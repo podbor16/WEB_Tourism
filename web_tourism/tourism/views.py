@@ -1,4 +1,28 @@
 from django.shortcuts import render
 
-def index_page(request):
-    return render(request, 'index.html')
+def start_page(request):
+    return render(request, 'start.html')
+
+def media_page(request):
+    return render(request, 'media.html')
+
+def about_project_page(request):
+    return render(request, 'about_project.html')
+
+def medicine_page(request):
+    return render(request, 'medicine.html')
+
+def header(request):
+    return render(request, 'header.html')
+
+def equipment_page(request):
+    return render(request, 'equipment.html')
+
+def walking_tourism__page(request):
+    return render(request, 'walking_tourism.html')
+
+def water_tourism__page(request):
+    return render(request, 'water_tourism.html')
+
+def mountain_tourism__page(request):
+    return render(request, 'mountain_tourism.html')

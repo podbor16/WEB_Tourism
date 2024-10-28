@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Noto Sans', sans-serif;
+    overflow: hidden;
+}
+
+.tourism-section {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Высота на весь экран */
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Масштабирует картинку, сохраняя пропорции */
+    z-index: -1; /* Отправляет изображение на задний план */
+}
+
+.tourism-options {
+    position: absolute;
+    bottom: 70px; /* Отступ снизу */
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.3); /* Полупрозрачный фон для читабельности текста */
+    padding: 20px 0;
+    color: #fff;
+}
+
+.tourism-item {
+    text-align: center;
+    color: #fff;
+}
+
+.tourism-item h3 {
+    margin-bottom: 5px;
+    font-size: 1.5em;
+}
+
+.tourism-item a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1em;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 2px;
+    transition: color 0.3s, border-bottom-color 0.3s;
+}
+
+.tourism-item a:hover {
+    color: #ffcc00; /* Меняет цвет при наведении */
+    border-bottom-color: #ffcc00;
+}

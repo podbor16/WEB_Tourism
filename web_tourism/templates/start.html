@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>Start</title>
+
+        <link rel="stylesheet" href="{% static 'css\start.css' %}">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
+    </head>
+    <body>
+        <div class="tourism-section">
+            <!-- Фоновая картинка -->
+            <img src="{% static 'image/IMG_6230.jpg' %}" alt="Фоновое изображение" class="background-image">
+            <!-- Контент поверх изображения -->
+            {% include 'header.html' %}
+            <div class="tourism-options">
+                <div class="tourism-item">
+                    <h3>Пеший туризм</h3>
+                    <a href="/walking_tourism/">Перейти></a>
+                </div>
+                <div class="tourism-item">
+                    <h3>Водный туризм</h3>
+                    <a href="/water_tourism/">Перейти></a>
+                </div>
+                <div class="tourism-item">
+                    <h3>Горный туризм</h3>
+                    <a href="/mountain_tourism/">Перейти></a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
