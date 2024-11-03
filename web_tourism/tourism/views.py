@@ -26,3 +26,12 @@ def water_tourism__page(request):
 
 def mountain_tourism__page(request):
     return render(request, 'mountain_tourism.html')
+
+def stolby_route_page(request):
+    return render(request, 'stolby_route.html')
+
+def mansky_route_page(request):
+    return render(request, 'mansky_route.html')
+
+def elbrus_route_page(request):
+    return render(request, 'elbrus_route.html')
