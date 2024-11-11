@@ -1,11 +1,21 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang = "en">
     <head>
         <meta charset = "UTF-8">
         <title>Walking tourism</title>
+
+        <link rel="stylesheet" href="{% static 'css\start.css' %}">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+ 
     </head>
     <body>
-        {% include 'header.html' %}
-        <h1>Пеший туризм</h1>
+        <div class="tourism-section">
+            <img src="{% static 'image/IMG_6233.jpg' %}" class="background-image">
+            {% include 'header.html' %}
+            <h1>ПЕШИЙ ТУРИЗМ</h1>
+        </div>
     </body>
 </html>

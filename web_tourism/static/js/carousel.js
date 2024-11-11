@@ -1,27 +1,58 @@
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const swiper = new Swiper('.swiper-container', {
-            loop: true,
-            slidesPerView: 1, // Сколько слайдов показывать одновременно
-            spaceBetween: 20, // Расстояние между слайдами
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            breakpoints: { // Адаптивность для разных экранов
-                640: {
-                    slidesPerView: 1,
-                    spaceBetween: 10,
-                },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                },
-                1024: {
-                    slidesPerView: 3,
-                    spaceBetween: 30,
-                },
-            },
+const galleryContainer = document.querySelector('.gallery-container');
+const galleryControlsContainer = document.querySelector('.gallery-controls');
+const galleryItems = [...document.querySelectorAll('.gallery-item')];
+const galleryControls = []; // Удалите кнопки из массива
+
+class Carousel {
+    constructor(container, items, controls) {
+        this.carouselContainer = container;
+        this.carouselControls = controls;
+        this.carouselArray = [...items];
+    }
+
+    updateGallery() {
+        this.carouselArray.forEach(el => {
+            el.classList.remove('gallery-item-1');
+            el.classList.remove('gallery-item-2');
+            el.classList.remove('gallery-item-3');
+            el.classList.remove('gallery-item-4');
+            el.classList.remove('gallery-item-5');
         });
-    });
-</script>
+
+        this.carouselArray.slice(0, 5).forEach((el, i) => {
+            el.classList.add(`gallery-item-${i + 1}`);
+        });
+    }
+
+    setCurrentState(direction) {
+        if (direction.classList.contains('gallery-controls-previous')) {
+            this.carouselArray.unshift(this.carouselArray.pop());
+        } else {
+            this.carouselArray.push(this.carouselArray.shift());
+        }
+        this.updateGallery();
+    }
+
+    setControls() {
+        this.carouselControls.forEach(control => {
+            const button = document.createElement('button');
+            button.className = `gallery-controls-${control}`;
+            button.innerText = control;
+            galleryControlsContainer.appendChild(button);
+        });
+    }
+
+    useControls() {
+        const triggers = [...galleryControlsContainer.children];
+        triggers.forEach(control => {
+            control.addEventListener('click', e => {
+                e.preventDefault();
+                this.setCurrentState(control);
+            });
+        });
+    }
+}
+
+const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls);
+exampleCarousel.setControls();
+exampleCarousel.useControls();
