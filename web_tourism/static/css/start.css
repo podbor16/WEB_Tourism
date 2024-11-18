@@ -18,7 +18,7 @@ body, html {
 
 .tourism-section h1 {
     font-size: 100px;
-    padding: 100px;
+    padding: 130px;
     color: #ffffff;
     text-align: center;
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); /* Add shadow */
@@ -71,14 +71,14 @@ body, html {
 
 /* Стили для раздела "Популярные маршруты" */
 .popular-routes {
-    padding: 40px;
+    padding: 10px;
     background-color: #f8f8f8;
     text-align: center;
 }
 
 .popular-routes h2 {
     font-size: 2em;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .route-cards {
@@ -178,6 +178,7 @@ body, html {
     flex-direction: row;
     align-items: center;
     position: relative;
+    background-color: #f8f8f8;
 }
 
 h2 {
