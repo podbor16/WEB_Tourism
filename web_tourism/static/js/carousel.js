@@ -1,7 +1,16 @@
 const galleryContainer = document.querySelector('.gallery-container');
 const galleryControlsContainer = document.querySelector('.gallery-controls');
 const galleryItems = [...document.querySelectorAll('.gallery-item')];
-const galleryControls = []; // Удалите кнопки из массива
+const descriptionText = document.getElementById('description-text');
+
+// Array of descriptions for the images
+const descriptions = [
+    "Столбы — уникальный заповедник с потрясающими скальными массивами.",
+    "Эльбрус — высочайшая гора Европы и гордость Кавказа.",
+    "Манский порог — великолепное место для отдыха на природе.",
+    "Териберка — сказочное место, где можно увидеть северное сияние.",
+    "Домбай — жемчужина Кавказа для любителей гор и лыж."
+];
 
 class Carousel {
     constructor(container, items, controls) {
@@ -22,6 +31,11 @@ class Carousel {
         this.carouselArray.slice(0, 5).forEach((el, i) => {
             el.classList.add(`gallery-item-${i + 1}`);
         });
+
+        // Update the description based on the center image
+        const centerImage = this.carouselArray[2]; // Center image in the array
+        const centerIndex = centerImage.getAttribute('data-index');
+        descriptionText.innerText = descriptions[centerIndex - 1];
     }
 
     setCurrentState(direction) {
@@ -53,6 +67,6 @@ class Carousel {
     }
 }
 
-const exampleCarousel = new Carousel(galleryContainer, galleryItems, galleryControls);
+const exampleCarousel = new Carousel(galleryContainer, galleryItems, []);
 exampleCarousel.setControls();
 exampleCarousel.useControls();
