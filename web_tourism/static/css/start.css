@@ -322,15 +322,10 @@ h2 {
 .tourism-benefits li {
     font-size: 1.1em;
     margin: 10px 0;
+    margin-left: 20px;
     display: flex;
     align-items: center;
     color: #333;
-}
-
-.tourism-benefits li::before {
-    content: "🟢";
-    margin-right: 10px;
-    font-size: 1em;
 }
 
 .cta-text {
