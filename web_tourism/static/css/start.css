@@ -7,7 +7,7 @@
 body, html {
     width: 100%;
     height: 100%;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: "Montserrat Alternates", sans-serif;
 }
 
 .tourism-section {
@@ -182,10 +182,15 @@ body, html {
 }
 
 h2 {
-    padding:35px;
+    padding:15px;
     text-align: center;
     font-size: 2em;
     margin-bottom: 20px;
+}
+
+h1 {
+    padding:15px;
+    text-align: center;
 }
 
 .gallery {
@@ -333,5 +338,4 @@ h2 {
     font-weight: bold;
     text-align: center;
     color: #000000;
-
 }
