@@ -7,7 +7,7 @@
 body, html {
     width: 100%;
     height: 100%;
-    font-family: "Montserrat Alternates", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .tourism-section {
@@ -16,6 +16,13 @@ body, html {
     height: 100vh; /* Высота на весь экран */
 }
 
+.tourism-section h1 {
+    font-size: 100px;
+    padding: 130px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); /* Add shadow */
+}
 .tourism-section h1 {
     font-size: 100px;
     padding: 130px;
@@ -316,6 +323,8 @@ h1 {
     font-size: 1.1em;
     line-height: 1.8;
     padding: 20px;
+    text-align: justify;
+    text-indent: 50px
 }
 
 .tourism-benefits {
@@ -328,9 +337,10 @@ h1 {
     font-size: 1.1em;
     margin: 10px 0;
     margin-left: 20px;
-    display: flex;
     align-items: center;
     color: #333;
+    text-align: justify;
+    text-indent: 50px
 }
 
 .cta-text {
@@ -338,4 +348,164 @@ h1 {
     font-weight: bold;
     text-align: center;
     color: #000000;
+}
+
+/* Стили для формы связи */
+.contact-form {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 50%;
+    text-align: center;
+}
+
+.contact-form h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для списка контактов */
+.contact-info {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    width: 50%;
+    text-align: center;
+}
+
+.contact-info h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.contact-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-info li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.photo-container {
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items:center; /* Центрируем по вертикали */
+    gap: 20px; /* Промежуток между большими и маленькими фото */
+    height: 60vh; /* Высота контейнера */
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.big-photo {
+    width: 45%;
+    height: auto;
+    box-sizing: border-box;
+    margin-left: 250px;
+    padding: 25px;
+    border-radius: 50px;
+    transition: transform 0.3s ease-in-out; /* Анимация увеличения */
+}
+
+.small-photos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Промежуток между фото */
+}
+
+.small-photo {
+    width: 52%; /* Фото занимают ширину родителя */
+    height: auto;
+    border-radius: 25px;
+    transition: transform 0.3s ease-in-out; /* Анимация увеличения */
+}
+
+/* Эффект увеличения при наведении */
+.big-photo:hover {
+    transform: scale(1.05); /* Увеличение на 5% */
+}
+
+.small-photo:hover {
+    transform: scale(1.10); /* Увеличение на 15% */
+}
+
+.other-photos {
+    font-size: 20px;
+    width:20%;
+    display:grid;
+    text-align: center;
+    margin-left: 40%;
+    padding: 10px 30px;
+    background-color: coral;
+    border-radius: 100px;
+    text-decoration: none;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(255, 127, 80, 0.2);
+    transition: all 0.1s ease-out;
+}
+
+/* Эффект при наведении */
+.other-photos:hover {
+    transform: scale(1.04);
+    color: #ffcc00;
+    box-shadow: 0 9px 9px rgba(255, 255, 255, 0.3);
+}
+/* Информация о маршруте */
+.route-info-on-page {
+    display: grid;
+    justify-content: space-evenly; /* Центрируем блоки по горизонтали */
+    gap: 5px; /* Добавляем промежутки между блоками */
+    background-color: #f8f8f8;
+    padding: 30px 20px;
+    text-align: center; /* Центрируем текст внутри блоков */
+    margin-top: 20px;
+}
+
+.route-block {
+    display: flex; /* Устанавливаем флекс-контейнер */
+    flex-direction: column; /* Ставим элементы вертикально */
+    align-items: center; /* Центрируем содержимое по горизонтали */
+}
+
+.route-block h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center; /* Центрируем заголовки */
+}
+
+.route-block p {
+    font-size: 1.1em;
+    color: #666;
+    text-align: center; /* Центрируем текст */
 }
