@@ -1,85 +1,45 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset = "UTF-8">
-        <title>Walking tourism</title>
-        <link rel="stylesheet" href="{% static 'css\start.css' %}">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <div class="tourism-section">
-            <img src="{% static 'image/IMG_6233.jpg' %}" class="background-image">
-            {% include 'header.html' %}
-            <h1>ПЕШИЙ ТУРИЗМ</h1>
-        </div>
-        <div class="tourism-description">
-            <p>
-                Пеший туризм — это возможность почувствовать природу во всей её красе, окунуться в тишину лесов, насладиться свежим воздухом и восхититься панорамами, открывающимися с вершины холмов. Это идеальный способ соединиться с миром вокруг и самим собой.
-            </p>
-            <ul class="tourism-benefits">
-                <li>🟡 Подойдёт как новичкам, так и опытным путешественникам.</li>
-                <li>🟡 Достаточно удобной обуви, рюкзака и минимального набора.</li>
-                <li>🟡 Удобный маршрут: от спокойных прогулок до многодневных походов.</li>
-                <li>🟡 Улучшайте физическую форму и настроение.</li>
-            </ul>
-            
-        </div>
-        <p class="cta-text">
-            Отправляйтесь в увлекательное путешествие по тропам, где каждый шаг открывает новые горизонты!
-        </p>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walking Tourism</title>
 
-        <div class="popular-routes">
-            <div class="route-cards">
-                <div class="route-card">
-                    <img src="{% static 'image/stolb.png' %}" alt="Столбы">
-                    <div class="route-info">
-                        <h3>Столбы</h3>
-                        <p>Протяженность по времени: 7 часов</p>
-                        <p>Включено: <br> Трансфер</p>
-                        <a href="/stolby_route/">Подробнее</a>
-                    </div>
-                </div>
-                <div class="route-card">
-                    <img src="{% static 'image/Ergaki.jpg' %}" alt="Ергаки">
-                    <div class="route-info">
-                        <h3>Ергаки</h3>
-                        <p>Протяженность по времени: 7 часов</p>
-                        <p>Включено: <br> Трансфер</p>
-                        <a href="/stolby_route/">Подробнее</a>
-                    </div>
-                </div>
-                <div class="route-card">
-                    <img src="{% static 'image/putoran.jpg' %}" alt="Плато Путорана">
-                    <div class="route-info">
-                        <h3>Плато Путорана</h3>
-                        <p>Протяженность по времени: 7 часов</p>
-                        <p>Включено: <br> Трансфер</p>
-                        <a href="/stolby_route/">Подробнее</a>
-                    </div>
-                </div>
-                <div class="route-card">
-                    <img src="{% static 'image/Ergaki.jpg' %}" alt="Ергаки">
-                    <div class="route-info">
-                        <h3>Ергаки</h3>
-                        <p>Протяженность по времени: 7 часов</p>
-                        <p>Включено: <br> Трансфер</p>
-                        <a href="/stolby_route/">Подробнее</a>
-                    </div>
-                </div>
-                <div class="route-card">
-                    <img src="{% static 'image/stolb.png' %}" alt="Столбы">
-                    <div class="route-info">
-                        <h3>Столбы</h3>
-                        <p>Протяженность по времени: 7 часов</p>
-                        <p>Включено: <br> Трансфер</p>
-                        <a href="/stolby_route/">Подробнее</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="{% static 'css/start.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    </body>
+    <!-- Подключение React и Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- Определяем пути к изображениям -->
+    <script type="text/javascript">
+        window.staticImages = {
+            background: "{% static 'image/IMG_6233.jpg' %}",
+            stolb: "{% static 'image/stolb.png' %}",
+            ergaki: "{% static 'image/Ergaki.jpg' %}",
+            putoran: "{% static 'image/putoran.jpg' %}"
+        };
+    </script>
+
+    <!-- Подключение header.js -->
+    <script src="{% static 'js/header.js' %}" type="text/babel"></script>
+
+    <!-- Подключение walkingTourism.js -->
+    <script src="{% static 'js/walkingTourism.js' %}" type="text/babel"></script>
+
+    <!-- Рендеринг компонента WalkingTourism -->
+    <script type="text/babel">
+        ReactDOM.createRoot(document.getElementById("root")).render(<WalkingTourism />);
+    </script>
+</body>
 </html>
