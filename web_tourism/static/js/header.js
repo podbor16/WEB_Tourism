@@ -21,13 +21,11 @@
                             <a href="#" className="dropdown-toggle" onClick={toggleDropdown}>
                                 Направления
                             </a>
-                            {isDropdownOpen && (
-                                <ul className="dropdown-menu">
-                                    <li><a href="/walking_tourism/">Пеший туризм</a></li>
-                                    <li><a href="/water_tourism/">Водный туризм</a></li>
-                                    <li><a href="/mountain_tourism/">Горный туризм</a></li>
-                                </ul>
-                            )}
+                            <ul className={`dropdown-menu ${isDropdownOpen ? 'open' : ''}`}>
+                                <li><a href="/walking_tourism/">Пеший туризм</a></li>
+                                <li><a href="/water_tourism/">Водный туризм</a></li>
+                                <li><a href="/mountain_tourism/">Горный туризм</a></li>
+                            </ul>
                         </li>
                         <li><a href="/media/">Медиа</a></li>
                         <li><a href="/medicine/">Медицина</a></li>

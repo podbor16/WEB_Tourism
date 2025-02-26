@@ -16,20 +16,21 @@ body, html {
     height: 100vh; /* Высота на весь экран */
 }
 
-.tourism-section h1 {
-    font-size: 100px;
-    padding: 130px;
-    color: #ffffff;
-    text-align: center;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); /* Add shadow */
-}
-.tourism-section h1 {
-    font-size: 100px;
-    padding: 130px;
-    color: #ffffff;
-    text-align: center;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); /* Add shadow */
-}
+    .tourism-section h1 {
+        font-size: 100px;
+        padding: 130px;
+        color: #ffffff;
+        text-align: center;
+        text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); /* Add shadow */
+    }
+
+    .tourism-section h1 {
+        font-size: 100px;
+        padding: 130px;
+        color: #ffffff;
+        text-align: center;
+        text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); /* Add shadow */
+    }
 
 .background-image {
     position: absolute;
@@ -57,24 +58,24 @@ body, html {
     color: #fff;
 }
 
-.tourism-item h3 {
-    margin-bottom: 5px;
-    font-size: 1.5em;
-}
+    .tourism-item h3 {
+        margin-bottom: 5px;
+        font-size: 1.5em;
+    }
 
-.tourism-item a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1em;
-    border-bottom: 1px solid #fff;
-    padding-bottom: 2px;
-    transition: color 0.3s, border-bottom-color 0.3s;
-}
+    .tourism-item a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 1em;
+        border-bottom: 1px solid #fff;
+        padding-bottom: 2px;
+        transition: color 0.3s, border-bottom-color 0.3s;
+    }
 
-.tourism-item a:hover {
-    color: #ffcc00; /* Меняет цвет при наведении */
-    border-bottom-color: #ffcc00;
-}
+        .tourism-item a:hover {
+            color: #ffcc00; /* Меняет цвет при наведении */
+            border-bottom-color: #ffcc00;
+        }
 
 /* Стили для раздела "Популярные маршруты" */
 .popular-routes {
@@ -83,10 +84,10 @@ body, html {
     text-align: center;
 }
 
-.popular-routes h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
+    .popular-routes h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
 
 .route-cards {
     display: flex;
@@ -105,15 +106,15 @@ body, html {
     transition: transform 0.3s;
 }
 
-.route-card:hover {
-    transform: scale(1.05);
-}
+    .route-card:hover {
+        transform: scale(1.05);
+    }
 
-.route-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    .route-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
 .route-info {
     position: absolute; /* Позиционируем поверх изображения */
@@ -127,30 +128,30 @@ body, html {
     color: #ffffff;
 }
 
-.route-info h3 {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-    color: #ffffff;
-    text-align: center;
-}
+    .route-info h3 {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+        color: #ffffff;
+        text-align: center;
+    }
 
-.route-info p {
-    font-size: 0.9em;
-    color: #ffffff;
-}
+    .route-info p {
+        font-size: 0.9em;
+        color: #ffffff;
+    }
 
-.route-info a {
-    display: inline-block;
-    margin-top: 10px;
-    color: coral;
-    text-decoration: none;
-    font-weight: bold;
-}
+    .route-info a {
+        display: inline-block;
+        margin-top: 10px;
+        color: coral;
+        text-decoration: none;
+        font-weight: bold;
+    }
 
-.route-info a:hover {
-    color: #ffcc00; /* Цвет при наведении, например, золотистый */
-    text-decoration: underline;
-}
+        .route-info a:hover {
+            color: #ffcc00; /* Цвет при наведении, например, золотистый */
+            text-decoration: underline;
+        }
 
 .popular-routes {
     padding: 40px;
@@ -158,10 +159,10 @@ body, html {
     text-align: center;
 }
 
-.popular-routes h2 {
-    font-size: 2em;
-    margin-bottom: 40px;
-}
+    .popular-routes h2 {
+        font-size: 2em;
+        margin-bottom: 40px;
+    }
 
 /* Стили для раздела "Календарь с занятиями" */
 .calendar-section {
@@ -170,10 +171,10 @@ body, html {
     text-align: center;
 }
 
-.calendar-section h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
-}
+    .calendar-section h2 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
 
 /* Можно добавить дополнительные стили для календаря */
 
@@ -189,14 +190,14 @@ body, html {
 }
 
 h2 {
-    padding:15px;
+    padding: 15px;
     text-align: center;
     font-size: 2em;
     margin-bottom: 20px;
 }
 
 h1 {
-    padding:15px;
+    padding: 15px;
     text-align: center;
 }
 
@@ -319,13 +320,13 @@ h1 {
     font-size: 1.2em;
 }
 
-.tourism-description p {
-    font-size: 1.1em;
-    line-height: 1.8;
-    padding: 20px;
-    text-align: justify;
-    text-indent: 50px
-}
+    .tourism-description p {
+        font-size: 1.1em;
+        line-height: 1.8;
+        padding: 20px;
+        text-align: justify;
+        text-indent: 50px
+    }
 
 .tourism-benefits {
     list-style: none;
@@ -333,15 +334,15 @@ h1 {
     margin: 20px 0;
 }
 
-.tourism-benefits li {
-    font-size: 1.1em;
-    margin: 10px 0;
-    margin-left: 20px;
-    align-items: center;
-    color: #333;
-    text-align: justify;
-    text-indent: 50px
-}
+    .tourism-benefits li {
+        font-size: 1.1em;
+        margin: 10px 0;
+        margin-left: 20px;
+        align-items: center;
+        color: #333;
+        text-align: justify;
+        text-indent: 50px
+    }
 
 .cta-text {
     font-size: 1.4em;
@@ -360,38 +361,38 @@ h1 {
     text-align: center;
 }
 
-.contact-form h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-}
+    .contact-form h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
 
-.contact-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
+    .contact-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
 
-.contact-form input, .contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+    .contact-form input, .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-.contact-form button {
-    background-color: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+    .contact-form button {
+        background-color: #007BFF;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
-.contact-form button:hover {
-    background-color: #0056b3;
-}
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
 
 /* Стили для списка контактов */
 .contact-info {
@@ -403,24 +404,24 @@ h1 {
     text-align: center;
 }
 
-.contact-info h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-}
+    .contact-info h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
 
-.contact-info ul {
-    list-style: none;
-    padding: 0;
-}
+    .contact-info ul {
+        list-style: none;
+        padding: 0;
+    }
 
-.contact-info li {
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
+    .contact-info li {
+        margin-bottom: 10px;
+        font-size: 1.1em;
+    }
 
 .photo-container {
     justify-content: center; /* Центрируем по горизонтали */
-    align-items:center; /* Центрируем по вертикали */
+    align-items: center; /* Центрируем по вертикали */
     gap: 20px; /* Промежуток между большими и маленькими фото */
     height: 60vh; /* Высота контейнера */
     display: flex;
@@ -461,8 +462,8 @@ h1 {
 
 .other-photos {
     font-size: 20px;
-    width:20%;
-    display:grid;
+    width: 20%;
+    display: grid;
     text-align: center;
     margin-left: 40%;
     padding: 10px 30px;
@@ -474,12 +475,12 @@ h1 {
     transition: all 0.1s ease-out;
 }
 
-/* Эффект при наведении */
-.other-photos:hover {
-    transform: scale(1.04);
-    color: #ffcc00;
-    box-shadow: 0 9px 9px rgba(255, 255, 255, 0.3);
-}
+    /* Эффект при наведении */
+    .other-photos:hover {
+        transform: scale(1.04);
+        color: #ffcc00;
+        box-shadow: 0 9px 9px rgba(255, 255, 255, 0.3);
+    }
 /* Информация о маршруте */
 .route-info-on-page {
     display: grid;
@@ -497,15 +498,15 @@ h1 {
     align-items: center; /* Центрируем содержимое по горизонтали */
 }
 
-.route-block h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    color: #333;
-    text-align: center; /* Центрируем заголовки */
-}
+    .route-block h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #333;
+        text-align: center; /* Центрируем заголовки */
+    }
 
-.route-block p {
-    font-size: 1.1em;
-    color: #666;
-    text-align: center; /* Центрируем текст */
-}
+    .route-block p {
+        font-size: 1.1em;
+        color: #666;
+        text-align: center; /* Центрируем текст */
+    }
