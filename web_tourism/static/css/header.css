@@ -1,8 +1,7 @@
-/* Основные стили для body */
 body {
     position: relative;
     font-family: 'Noto Sans', sans-serif;
-    font-size: 36px;
+    font-size: 16px;
     line-height: 1.4;
     color: #000;
     min-width: 320px;
@@ -10,91 +9,90 @@ body {
     height: auto;
 }
 
-/* Стили для навигационной панели */
 .navbar {
     width: 100%;
     height: 100px;
-    background-color: transparent !important; /* Прозрачный фон с приоритетом */
+    background-color: transparent;
+    font-family: 'Noto Sans', sans-serif; /* Переносим шрифт сюда */
+    line-height: 1.4; /* Если нужно, оставляем здесь */
+    color: #000; /* Цвет текста для navbar */
+    font-size: 16px;
 }
 
-.navbar .container {
-    height: inherit;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: transparent !important; /* Прозрачный фон с приоритетом */
-}
+    .navbar .container {
+        height: inherit;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: transparent;
+    }
 
-/* Меню навигации */
 .navbar-menu {
     list-style-type: none;
-    padding-left: 0%;
-    margin-bottom: 0%;
+    padding-left: 0;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
 }
 
-.navbar-menu li { 
+.navbar-menu li {
     display: inline-block;
-    margin-right: 30px; /* Расстояние между пунктами меню */
-    position: relative; /* Для выпадающих списков */
+    margin-right: 30px;
+    position: relative;
 }
 
-.navbar-menu li a { 
-    font-size: 20px; /* Размер шрифта для пунктов меню */
-    display: inline-block;
-    color: #000;
-    opacity: 0.6;
-    text-decoration: none;
-    padding: 10px;
-    transition: all 0.07s ease-in-out;
-}
+    .navbar-menu li a {
+        font-size: 20px;
+        display: inline-block;
+        color: #000;
+        opacity: 0.6;
+        text-decoration: none;
+        padding: 10px;
+        transition: all 0.07s ease-in-out;
+    }
 
-.navbar-menu li a:hover { 
-    opacity: 1;
-}
+        .navbar-menu li a:hover {
+            opacity: 1;
+        }
 
-/* Стиль для выпадающих списков */
-.dropdown-menu {
+.navbar .dropdown-menu {
     display: none;
     position: absolute;
-    top: calc(100%); /* Позиционирование под заголовком */
+    top: 100%;
     left: 0;
     background: white;
     list-style: none;
-    padding: 7px 7px;
+    padding: 7px;
     margin: 0;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    z-index: 1000; /* Выпадающее меню поверх всего */
-    border-radius: 4px; /* Скругленные углы */
-    min-width: 100px; /* Минимальная ширина */
+    z-index: 1000;
+    border-radius: 4px;
+    min-width: 100px;
 }
 
-.dropdown-menu li {
-    padding: 7px 7px;
+.navbar .dropdown-menu.open {
+    display: block;
+}
+
+.navbar .dropdown-menu li {
+    padding: 7px;
     text-align: center;
 }
 
-.dropdown-menu li a {
+.navbar .dropdown-menu li a {
     color: black;
     text-decoration: none;
     font-size: 14px;
-    white-space: nowrap; /* Предотвращает перенос текста */
+    white-space: nowrap;
     display: block;
     transition: background-color 0.2s ease;
 }
 
-.dropdown-menu li a:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-}
+    .navbar .dropdown-menu li a:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
 
-/* Показываем выпадающее меню при наведении */
-.navbar-menu li:hover .dropdown-menu {
-    display: block;
-}
-
-/* Стили кнопки смены темы */
-.callback {
+.navbar .callback {
     font-size: 20px;
     margin-left: 40px;
     padding: 10px 30px;
@@ -106,22 +104,21 @@ body {
     transition: all 0.1s ease-out;
 }
 
-.callback:hover {
+.navbar .callback:hover {
     transform: scale(1.04);
     color: #fff;
     box-shadow: 0 9px 9px rgba(255, 255, 255, 0.3);
 }
 
-/* Стили для логотипа */
-.navbar-brand {
+.navbar .navbar-brand {
     font-weight: 700;
     font-size: 36px;
     text-decoration: none;
     color: #000;
-    margin-right: 0px; /* Расстояние между логотипом и меню */
+    margin-left: 40px;
 }
 
-.navbar-brand:hover {
+.navbar .navbar-brand:hover {
     color: coral;
     transition: all 0.07s ease-in-out;
 }
