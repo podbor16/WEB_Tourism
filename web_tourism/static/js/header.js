@@ -30,6 +30,7 @@
                         <li><a href="/media/">Медиа</a></li>
                         <li><a href="/medicine/">Медицина</a></li>
                         <li><a href="/about_project/">Контакты</a></li>
+                        <li><a href="/about_project/">Профиль</a></li>
                         <li>
                             <a href="#" className="callback theme-toggle" onClick={toggleTheme}>
                                 {theme === "light" ? "☀️|🌙" : "☀️|🌙"}

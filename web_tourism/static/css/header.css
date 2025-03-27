@@ -1,6 +1,6 @@
 body {
     position: relative;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Santello Regular', sans-serif;
     font-size: 16px;
     line-height: 1.4;
     color: #000;
@@ -13,19 +13,19 @@ body {
     width: 100%;
     height: 100px;
     background-color: transparent;
-    font-family: 'Noto Sans', sans-serif; /* Переносим шрифт сюда */
+    font-family: 'Santello Regular', sans-serif; /* Переносим шрифт сюда */
     line-height: 1.4; /* Если нужно, оставляем здесь */
     color: #000; /* Цвет текста для navbar */
     font-size: 16px;
 }
 
-    .navbar .container {
-        height: inherit;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: transparent;
-    }
+.navbar .container {
+    height: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
 
 .navbar-menu {
     list-style-type: none;
@@ -41,19 +41,19 @@ body {
     position: relative;
 }
 
-    .navbar-menu li a {
-        font-size: 20px;
-        display: inline-block;
-        color: #000;
-        opacity: 0.6;
-        text-decoration: none;
-        padding: 10px;
-        transition: all 0.07s ease-in-out;
-    }
+.navbar-menu li a {
+    font-size: 20px;
+    display: inline-block;
+    color: #ffffff;
+    opacity: 0.6;
+    text-decoration: none;
+    padding: 10px;
+    transition: all 0.07s ease-in-out;
+}
 
-        .navbar-menu li a:hover {
-            opacity: 1;
-        }
+.navbar-menu li a:hover {
+    opacity: 1;
+}
 
 .navbar .dropdown-menu {
     display: none;
@@ -88,9 +88,9 @@ body {
     transition: background-color 0.2s ease;
 }
 
-    .navbar .dropdown-menu li a:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
+.navbar .dropdown-menu li a:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
 
 .navbar .callback {
     font-size: 20px;
