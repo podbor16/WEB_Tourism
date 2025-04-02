@@ -44,10 +44,11 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Масштабирует картинку, сохраняя пропорции */
-    z-index: -1; /* Отправляет изображение на задний план */
+    object-fit: cover;
+    z-index: -1;
+    border-bottom-left-radius: 50px; /* Скругление нижнего левого угла */
+    border-bottom-right-radius: 50px; /* Скругление нижнего правого угла */
 }
-
 .tourism-options {
     position: absolute;
     bottom: 70px;
