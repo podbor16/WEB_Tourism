@@ -7,7 +7,13 @@
 body, html {
     width: 100%;
     height: 100%;
-    font-family: "Santello Regular";
+    font-family: "Manrope", sans-serif; /* Manrope для базового текста */
+    font-size: 16px;
+}
+
+/* Santello Regular для заголовков */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Santello Regular", sans-serif;
 }
 
 .tourism-section {
@@ -44,12 +50,12 @@ body, html {
 
 .tourism-options {
     position: absolute;
-    bottom: 70px; /* Отступ снизу */
+    bottom: 70px;
     width: 100%;
     display: flex;
     font-family: "Santello Regular", sans-serif;
     justify-content: space-around;
-    background-color: rgba(0, 0, 0, 0); /* Полупрозрачный фон для читабельности текста */
+    background-color: rgba(0, 0, 0, 0);
     padding: 20px 0;
     color: #fff;
 }
@@ -73,27 +79,34 @@ body, html {
     transition: color 0.3s, border-bottom-color 0.3s;
 }
 
-    .tourism-item a:hover {
-        color: #ffcc00; /* Меняет цвет при наведении */
-        border-bottom-color: #ffcc00;
-    }
+.tourism-item a:hover {
+    color: #ff8559; /* Коралловый при наведении вместо желтого */
+    border-bottom-color: #ff8559; /* Подчеркивание тоже коралловое */
+}
+
 
 /* Стили для раздела "Популярные маршруты" */
 .popular-routes {
-    padding: 10px;
-    background-color: #e0e0e0;
+    padding: 40px;
+    background-color: #f8f8f8;
     text-align: center;
 }
 
 .popular-routes h2 {
     font-size: 2em;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .route-cards {
     display: flex;
     justify-content: center;
     gap: 25px;
+}
+
+.route-card-link {
+    text-decoration: none; /* Убираем подчеркивание для ссылки */
+    color: inherit; /* Наследуем цвет текста */
+    display: block; /* Делаем ссылку блочной, чтобы она охватывала всю карточку */
 }
 
 .route-card {
@@ -118,12 +131,12 @@ body, html {
 }
 
 .route-info {
-    position: absolute; /* Позиционируем поверх изображения */
-    bottom: 0; /* Размещаем внизу карточки */
+    position: absolute;
+    bottom: 0;
     left: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.45);
-    border-radius: 10px; /* Полупрозрачный фон для читаемости */
+    border-radius: 10px;
     padding: 15px;
     text-align: left;
     color: #ffffff;
@@ -141,7 +154,7 @@ body, html {
     color: #ffffff;
 }
 
-.route-info a {
+.route-info .route-details { /* Изменяем класс для ссылки "Подробнее" */
     display: inline-block;
     margin-top: 10px;
     color: coral;
@@ -149,15 +162,9 @@ body, html {
     font-weight: bold;
 }
 
-.route-info a:hover {
-    color: #ffcc00; /* Цвет при наведении, например, золотистый */
+.route-info .route-details:hover {
+    color: #ff8559;
     text-decoration: underline;
-}
-
-.popular-routes {
-    padding: 40px;
-    background-color: #f8f8f8;
-    text-align: center;
 }
 
 .popular-routes h2 {
@@ -294,7 +301,6 @@ h1 {
     max-width: 800px;
 }
 
-/* General Section Styling */
 .tourism-section {
     text-align: center;
     color: white;
@@ -308,9 +314,10 @@ h1 {
     border-radius: 20px;
     padding: 30px;
     padding-bottom: 5px;
-    margin: 0px auto 0; /* Overlap slightly with the image */
+    margin: 0px auto 0;
     width: 75%;
     font-size: 1.2em;
+    font-family: "Manrope", sans-serif;
 }
 
 .tourism-description p {
@@ -508,6 +515,13 @@ h1 {
 @font-face {
     font-family: "Santello Regular";
     src: url("/static/fonts/SANTELLO.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Manrope";
+    src: url("/static/fonts/Manrope.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
 }

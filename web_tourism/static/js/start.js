@@ -52,33 +52,39 @@
             <h2>Наши популярные маршруты:</h2>
             <div className="popular-routes">
                 <div className="route-cards">
-                    <div className="route-card">
-                        <img src="/static/image/stolb.png" alt="Столбы" />
-                        <div className="route-info">
-                            <h3>Столбы</h3>
-                            <p>Протяженность по времени: 7 часов</p>
-                            <p>Включено: <br /> Трансфер</p>
-                            <a href="/stolby_route/">Подробнее</a>
+                    <a href="/stolby_route/" className="route-card-link">
+                        <div className="route-card">
+                            <img src="/static/image/stolb.png" alt="Столбы" />
+                            <div className="route-info">
+                                <h3>Столбы</h3>
+                                <p>Протяженность по времени: 7 часов</p>
+                                <p>Включено: <br /> Трансфер</p>
+                                <a href="/stolby_route/" className="route-details">Подробнее</a>
+                            </div>
                         </div>
-                    </div>
-                    <div className="route-card">
-                        <img src="/static/image/elbrus.jpg" alt="Эльбрус" />
-                        <div className="route-info">
-                            <h3>Эльбрус</h3>
-                            <p>Протяженность по времени: 5-7 дней</p>
-                            <p>Включено: <br />Питание, Трансфер</p>
-                            <a href="/elbrus_route/">Подробнее</a>
+                    </a>
+                    <a href="/elbrus_route/" className="route-card-link">
+                        <div className="route-card">
+                            <img src="/static/image/elbrus.jpg" alt="Эльбрус" />
+                            <div className="route-info">
+                                <h3>Эльбрус</h3>
+                                <p>Протяженность по времени: 5-7 дней</p>
+                                <p>Включено: <br />Питание, Трансфер</p>
+                                <a href="/elbrus_route/" className="route-details">Подробнее</a>
+                            </div>
                         </div>
-                    </div>
-                    <div className="route-card">
-                        <img src="/static/image/mansky.jpg" alt="Манский порог" />
-                        <div className="route-info">
-                            <h3>Манский порог</h3>
-                            <p>Протяженность по времени: 3 часа</p>
-                            <p>Включено: <br />Трансфер</p>
-                            <a href="/mansky_route/">Подробнее</a>
+                    </a>
+                    <a href="/mansky_route/" className="route-card-link">
+                        <div className="route-card">
+                            <img src="/static/image/mansky.jpg" alt="Манский порог" />
+                            <div className="route-info">
+                                <h3>Манский порог</h3>
+                                <p>Протяженность по времени: 3 часа</p>
+                                <p>Включено: <br />Трансфер</p>
+                                <a href="/mansky_route/" className="route-details">Подробнее</a>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
 

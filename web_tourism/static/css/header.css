@@ -1,22 +1,22 @@
 body {
-    position: relative;
-    font-family: 'Santello Regular', sans-serif;
-    font-size: 16px;
-    line-height: 1.4;
-    color: #000;
-    min-width: 320px;
-    overflow-x: hidden;
-    height: auto;
+position: relative;
+font-family: 'Santello Regular', sans-serif;
+font-size: 16px;
+line-height: 1.4;
+color: #000;
+min-width: 320px;
+overflow-x: hidden;
+height: auto;
 }
 
 .navbar {
-    width: 100%;
-    height: 100px;
-    background-color: transparent;
-    font-family: 'Santello Regular', sans-serif; /* Переносим шрифт сюда */
-    line-height: 1.4; /* Если нужно, оставляем здесь */
-    color: #000; /* Цвет текста для navbar */
-    font-size: 16px;
+width: 100%;
+height: 100px;
+background-color: transparent;
+font-family: 'Santello Regular', sans-serif;
+line-height: 1.4;
+color: #fff;
+font-size: 16px;
 }
 
 .navbar .container {
@@ -28,11 +28,11 @@ body {
 }
 
 .navbar-menu {
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: 0;
-    display: flex;
-    align-items: center;
+list-style-type: none;
+padding-left: 0;
+margin-bottom: 0;
+display: flex;
+align-items: center;
 }
 
 .navbar-menu li {
@@ -44,30 +44,29 @@ body {
 .navbar-menu li a {
     font-size: 20px;
     display: inline-block;
-    color: #ffffff;
-    opacity: 0.6;
+    color: #ffffff; /* Белый цвет по умолчанию */
     text-decoration: none;
     padding: 10px;
-    transition: all 0.07s ease-in-out;
+    transition: color 0.3s ease-in-out;
 }
 
 .navbar-menu li a:hover {
-    opacity: 1;
+    color: #ff8559; /* Коралловый при наведении */
 }
 
 .navbar .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: white;
-    list-style: none;
-    padding: 7px;
-    margin: 0;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    border-radius: 4px;
-    min-width: 100px;
+display: none;
+position: absolute;
+top: 100%;
+left: 0;
+background: white;
+list-style: none;
+padding: 7px;
+margin: 0;
+box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+z-index: 1000;
+border-radius: 4px;
+min-width: 100px;
 }
 
 .navbar .dropdown-menu.open {
@@ -93,32 +92,39 @@ body {
 }
 
 .navbar .callback {
-    font-size: 20px;
-    margin-left: 40px;
-    padding: 10px 30px;
-    background-color: coral;
-    border-radius: 100px;
-    color: #fff;
-    text-decoration: none;
-    box-shadow: 0 4px 6px rgba(255, 127, 80, 0.2);
-    transition: all 0.1s ease-out;
+font-size: 20px;
+margin-left: 40px;
+padding: 10px 30px;
+background-color: coral;
+border-radius: 100px;
+color: #fff;
+text-decoration: none;
+box-shadow: 0 4px 6px rgba(255, 127, 80, 0.2);
+transition: all 0.1s ease-out;
 }
 
 .navbar .callback:hover {
     transform: scale(1.04);
-    color: #fff;
+    color: #ff8559; /* Коралловый при наведении */
     box-shadow: 0 9px 9px rgba(255, 255, 255, 0.3);
 }
 
 .navbar .navbar-brand {
-    font-weight: 700;
-    font-size: 36px;
-    text-decoration: none;
-    color: #000;
-    margin-left: 40px;
+font-weight: 700;
+font-size: 36px;
+text-decoration: none;
+color: #ffffff; /* Белый цвет по умолчанию */
+margin-left: 40px;
+transition: color 0.3s ease-in-out;
 }
 
 .navbar .navbar-brand:hover {
-    color: coral;
-    transition: all 0.07s ease-in-out;
+    color: #ff8559; /* Коралловый при наведении */
+}
+
+@font-face {
+    font-family: "Santello Regular";
+    src: url("/static/fonts/SANTELLO.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
 }
