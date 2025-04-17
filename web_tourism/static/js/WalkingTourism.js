@@ -43,7 +43,23 @@
             <div className="tourism-section">
                 <img src={window.staticImages.background} className="background-image" alt="Background" />
                 <Header /> {}
-                <h1>ПЕШИЙ ТУРИЗМ</h1>
+                <h1 className="text-4xl font-bold text-white text-center absolute top-1/2 w-full">
+                    ПЕШИЙ ТУРИЗМ
+                </h1>
+                <div className="tourism-options flex justify-center gap-8 absolute bottom-10 w-full">
+                    <div className="tourism-item bg-white p-4 rounded-lg shadow-lg">
+                        <a href="/water_tourism/" className="text-xl font-semibold text-blue-600 hover:underline">
+                            <h3>Водный туризм</h3>
+                        </a>
+                        <a href="/water_tourism/" className="text-blue-500 hover:underline">Перейти ></a>
+                    </div>
+                    <div className="tourism-item bg-white p-4 rounded-lg shadow-lg">
+                        <a href="/mountain_tourism/" className="text-xl font-semibold text-blue-600 hover:underline">
+                            <h3>Горный туризм</h3>
+                        </a>
+                        <a href="/mountain_tourism/" className="text-blue-500 hover:underline">Перейти ></a>
+                    </div>
+                </div>
             </div>
 
             {/* Описание */}
