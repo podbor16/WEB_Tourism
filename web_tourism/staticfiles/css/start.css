@@ -7,13 +7,24 @@
 body, html {
     width: 100%;
     height: 100%;
-    font-family: "Roboto", sans-serif;
+    font-family: "Manrope", sans-serif; /* Manrope для базового текста */
+    font-size: 16px;
+    background-color: #e0e0e0;
+    z-index: -1;
+}
+
+/* Santello Regular для заголовков */
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Santello Regular", sans-serif;
 }
 
 .tourism-section {
     position: relative;
     width: 100%;
-    height: 100vh; /* Высота на весь экран */
+    height: 100vh;
+    text-align: center;
+    color: white;
+    padding-bottom: 40px;
 }
 
     .tourism-section h1 {
@@ -38,17 +49,20 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Масштабирует картинку, сохраняя пропорции */
-    z-index: -1; /* Отправляет изображение на задний план */
+    object-fit: cover;
+    z-index: 0;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 .tourism-options {
     position: absolute;
-    bottom: 70px; /* Отступ снизу */
+    bottom: 70px;
     width: 100%;
     display: flex;
+    font-family: "Santello Regular", sans-serif;
     justify-content: space-around;
-    background-color: rgba(0, 0, 0, 0.3); /* Полупрозрачный фон для читабельности текста */
+    background-color: rgba(0, 0, 0, 0);
     padding: 20px 0;
     color: #fff;
 }
@@ -73,89 +87,15 @@ body, html {
     }
 
         .tourism-item a:hover {
-            color: #ffcc00; /* Меняет цвет при наведении */
-            border-bottom-color: #ffcc00;
+            color: #ff8559;
+            border-bottom-color: #ff8559;
         }
 
-/* Стили для раздела "Популярные маршруты" */
-.popular-routes {
-    padding: 10px;
-    background-color: #f8f8f8;
-    text-align: center;
-}
 
-    .popular-routes h2 {
-        font-size: 2em;
-        margin-bottom: 20px;
-    }
-
-.route-cards {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-}
-
-.route-card {
-    position: relative;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    overflow: hidden;
-    width: 220px;
-    height: 450px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
-}
-
-    .route-card:hover {
-        transform: scale(1.05);
-    }
-
-    .route-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-.route-info {
-    position: absolute; /* Позиционируем поверх изображения */
-    bottom: 0; /* Размещаем внизу карточки */
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.45);
-    border-radius: 10px; /* Полупрозрачный фон для читаемости */
-    padding: 15px;
-    text-align: left;
-    color: #ffffff;
-}
-
-    .route-info h3 {
-        font-size: 1.2em;
-        margin-bottom: 5px;
-        color: #ffffff;
-        text-align: center;
-    }
-
-    .route-info p {
-        font-size: 0.9em;
-        color: #ffffff;
-    }
-
-    .route-info a {
-        display: inline-block;
-        margin-top: 10px;
-        color: coral;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-        .route-info a:hover {
-            color: #ffcc00; /* Цвет при наведении, например, золотистый */
-            text-decoration: underline;
-        }
-
+/* Стили для раздела "Популярные маршруты" главной страницы*/
 .popular-routes {
     padding: 40px;
-    background-color: #f8f8f8;
+    background-color: #e0e0e0;
     text-align: center;
 }
 
@@ -164,16 +104,99 @@ body, html {
         margin-bottom: 40px;
     }
 
+.route-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 450px); /* фикс ширина карточек */
+    gap: 30px;
+    justify-content: center; /* выравнивание всей сетки по центру */
+    padding: 30px 0;
+}
+
+.route-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+    max-width: 350px;
+}
+
+.route-card {
+    position: relative;
+    width: 450px;
+    height: 250px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+    .route-card:hover {
+        transform: scale(1.03);
+    }
+
+    .route-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+.route-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+    color: white;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 20px;
+}
+
+
+    .route-info h3 {
+        font-size: 1.3em;
+        margin-bottom: 5px;
+        color: #ffffff;
+    }
+
+    .route-info p {
+        font-size: 0.95em;
+        margin: 2px 0;
+    }
+
+.route-details {
+    margin-top: 10px;
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 0.9em;
+}
+
+.route-info .route-details:hover {
+    color: #ff8559;
+    text-decoration: underline;
+}
+
+.popular-routes h2 {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
 /* Стили для раздела "Календарь с занятиями" */
 .calendar-section {
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: #e0e0e0;
     text-align: center;
 }
 
     .calendar-section h2 {
         font-size: 2em;
         margin-bottom: 20px;
+        background-color: #e0e0e0;
     }
 
 /* Можно добавить дополнительные стили для календаря */
@@ -186,7 +209,7 @@ body, html {
     flex-direction: row;
     align-items: center;
     position: relative;
-    background-color: #f8f8f8;
+    background-color: #e0e0e0;
 }
 
 h2 {
@@ -199,6 +222,7 @@ h2 {
 h1 {
     padding: 15px;
     text-align: center;
+    font-family: "Santello Regular", sans-serif;
 }
 
 .gallery {
@@ -282,16 +306,6 @@ h1 {
     border: 0;
 }
 
-.carousel {
-    margin: 0 auto;
-    padding: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column; /* Arrange carousel and description vertically */
-    align-items: center;
-    background-color: #f8f8f8;
-}
-
 .gallery-description {
     text-align: center;
     margin-top: 15px;
@@ -301,7 +315,6 @@ h1 {
     max-width: 800px;
 }
 
-/* General Section Styling */
 .tourism-section {
     text-align: center;
     color: white;
@@ -311,13 +324,14 @@ h1 {
 }
 
 .tourism-description {
-    background-color: #ffffff;
+    background-color: #e0e0e0;
     border-radius: 20px;
     padding: 30px;
     padding-bottom: 5px;
-    margin: 0px auto 0; /* Overlap slightly with the image */
+    margin: 0px auto 0;
     width: 75%;
     font-size: 1.2em;
+    font-family: "Manrope", sans-serif;
 }
 
     .tourism-description p {
@@ -353,7 +367,7 @@ h1 {
 
 /* Стили для формы связи */
 .contact-form {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #e0e0e0;
     padding: 20px;
     border-radius: 10px;
     margin: 20px auto;
@@ -381,7 +395,7 @@ h1 {
     }
 
     .contact-form button {
-        background-color: #007BFF;
+        background-color: #e0e0e0;
         color: white;
         padding: 10px 20px;
         border: none;
@@ -391,12 +405,12 @@ h1 {
     }
 
         .contact-form button:hover {
-            background-color: #0056b3;
+            background-color: #e0e0e0;
         }
 
 /* Стили для списка контактов */
 .contact-info {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #e0e0e0;
     padding: 20px;
     border-radius: 10px;
     margin: 20px auto;
@@ -475,18 +489,19 @@ h1 {
     transition: all 0.1s ease-out;
 }
 
-    /* Эффект при наведении */
-    .other-photos:hover {
-        transform: scale(1.04);
-        color: #ffcc00;
-        box-shadow: 0 9px 9px rgba(255, 255, 255, 0.3);
-    }
+/* Эффект при наведении */
+.other-photos:hover {
+    transform: scale(1.04);
+    color: #ffcc00;
+    box-shadow: 0 9px 9px rgba(255, 255, 255, 0.3);
+}
+
 /* Информация о маршруте */
 .route-info-on-page {
     display: grid;
     justify-content: space-evenly; /* Центрируем блоки по горизонтали */
     gap: 5px; /* Добавляем промежутки между блоками */
-    background-color: #f8f8f8;
+    background-color: #e0e0e0;
     padding: 30px 20px;
     text-align: center; /* Центрируем текст внутри блоков */
     margin-top: 20px;
@@ -498,15 +513,46 @@ h1 {
     align-items: center; /* Центрируем содержимое по горизонтали */
 }
 
-    .route-block h3 {
-        font-size: 1.5em;
-        margin-bottom: 10px;
-        color: #333;
-        text-align: center; /* Центрируем заголовки */
-    }
+.route-block h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center; /* Центрируем заголовки */
+}
 
-    .route-block p {
-        font-size: 1.1em;
-        color: #666;
-        text-align: center; /* Центрируем текст */
-    }
+.route-block p {
+    font-size: 1.1em;
+    color: #666;
+    text-align: center; /* Центрируем текст */
+}
+
+@font-face {
+    font-family: "Santello Regular";
+    src: url("/static/fonts/SANTELLO.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Manrope";
+    src: url("/static/fonts/Manrope.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+.tourism-heading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+}
+
+.tourism-heading {
+    font-size: 5rem; /* можно уменьшить, если слишком большое */
+    color: white;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+    font-family: "Santello Regular", sans-serif;
+}
