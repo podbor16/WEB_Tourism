@@ -1,4 +1,11 @@
-﻿function MountainTourism() {
+﻿function MountainTourismHeading() {
+    return (
+        <div className="tourism-heading-container">
+            <h1 className="tourism-heading">ПЕШИЙ ТУРИЗМ</h1>
+        </div>
+    );
+}
+function MountainTourism() {
     const routes = [
         {
             title: 'Эльбрус',
@@ -27,25 +34,17 @@
             location: 'Грузия',
             included: 'Трансфер, Питание',
             link: '/kazbek_route/',
-        },
-        {
-            title: 'Килиманджаро',
-            image: window.staticImages.kilimand,
-            location: 'Танзания',
-            included: 'Трансфер, Питание',
-            link: '/kilimand_route/',
-        },
+        }
     ];
 
     return (
         <div>
-            {/* Секция с фоновым изображением и заголовком */}
             <div className="tourism-section">
-                <img src={window.staticImages.background} className="background-image" alt="Background" />
-                <Header />
-                <h1 className="text-4xl font-bold text-white text-center absolute top-1/2 w-full">
-                    ГОРНЫЙ ТУРИЗМ
-                </h1>
+                <div className="tourism-hero relative w-full h-full">
+                    <img src={window.staticImages.background} className="background-image" alt="Background" />
+                    <Header />
+                    <MountainTourismHeading/>
+                </div>
                 <div className="tourism-options flex justify-center gap-8 absolute bottom-10 w-full">
                     <div className="tourism-item bg-white p-4 rounded-lg shadow-lg">
                         <a href="/walking_tourism/" className="text-xl font-semibold text-blue-600 hover:underline">
@@ -62,7 +61,6 @@
                 </div>
             </div>
 
-            {/* Описание */}
             <div className="tourism-description">
                 <p>
                     <b>Горный туризм</b> — это путешествие туда, где воздух чище, а виды настолько грандиозны, что перехватывает дух. Это приключение для тех, кто хочет проверить себя, выйти за рамки повседневного и зарядиться энергией гор.
@@ -95,26 +93,23 @@
                 </ul>
             </div>
 
-            {/* Призыв к действию */}
-            <p className="cta-text">
-                Покорите вершины и ощутите восторг от достижения новых высот!
-            </p>
-
-            {/* Популярные маршруты */}
             <div className="popular-routes">
+                <p className="cta-text">
+                    Покорите вершины и ощутите восторг от достижения новых высот!
+                </p>
                 <div className="route-cards">
                     {routes.map((route, index) => (
-                        <div className="route-card" key={index}>
-                            <img src={route.image} alt={route.title} />
-                            <div className="route-info">
-                                <h3>{route.title}</h3>
-                                <p>Место: {route.location}</p>
-                                <p>
-                                    Включено: <br /> {route.included}
-                                </p>
-                                <a href={route.link}>Подробнее</a>
+                        <a href={route.link} className="route-card-link" key={index}>
+                            <div className="route-card">
+                                <img src={route.image} alt={route.title} />
+                                <div className="route-info">
+                                    <h3>{route.title}</h3>
+                                    <p>{route.duration}</p>
+                                    <p>{route.included}</p>
+                                    <span className="route-details">Подробнее</span>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
             </div>

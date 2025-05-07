@@ -1,4 +1,11 @@
-﻿function WaterTourism() {
+﻿function WaterTourismHeading() {
+    return (
+        <div className="tourism-heading-container">
+            <h1 className="tourism-heading">ВОДНЫЙ ТУРИЗМ</h1>
+        </div>
+    );
+}
+function WaterTourism() {
     const routes = [
         {
             title: 'Cплав по реке "Катунь"',
@@ -10,13 +17,6 @@
         {
             title: 'Сплав по реке "Есауловка"',
             image: window.staticImages.esaulovka,
-            place: 'Красноярск',
-            included: 'Трансфер',
-            link: '/stolby_route/',
-        },
-        {
-            title: 'Сплав по реке "Мана"',
-            image: window.staticImages.mana,
             place: 'Красноярск',
             included: 'Трансфер',
             link: '/stolby_route/',
@@ -39,13 +39,12 @@
 
     return (
         <div>
-            {/* Секция с фоновым изображением и заголовком */}
             <div className="tourism-section">
-                <img src={window.staticImages.katun2} className="background-image" alt="Background" />
-                <Header /> {/* Глобальная функция Header из header.js */}
-                <h1 className="text-4xl font-bold text-white text-center absolute top-1/2 w-full">
-                    ВОДНЫЙ ТУРИЗМ
-                </h1>
+                <div className="tourism-hero relative w-full h-full">
+                    <img src={window.staticImages.background} className="background-image" alt="Background" />
+                    <Header />
+                    <WaterTourismHeading />
+                </div>
                 <div className="tourism-options flex justify-center gap-8 absolute bottom-10 w-full">
                     <div className="tourism-item bg-white p-4 rounded-lg shadow-lg">
                         <a href="/walking_tourism/" className="text-xl font-semibold text-blue-600 hover:underline">
@@ -95,26 +94,23 @@
                 </ul>
             </div>
 
-            {/* Призыв к действию */}
-            <p className="cta-text">
-                Почувствуйте дух приключений на воде, скользя по рекам, озёрам или морям!
-            </p>
-
-            {/* Популярные маршруты */}
             <div className="popular-routes">
+                <p className="cta-text">
+                    Почувствуйте дух приключений на воде, скользя по рекам, озёрам или морям!
+                </p>
                 <div className="route-cards">
                     {routes.map((route, index) => (
-                        <div className="route-card" key={index}>
-                            <img src={route.image} alt={route.title} />
-                            <div className="route-info">
-                                <h3>{route.title}</h3>
-                                <p>Место: {route.place}</p>
-                                <p>
-                                    Включено: <br /> {route.included}
-                                </p>
-                                <a href={route.link}>Подробнее</a>
+                        <a href={route.link} className="route-card-link" key={index}>
+                            <div className="route-card">
+                                <img src={route.image} alt={route.title} />
+                                <div className="route-info">
+                                    <h3>{route.title}</h3>
+                                    <p>{route.duration}</p>
+                                    <p>{route.included}</p>
+                                    <span className="route-details">Подробнее</span>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
             </div>

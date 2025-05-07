@@ -1,7 +1,6 @@
 ﻿function Start() {
     return (
         <div>
-            {/* Секция с туризмом */}
             <div className="tourism-section">
                 <img
                     src="/static/image/glavnaya.png"
@@ -31,7 +30,6 @@
                 </div>
             </div>
 
-            {/* Описание туризма */}
             <div className="tourism-description">
                 <p style={{ padding: '5px' }}>
                     <b>Школа правильного туризма</b> — это место, где каждый может научиться самостоятельно организовывать походы и уверенно чувствовать себя в любых природных условиях.
@@ -54,7 +52,6 @@
                 </p>
             </div>
 
-            {/* Популярные маршруты */}
             <h2>Наши популярные маршруты:</h2>
             <div className="popular-routes">
                 <div className="route-cards">
@@ -93,11 +90,8 @@
                     </a>
                 </div>
             </div>
-
-            {/* Календарь */}
             <div className="calendar-section">
                 <h2>Календарь с занятиями</h2>
-                {/* Здесь можно добавить календарь позже */}
             </div>
         </div>
     );

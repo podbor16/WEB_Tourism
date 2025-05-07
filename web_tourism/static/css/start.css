@@ -9,6 +9,8 @@ body, html {
     height: 100%;
     font-family: "Manrope", sans-serif; /* Manrope для базового текста */
     font-size: 16px;
+    background-color: #e0e0e0;
+    z-index: -1;
 }
 
 /* Santello Regular для заголовков */
@@ -19,7 +21,10 @@ h1, h2, h3, h4, h5, h6 {
 .tourism-section {
     position: relative;
     width: 100%;
-    height: 100vh; /* Высота на весь экран */
+    height: 100vh;
+    text-align: center;
+    color: white;
+    padding-bottom: 40px;
 }
 
 .tourism-section h1 {
@@ -45,10 +50,11 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1;
-    border-bottom-left-radius: 50px; /* Скругление нижнего левого угла */
-    border-bottom-right-radius: 50px; /* Скругление нижнего правого угла */
+    z-index: 0; 
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
+
 .tourism-options {
     position: absolute;
     bottom: 70px;
@@ -81,15 +87,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tourism-item a:hover {
-    color: #ff8559; /* Коралловый при наведении вместо желтого */
-    border-bottom-color: #ff8559; /* Подчеркивание тоже коралловое */
+    color: #ff8559; 
+    border-bottom-color: #ff8559; 
 }
 
 
-/* Стили для раздела "Популярные маршруты" */
+/* Стили для раздела "Популярные маршруты" главной страницы*/
 .popular-routes {
     padding: 40px;
-    background-color: #f8f8f8;
+    background-color: #e0e0e0;
     text-align: center;
 }
 
@@ -99,68 +105,75 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .route-cards {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
+    display: grid;
+    grid-template-columns: repeat(2, 450px); /* фикс ширина карточек */
+    gap: 30px;
+    justify-content: center; /* выравнивание всей сетки по центру */
+    padding: 30px 0;
 }
 
 .route-card-link {
-    text-decoration: none; /* Убираем подчеркивание для ссылки */
-    color: inherit; /* Наследуем цвет текста */
-    display: block; /* Делаем ссылку блочной, чтобы она охватывала всю карточку */
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+    max-width: 350px;
 }
 
 .route-card {
     position: relative;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
+    width: 450px;
+    height: 250px;
+    border-radius: 20px;
     overflow: hidden;
-    width: 220px;
-    height: 450px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
 }
 
 .route-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .route-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .route-info {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
+    height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.45);
-    border-radius: 10px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+    color: white;
     padding: 15px;
-    text-align: left;
-    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-radius: 20px;
 }
 
+
 .route-info h3 {
-    font-size: 1.2em;
+    font-size: 1.3em;
     margin-bottom: 5px;
     color: #ffffff;
-    text-align: center;
 }
 
 .route-info p {
-    font-size: 0.9em;
-    color: #ffffff;
+    font-size: 0.95em;
+    margin: 2px 0;
 }
 
-.route-info .route-details { /* Изменяем класс для ссылки "Подробнее" */
-    display: inline-block;
+.route-details {
     margin-top: 10px;
-    color: coral;
-    text-decoration: none;
+    color: white;
     font-weight: bold;
+    text-decoration: underline;
+    font-size: 0.9em;
 }
 
 .route-info .route-details:hover {
@@ -311,7 +324,7 @@ h1 {
 }
 
 .tourism-description {
-    background-color: #ffffff;
+    background-color: #e0e0e0;
     border-radius: 20px;
     padding: 30px;
     padding-bottom: 5px;
@@ -354,7 +367,7 @@ h1 {
 
 /* Стили для формы связи */
 .contact-form {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #e0e0e0;
     padding: 20px;
     border-radius: 10px;
     margin: 20px auto;
@@ -382,7 +395,7 @@ h1 {
 }
 
 .contact-form button {
-    background-color: #007BFF;
+    background-color: #e0e0e0;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -392,12 +405,12 @@ h1 {
 }
 
 .contact-form button:hover {
-    background-color: #0056b3;
+    background-color: #e0e0e0;
 }
 
 /* Стили для списка контактов */
 .contact-info {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: #e0e0e0;
     padding: 20px;
     border-radius: 10px;
     margin: 20px auto;
@@ -488,7 +501,7 @@ h1 {
     display: grid;
     justify-content: space-evenly; /* Центрируем блоки по горизонтали */
     gap: 5px; /* Добавляем промежутки между блоками */
-    background-color: #f8f8f8;
+    background-color: #e0e0e0;
     padding: 30px 20px;
     text-align: center; /* Центрируем текст внутри блоков */
     margin-top: 20px;
@@ -525,4 +538,21 @@ h1 {
     src: url("/static/fonts/Manrope.ttf") format("truetype");
     font-style: normal;
     font-weight: normal;
+}
+
+.tourism-heading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+}
+
+.tourism-heading {
+    font-size: 5rem; /* можно уменьшить, если слишком большое */
+    color: white;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+    font-family: "Santello Regular", sans-serif;
 }
