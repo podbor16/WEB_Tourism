@@ -2,6 +2,7 @@
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
     const [theme, setTheme] = React.useState("light");
     const [isLoginModalOpen, setIsLoginModalOpen] = React.useState(false);
+    const [showInitialAuthOptions, setShowInitialAuthOptions] = React.useState(false);
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -13,9 +14,19 @@
         document.body.classList.toggle("dark-theme", newTheme === "dark");
     };
 
-    const toggleLoginModal = (e) => {
+    const handleProfileClick = (e) => {
         e.preventDefault();
-        setIsLoginModalOpen(!isLoginModalOpen);
+        setShowInitialAuthOptions(true);
+    };
+
+    const handleLoginClick = () => {
+        setShowInitialAuthOptions(false);
+        setIsLoginModalOpen(true);
+    };
+
+    const handleRegisterClick = () => {
+        // Тут может быть логика открытия регистрации
+        alert("Регистрация пока не реализована.");
     };
 
     return (
@@ -40,7 +51,7 @@
                             <li><a href="/media/">Медиа</a></li>
                             <li><a href="/medicine/">Медицина</a></li>
                             <li><a href="/about_project/">Контакты</a></li>
-                            <li><a href="#" onClick={toggleLoginModal}>Профиль</a></li>
+                            <li><a href="#" onClick={handleProfileClick}>Профиль</a></li>
                             <li>
                                 <a href="#" className="callback theme-toggle" onClick={toggleTheme}>
                                     {theme === "light" ? "☀️|🌙" : "☀️|🌙"}
@@ -51,6 +62,20 @@
                 </div>
             </nav>
 
+            {showInitialAuthOptions && (
+                <div className="modal-overlay" onClick={() => setShowInitialAuthOptions(false)}>
+                    <div className="auth-choice-modal" onClick={(e) => e.stopPropagation()}>
+                        <h2>Вход или регистрация</h2>
+                        <button className="register-button" onClick={handleRegisterClick}>Зарегистрироваться</button>
+                        <div className="divider">
+                            <hr /> <span>Уже есть аккаунт?</span> <hr />
+                        </div>
+                        <button className="login-button" onClick={handleLoginClick}>Войти</button>
+                    </div>
+                </div>
+            )}
+
+            {/* Вход */}
             {isLoginModalOpen && (
                 <div className="modal-overlay" onClick={() => setIsLoginModalOpen(false)}>
                     <div className="login-modal" onClick={(e) => e.stopPropagation()}>

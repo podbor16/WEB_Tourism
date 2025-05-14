@@ -1,18 +1,17 @@
 ﻿function MountainTourismHeading() {
     return (
         <div className="tourism-heading-container">
-            <h1 className="tourism-heading">ПЕШИЙ ТУРИЗМ</h1>
+            <h1 className="tourism-heading">ГОРНЫЙ ТУРИЗМ</h1>
         </div>
     );
 }
 function MountainTourism() {
     const routes = [
         {
-            title: 'Эльбрус',
-            image: window.staticImages.elbrus,
-            location: 'Кавказ',
+            title: 'Борус',
+            image: window.staticImages.borus,
             included: 'Трансфер, Питание',
-            link: '/elbrus_route/',
+            link: '/borus_route/',
         },
         {
             title: 'Арктру',
