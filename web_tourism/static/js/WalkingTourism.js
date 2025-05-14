@@ -19,21 +19,21 @@ function WalkingTourism() {
             image: window.staticImages.ergaki,
             duration: '5-7 дней',
             included: 'Трансфер, питание',
-            link: '/stolby_route/',
+            link: '/ergaki_route/',
         },
         {
             title: 'Кутурчинское Белогорье',
             image: window.staticImages.belogorye,
             duration: '3 дня',
             included: 'Трансфер, питание',
-            link: '/stolby_route/',
+            link: '/belogorye_route/',
         },
         {
             title: 'Мининские столбы',
             image: window.staticImages.mininskie,
             duration: '7 часов',
             included: 'Трансфер',
-            link: '/stolby_route/',
+            link: '/mininskie_route/',
         }
     ];
 
