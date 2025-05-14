@@ -1,6 +1,6 @@
 body {
 position: relative;
-font-family: 'Santello Regular', sans-serif;
+fontcallback theme-togglefamily: 'Santello Regular', sans-serif;
 font-size: 16px;
 line-height: 1.4;
 color: #000;
@@ -245,7 +245,7 @@ transition: all 0.1s ease-out;
 }
 
 .auth-choice-modal .register-button {
-    background-color: #4c6ef5;
+    background-color: #ff8559;
     color: white;
     padding: 12px 20px;
     border-radius: 8px;
@@ -297,3 +297,79 @@ transition: all 0.1s ease-out;
     font-size: 14px;
 }
 
+/* Форма регистрации */
+.register-modal {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.register-modal h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.register-submit-button {
+    background-color: #ff8559; /*#4caf50 синий*/
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.register-submit-button:hover {
+    background-color: #43a047;
+}
+
+/* Ограничение высоты и прокрутка внутри модальных окон */
+.login-modal,
+.register-modal,
+.auth-choice-modal {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+/* Добавим плавность и скрытие скролла (опционально) */
+.login-modal::-webkit-scrollbar,
+.register-modal::-webkit-scrollbar,
+.auth-choice-modal::-webkit-scrollbar {
+    width: 6px;
+}
+
+.login-modal::-webkit-scrollbar-thumb,
+.register-modal::-webkit-scrollbar-thumb,
+.auth-choice-modal::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.auth-choice-modal .close-modal,
+.register-modal .close-modal,
+.login-modal .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    z-index: 1;
+}
+
+.auth-choice-modal .close-modal:hover,
+.register-modal .close-modal:hover,
+.login-modal .close-modal:hover {
+    color: #000;
+}
