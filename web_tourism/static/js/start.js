@@ -1,34 +1,38 @@
 ﻿function Start() {
     return (
         <div>
-            {/* Секция с туризмом */}
             <div className="tourism-section">
                 <img
-                    src="/static/image/IMG_6230.jpg"
+                    src="/static/image/glavnaya.png"
                     alt="Фоновое изображение"
                     className="background-image"
                 />
                 <Header />
-                <div className="tourism-options">
-                    <div className="tourism-item">
-                        <h3>Пеший туризм</h3>
-                        <a href="/walking_tourism/">Перейти&gt;</a>
+                <div className="tourism-options flex justify-center gap-8 absolute bottom-10 w-full">
+                    <div className="tourism-item bg-white p-4 rounded-lg shadow-lg">
+                        <a href="/walking_tourism/" className="text-xl font-semibold text-blue-600 hover:underline">
+                            <h3>Пеший туризм</h3>
+                        </a>
+                        <a href="/walking_tourism/" className="text-blue-500 hover:underline">Перейти &gt;</a>
                     </div>
-                    <div className="tourism-item">
-                        <h3>Водный туризм</h3>
-                        <a href="/water_tourism/">Перейти&gt;</a>
+                    <div className="tourism-item bg-white p-4 rounded-lg shadow-lg">
+                        <a href="/water_tourism/" className="text-xl font-semibold text-blue-600 hover:underline">
+                            <h3>Водный туризм</h3>
+                        </a>
+                        <a href="/water_tourism/" className="text-blue-500 hover:underline">Перейти &gt;</a>
                     </div>
-                    <div className="tourism-item">
-                        <h3>Горный туризм</h3>
-                        <a href="/mountain_tourism/">Перейти&gt;</a>
+                    <div className="tourism-item bg-white p-4 rounded-lg shadow-lg">
+                        <a href="/mountain_tourism/" className="text-xl font-semibold text-blue-600 hover:underline">
+                            <h3>Горный туризм</h3>
+                        </a>
+                        <a href="/mountain_tourism/" className="text-blue-500 hover:underline">Перейти &gt;</a>
                     </div>
                 </div>
             </div>
 
-            {/* Описание туризма */}
             <div className="tourism-description">
                 <p style={{ padding: '5px' }}>
-                    <b>Школа правильного туризма ЕБУЧИЙ ТЕСТ ОТ 23.03</b> — это место, где каждый может научиться самостоятельно организовывать походы и уверенно чувствовать себя в любых природных условиях.
+                    <b>Школа правильного туризма</b> — это место, где каждый может научиться самостоятельно организовывать походы и уверенно чувствовать себя в любых природных условиях.
                 </p>
                 <p style={{ padding: '5px' }}>
                     <b>Наша миссия</b> — передать знания, которые помогут вам не только наслаждаться красотой дикой природы, но и делать это безопасно и грамотно.
@@ -48,44 +52,46 @@
                 </p>
             </div>
 
-            {/* Популярные маршруты */}
             <h2>Наши популярные маршруты:</h2>
             <div className="popular-routes">
                 <div className="route-cards">
-                    <div className="route-card">
-                        <img src="/static/image/stolb.png" alt="Столбы" />
-                        <div className="route-info">
-                            <h3>Столбы</h3>
-                            <p>Протяженность по времени: 7 часов</p>
-                            <p>Включено: <br /> Трансфер</p>
-                            <a href="/stolby_route/">Подробнее</a>
+                    <a href="/stolby_route/" className="route-card-link">
+                        <div className="route-card">
+                            <img src="/static/image/stolb.png" alt="Столбы" />
+                            <div className="route-info">
+                                <h3>Столбы</h3>
+                                <p>Протяженность по времени: 7 часов</p>
+                                <p>Включено: <br /> Трансфер</p>
+                                <a href="/stolby_route/" className="route-details">Подробнее</a>
+                            </div>
                         </div>
-                    </div>
-                    <div className="route-card">
-                        <img src="/static/image/elbrus.jpg" alt="Эльбрус" />
-                        <div className="route-info">
-                            <h3>Эльбрус</h3>
-                            <p>Протяженность по времени: 5-7 дней</p>
-                            <p>Включено: <br />Питание, Трансфер</p>
-                            <a href="/elbrus_route/">Подробнее</a>
+                    </a>
+                    <a href="/elbrus_route/" className="route-card-link">
+                        <div className="route-card">
+                            <img src="/static/image/elbrus.jpg" alt="Эльбрус" />
+                            <div className="route-info">
+                                <h3>Эльбрус</h3>
+                                <p>Протяженность по времени: 5-7 дней</p>
+                                <p>Включено: <br />Питание, Трансфер</p>
+                                <a href="/elbrus_route/" className="route-details">Подробнее</a>
+                            </div>
                         </div>
-                    </div>
-                    <div className="route-card">
-                        <img src="/static/image/mansky.jpg" alt="Манский порог" />
-                        <div className="route-info">
-                            <h3>Манский порог</h3>
-                            <p>Протяженность по времени: 3 часа</p>
-                            <p>Включено: <br />Трансфер</p>
-                            <a href="/mansky_route/">Подробнее</a>
+                    </a>
+                    <a href="/mansky_route/" className="route-card-link">
+                        <div className="route-card">
+                            <img src="/static/image/mansky.jpg" alt="Манский порог" />
+                            <div className="route-info">
+                                <h3>Манский порог</h3>
+                                <p>Протяженность по времени: 3 часа</p>
+                                <p>Включено: <br />Трансфер</p>
+                                <a href="/mansky_route/" className="route-details">Подробнее</a>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
-
-            {/* Календарь */}
             <div className="calendar-section">
                 <h2>Календарь с занятиями</h2>
-                {/* Здесь можно добавить календарь позже */}
             </div>
         </div>
     );
