@@ -1,6 +1,6 @@
 body {
 position: relative;
-fontcallback theme-togglefamily: 'Santello Regular', sans-serif;
+font-family: 'Santello Regular', sans-serif;
 font-size: 16px;
 line-height: 1.4;
 color: #000;
@@ -372,4 +372,40 @@ transition: all 0.1s ease-out;
 .register-modal .close-modal:hover,
 .login-modal .close-modal:hover {
     color: #000;
+}
+/*Кнопка смены темы*/
+.theme-toggle.vertical-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 12px 12px; /* Уменьшил padding для более тонкого вида */
+    background-color: coral;
+    border-radius: 50px; /* Увеличил для более плавного скругления */
+    color: #fff;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(255, 127, 80, 0.2);
+    transition: all 0.1s ease-out;
+    margin-left: 30px;
+    font-size: 18px; /* Немного уменьшил размер шрифта */
+    height: 80px; /* Фиксированная высота */
+    width: 40px; /* Фиксированная ширина */
+    box-sizing: border-box;
+}
+
+.theme-toggle.vertical-toggle:hover {
+    transform: scale(1.04);
+    color: #ff8559;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.3);
+}
+
+.theme-toggle.vertical-toggle span {
+    display: block;
+    margin: 10px 0;
+}
+
+/* Уменьшаем отступ между иконками */
+.theme-toggle.vertical-toggle span:first-child {
+    margin-bottom: 0;
 }

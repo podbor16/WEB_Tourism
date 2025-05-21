@@ -44,8 +44,9 @@
                             <li><a href="/about_project/">Контакты</a></li>
                             <li><a href="#" onClick={openChoiceModal}>Профиль</a></li>
                             <li>
-                                <a href="#" className="callback theme-toggle" onClick={toggleTheme}>
-                                    {theme === "light" ? "☀️|🌙" : "☀️|🌙"}
+                                <a href="#" className="callback theme-toggle vertical-toggle" onClick={toggleTheme}>
+                                    <span>{theme === "light" ? "☀️" : "🌙"}</span>
+                                    <span>{theme === "light" ? "🌙" : "☀️"}</span>
                                 </a>
                             </li>
                         </ul>
