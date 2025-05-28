@@ -44,10 +44,15 @@
                             <li><a href="/about_project/">Контакты</a></li>
                             <li><a href="#" onClick={openChoiceModal}>Профиль</a></li>
                             <li>
-                                <a href="#" className="callback theme-toggle vertical-toggle" onClick={toggleTheme}>
-                                    <span>{theme === "light" ? "☀️" : "🌙"}</span>
-                                    <span>{theme === "light" ? "🌙" : "☀️"}</span>
-                                </a>
+                                <div className={`theme-switch-button ${theme}`} onClick={toggleTheme}>
+                                    <div className="icon-wrapper">
+                                        <img
+                                            src={theme === "light" ? "/static/image/sun.png" : "/static/image/moon.png"}
+                                            alt="theme icon"
+                                            className="theme-icon"
+                                        />
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </div>
