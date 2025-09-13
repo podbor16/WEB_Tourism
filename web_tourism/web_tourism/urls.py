@@ -17,11 +17,12 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from tourism.views import start_page, media_page, about_project_page, medicine_page,header,equipment_page,walking_tourism__page, water_tourism__page,mountain_tourism__page,stolby_route_page,mansky_route_page,elbrus_route_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('account/', include('account.urls')),
     path('', start_page),
     path('media/', media_page),
     path('about_project/', about_project_page),

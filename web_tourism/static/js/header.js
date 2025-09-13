@@ -42,7 +42,7 @@
                             <li><a href="/media/">Медиа</a></li>
                             <li><a href="/medicine/">Медицина</a></li>
                             <li><a href="/about_project/">Контакты</a></li>
-                            <li><a href="#" onClick={openChoiceModal}>Профиль</a></li>
+                            <li><a href="/account/login/">Профиль</a></li>
                             <li>
                                 <div className={`theme-switch-button ${theme}`} onClick={toggleTheme}>
                                     <div className="icon-wrapper">
