@@ -88,6 +88,17 @@
                             </div>
                         </div>
                     </a>
+                    <a href="/ergaki_route/" className="route-card-link">
+                        <div className="route-card">
+                            <img src="/static/image/Ergaki.jpg" alt="Ергаки" />
+                            <div className="route-info">
+                                <h3>Ергаки</h3>
+                                <p>Протяженность по времени: 5-7 дней</p>
+                                <p>Включено: <br />Питание, Трансфер</p>
+                                <a href="/ergaki_route/" className="route-details">Подробнее</a>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div className="calendar-section">
