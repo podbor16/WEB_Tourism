@@ -49,13 +49,13 @@ function MountainTourism() {
                         <a href="/walking_tourism/" className="text-xl font-semibold text-blue-600 hover:underline">
                             <h3>Пеший туризм</h3>
                         </a>
-                        <a href="/walking_tourism/" className="text-blue-500 hover:underline">Перейти ></a>
+                        <a href="/walking_tourism/" className="text-blue-500 hover:underline">Перейти </a>
                     </div>
                     <div className="tourism-item bg-white p-4 rounded-lg shadow-lg">
                         <a href="/water_tourism/" className="text-xl font-semibold text-blue-600 hover:underline">
                             <h3>Водный туризм</h3>
                         </a>
-                        <a href="/water_tourism/" className="text-blue-500 hover:underline">Перейти ></a>
+                        <a href="/water_tourism/" className="text-blue-500 hover:underline">Перейти </a>
                     </div>
                 </div>
             </div>
