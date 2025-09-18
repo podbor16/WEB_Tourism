@@ -90,7 +90,7 @@
                     </a>
                     <a href="/ergaki_route/" className="route-card-link">
                         <div className="route-card">
-                            <img src="/static/image/Ergaki.jpg" alt="Ергаки" />
+                            <img src="/static/image/Ergaki.png" alt="Ергаки" />
                             <div className="route-info">
                                 <h3>Ергаки</h3>
                                 <p>Протяженность по времени: 5-7 дней</p>
