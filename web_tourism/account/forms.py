@@ -1,28 +1,37 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
+from .models import CustomUser, Profile
 
-class SignUpForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    first_name = forms.CharField(max_length=30, required=False)
-    last_name = forms.CharField(max_length=30, required=False)
-    phone = forms.CharField(max_length=20, required=False)
-    city = forms.CharField(max_length=255, required=False)
-    birth_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type':'date'}))
+
+class RegistrationForm(UserCreationForm):
+    # Дополнительные поля для профиля
+    gender = forms.ChoiceField(choices=Profile.GENDER_CHOICES, required=False, label="Пол")
+    city = forms.CharField(max_length=100, required=False, label="Город")
+    birth_date = forms.DateField(
+        required=False,
+        widget=forms.DateInput(attrs={"type": "date"}),
+        label="Дата рождения"
+    )
+    phone_number = forms.CharField(max_length=20, required=False, label="Телефон")
 
     class Meta:
-        model = User
-        fields = ('username','first_name','last_name','email','password1','password2','phone','city','birth_date')
+        model = CustomUser
+        # ⚠️ только поля из CustomUser!
+        fields = ("first_name", "last_name", "email", "password1", "password2")
 
     def save(self, commit=True):
-        user = super().save(commit=False)
-        user.email = self.cleaned_data['email']
+        user = super().save(commit=commit)
         if commit:
-            user.save()
-            # Обновляем профиль
-            profile = user.profile
-            profile.phone = self.cleaned_data.get('phone','')
-            profile.city = self.cleaned_data.get('city','')
-            profile.birth_date = self.cleaned_data.get('birth_date', None)
-            profile.save()
+            # создаём связанный профиль
+            Profile.objects.create(
+                user=user,
+                gender=self.cleaned_data.get("gender"),
+                city=self.cleaned_data.get("city"),
+                birth_date=self.cleaned_data.get("birth_date"),
+                phone_number=self.cleaned_data.get("phone_number"),
+            )
         return user
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.EmailField(label="Электронная почта")
