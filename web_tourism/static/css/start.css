@@ -101,14 +101,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .popular-routes h2 {
     font-size: 2em;
-    margin-bottom: 40px;
+    margin-bottom: -15px;
 }
 
 .route-cards {
     display: grid;
     grid-template-columns: repeat(2, 450px); /* фикс ширина карточек */
     gap: 30px;
-    justify-content: center; /* выравнивание всей сетки по центру */
+    justify-content: center; 
     padding: 30px 0;
 }
 
@@ -183,7 +183,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .popular-routes h2 {
     font-size: 2em;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 /* Стили для раздела "Календарь с занятиями" */
@@ -213,10 +213,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
-    padding: 15px;
+    padding: 0px;
     text-align: center;
     font-size: 2em;
-    margin-bottom: 20px;
+    margin-bottom: -15px;
 }
 
 h1 {
