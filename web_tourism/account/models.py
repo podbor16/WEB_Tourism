@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
+from django.core.validators import RegexValidator
 
 
 class CustomUserManager(BaseUserManager):
@@ -63,7 +64,19 @@ class Profile(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, null=True, verbose_name="Пол")
     city = models.CharField(max_length=100, blank=True, null=True, verbose_name="Город")
     birth_date = models.DateField(blank=True, null=True, verbose_name="Дата рождения")
-    phone_number = models.CharField(max_length=20, blank=True, null=True, verbose_name="Телефон")
+
+    phone_number = models.CharField(
+        max_length=10,
+        validators=[
+            RegexValidator(
+                regex=r'^\d{10}$',
+                message="Введите номер в формате: 9001234567 (10 цифр без пробелов и символов)"
+            )
+        ],
+        blank=True,
+        null=True,
+        verbose_name="Телефон"
+    )
 
     def __str__(self):
         return f"Профиль {self.user.email}"

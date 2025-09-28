@@ -64,3 +64,18 @@ def profile_view(request):
     Профиль пользователя.
     """
     return render(request, "account/profile.html", {"user": request.user})
+
+def signup(request):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Регистрация прошла успешно!")
+            return redirect("account:login")
+        else:
+            print("Ошибки формы:", form.errors)  # ← ошибки будут в консоли
+            messages.error(request, "Исправьте ошибки в форме")
+    else:
+        form = RegistrationForm()
+    return render(request, "account/signup.html", {"form": form})
+
