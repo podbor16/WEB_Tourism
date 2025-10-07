@@ -29,27 +29,72 @@
                     </div>
                 </div>
             </div>
+            
+            <div className="promo-section">
+                <div className="promo-background">
+                    <img
+                        src="/static/image/glavnaya.png"
+                        alt="Промо изображение"
+                        className="background-image"
+                    />
+                    <div className="tourism-heading-container">
+                        <img
+                            src="/static/image/shcola.png"
+                            alt="Школа правильного туризма"
+                            className="tourism-logo"
+                        />
+                        <p className="promo-text">
+                            Место, где каждый может научиться самостоятельно организовывать походы и уверенно чувствовать себя в любых природных условиях.
+                        </p>
+                        <div className="white-rectangle">
+                            <p className="promo-text" style={{ color: "black" }}>
+                                НАША МИССИЯ
+                            </p>
+                            <p className="promo-text" style={{ color: "black", fontSize: "20px", fontFamily: "Manrope" }}>
+                                передать знания, которые помогут вам не только наслаждаться красотой дикой природы, но и делать это безопасно и грамотно.
+                            </p>
+                            <p className="promo-text" style={{ color: "black", fontSize: "28px" }}>
+                                Мы обучаем базовым и продвинутым навыкам в трёх направлениях:
+                            </p>
 
-            <div className="tourism-description">
-                <p style={{ padding: '5px' }}>
-                    <b>Школа правильного туризма</b> — это место, где каждый может научиться самостоятельно организовывать походы и уверенно чувствовать себя в любых природных условиях.
-                </p>
-                <p style={{ padding: '5px' }}>
-                    <b>Наша миссия</b> — передать знания, которые помогут вам не только наслаждаться красотой дикой природы, но и делать это безопасно и грамотно.
-                </p>
-                <p style={{ padding: '5px' }}>Мы обучаем базовым и продвинутым навыкам в трех направлениях:</p>
-                <p style={{ padding: '5px' }}>
-                    <b> Пеший туризм </b> — походы по равнинам, лесам и холмистым местностям, где вы научитесь правильно планировать маршруты, ориентироваться на местности и комфортно обустраивать лагерь.
-                </p>
-                <p style={{ padding: '5px' }}>
-                    <b> Водный туризм </b> — сплавы по рекам и озерам, включая обучение техникам гребли, навигации и безопасности на воде.
-                </p>
-                <p style={{ padding: '5px' }}>
-                    <b> Горный туризм </b> — путешествия по горам, с акцентом на физическую подготовку, преодоление сложных подъемов и использование специального снаряжения.
-                </p>
-                <p style={{ padding: '5px' }}>
-                    Наша школа — это практический опыт, который вы приобретаете вместе с командой опытных инструкторов. Присоединяйтесь и откройте для себя мир туризма, где свобода и уверенность идут рука об руку!
-                </p>
+                            {/* Блок с направлениями */}
+                            <div className="directions-container">
+                                <div className="direction-item">
+                                    <div className="direction-content">
+                                        <span className="direction-arrow">►</span>
+                                        <p className="direction-text">
+                                            Пеший туризм – походы по равнинам, лесам и холмистым местностям, где вы научитесь правильно планировать маршруты, ориентироваться на местности и комфортно обустраивать лагерь.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="direction-item">
+                                    <div className="direction-content">
+                                        <span className="direction-arrow">►</span>
+                                        <p className="direction-text">
+                                            Водный туризм – сплавы по рекам и озёрам, включая обучение техникам гребли, навигации и безопасности на воде.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="direction-item">
+                                    <div className="direction-content">
+                                        <span className="direction-arrow">►</span>
+                                        <p className="direction-text">
+                                            Наша школа — это практический опыт, который вы приобретаете вместе с командой опытных инструкторов.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p className="promo-text" style={{ color: "black", fontSize: "22px", fontFamily: "Manrope" }}>
+                                передать знания, которые помогут вам не только наслаждаться красотой дикой природы, но и делать это безопасно и грамотно.
+                            </p>
+                            <p className="promo-text" style={{ color: "black", fontSize: "30px" }}>
+                                Присоединяйтесь и откройте для себя мир туризма, где свобода и уверенность идут рука об руку!
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <h2>Наши популярные маршруты:</h2>

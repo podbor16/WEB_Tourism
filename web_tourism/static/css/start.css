@@ -14,7 +14,7 @@ body, html {
 }
 
 /* Santello Regular для заголовков */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, p{
     font-family: "Santello Regular", sans-serif;
 }
 
@@ -25,14 +25,6 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
     color: white;
     padding-bottom: 40px;
-}
-
-.tourism-section h1 {
-    font-size: 100px;
-    padding: 130px;
-    color: #ffffff;
-    text-align: center;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7); /* Add shadow */
 }
 
 .tourism-section h1 {
@@ -555,4 +547,120 @@ h1 {
     color: white;
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
     font-family: "Santello Regular", sans-serif;
+}
+
+/* Стили для промо-секции */
+.promo-section {
+    width: calc(100% - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    margin: 50px auto;
+    border-radius: 50px;
+    background: #e0e0e0;
+}
+
+.promo-background{
+    width: 100%;
+    height: 1350px;
+    position: relative;
+    border-radius: 50px 50px 50px 50px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.white-rectangle {
+    z-index: 20;
+    width: calc(100% - 100px);
+    height: auto;
+    align-items: center;
+    background-color: #e0e0e0;
+    border-radius: 50px;
+    padding: 50px;
+    position: relative;
+}
+
+.promo-background .background-image {
+    border-radius: 50px; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tourism-heading-container {
+    position: absolute;
+    top: 50px; /* 50px отступ сверху от края фонового изображения */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Изменяем на колонку */
+    justify-content: flex-start; 
+    align-items: center;
+}
+
+.tourism-logo {
+    width: 50vw; /* Занимает половину ширины экрана */
+    max-width: 1000px; 
+    height: auto; 
+    max-height: 500px; 
+    object-fit: contain; 
+    margin-bottom: 30px; 
+}
+
+.promo-text {
+    z-index: 20;
+    color: white;
+    font-size: 32px;
+    font-family: "Santello Regular", sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0 50px;
+    max-width: 1200px;
+    line-height: 1.4;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.directions-container {
+    max-width: 900px;
+    margin: 30px auto 0;
+}
+
+.direction-item {
+    margin-bottom: 20px;
+}
+
+.direction-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.direction-arrow {
+    color: #ff8559;
+    font-size: 16px;
+    margin-top: 4px;
+    flex-shrink: 0;
+    font-weight: bold;
+}
+
+.direction-text {
+    color: #000;
+    font-size: 18px;
+    font-family: "Manrope", sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+}
+
+.direction-text strong {
+    font-family: "Santello Regular", sans-serif;
+    font-weight: bold;
 }
