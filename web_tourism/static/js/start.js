@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div className="promo-section">
                 <div className="promo-background">
                     <img
@@ -61,35 +61,45 @@
                             <div className="directions-container">
                                 <div className="direction-item">
                                     <div className="direction-content">
-                                        <span className="direction-arrow">►</span>
+                                        <img
+                                            src="/static/image/Arrow 1.png"
+                                            alt="Стрелка"
+                                            className="direction-arrow"/>
                                         <p className="direction-text">
-                                            Пеший туризм – походы по равнинам, лесам и холмистым местностям, где вы научитесь правильно планировать маршруты, ориентироваться на местности и комфортно обустраивать лагерь.
+                                            <strong>Пеший туризм</strong> – походы по равнинам, лесам и холмистым местностям, где вы научитесь правильно планировать маршруты, ориентироваться на местности и комфортно обустраивать лагерь.
                                         </p>
                                     </div>
                                 </div>
 
                                 <div className="direction-item">
                                     <div className="direction-content">
-                                        <span className="direction-arrow">►</span>
+                                        <img
+                                            src="/static/image/Arrow 2.png"
+                                            alt="Стрелка"
+                                            className="direction-arrow"/>
                                         <p className="direction-text">
-                                            Водный туризм – сплавы по рекам и озёрам, включая обучение техникам гребли, навигации и безопасности на воде.
+                                            <strong>Водный туризм</strong> – сплавы по рекам и озёрам, включая обучение техникам гребли, навигации и безопасности на воде.
                                         </p>
                                     </div>
                                 </div>
 
                                 <div className="direction-item">
                                     <div className="direction-content">
-                                        <span className="direction-arrow">►</span>
+                                        <img
+                                            src="/static/image/Arrow 3.png"
+                                            alt="Стрелка"
+                                            className="direction-arrow"/>
                                         <p className="direction-text">
-                                            Наша школа — это практический опыт, который вы приобретаете вместе с командой опытных инструкторов.
+                                            <strong>Горный туризм</strong> – путешествия по горам, с акцентом на физическую подготовку, преодоление сложных подъёмов и использование специального снаряжения.
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <p className="promo-text" style={{ color: "black", fontSize: "22px", fontFamily: "Manrope" }}>
-                                передать знания, которые помогут вам не только наслаждаться красотой дикой природы, но и делать это безопасно и грамотно.
+
+                            <p className="promo-text" style={{ color: "black", fontSize: "22px", fontFamily: "Manrope", marginTop: "30px" }}>
+                                Наша школа — это практический опыт, который вы приобретаете вместе с командой опытных инструкторов.
                             </p>
-                            <p className="promo-text" style={{ color: "black", fontSize: "30px" }}>
+                            <p className="promo-text" style={{ color: "black", fontSize: "30px", marginTop: "20px" }}>
                                 Присоединяйтесь и откройте для себя мир туризма, где свобода и уверенность идут рука об руку!
                             </p>
                         </div>
