@@ -33,7 +33,7 @@
             <div className="promo-section">
                 <div className="promo-background">
                     <img
-                        src="/static/image/glavnaya.png"
+                        src="/static/image/gooooryi.png"
                         alt="Промо изображение"
                         className="background-image"
                     />
