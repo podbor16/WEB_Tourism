@@ -1,0 +1,13 @@
+<h2>Регистрация на маршрут: {{ tour.name }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="tour_id" value="{{ tour.id }}">
+    
+    <p><b>Имя:</b> {{ user_data.first_name }}</p>
+    <p><b>Фамилия:</b> {{ user_data.last_name }}</p>
+    <p><b>Город:</b> {{ user_data.city }}</p>
+    <p><b>Телефон:</b> {{ user_data.phone }}</p>
+
+    <button type="submit">Зарегистрироваться</button>
+</form>

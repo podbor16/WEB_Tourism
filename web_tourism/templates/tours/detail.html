@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ tour.name }}</title>
+</head>
+<body>
+    <a href="{% url 'tours_registrations:my_registrations' %}">Назад к моим регистрациям</a>
+
+    <h1>{{ tour.name }}</h1>
+
+    {% if tour.image %}
+        <img src="{{ tour.image.url }}" alt="{{ tour.name }}" style="max-width: 500px; height: auto;">
+    {% endif %}
+
+    <p><strong>Описание:</strong></p>
+    <p>{{ tour.description|linebreaks }}</p>
+
+    <p><strong>Дата начала:</strong> {{ tour.start_date }}</p>
+    <p><strong>Дата окончания:</strong> {{ tour.end_date|default:"Бессрочно" }}</p>
+    <p><strong>Стоимость:</strong> {{ tour.price }} руб.</p>
+    <p><strong>Тип похода:</strong> {{ tour.type }}</p>
+
+    <hr>
+
+    
+
+</body>
+</html>

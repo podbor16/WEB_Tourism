@@ -1,0 +1,16 @@
+<h2>Ваши регистрации</h2>
+{% if registrations %}
+    <ul>
+    {% for reg in registrations %}
+        <li>
+            <a href="{% url 'tours:tour_detail' tour_id=reg.tour.id %}">
+                <strong>{{ reg.tour.name }}</strong>
+            </a> — 
+            {{ reg.tour.start_date }} — {{ reg.tour.end_date|default:"Бессрочно" }}
+            (Статус: {{ reg.get_status_display }})
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Вы пока не зарегистрированы ни на один маршрут.</p>
+{% endif %}
