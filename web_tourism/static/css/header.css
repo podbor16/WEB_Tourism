@@ -162,7 +162,7 @@ transition: all 0.1s ease-out;
     }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .form-group label {
@@ -283,7 +283,7 @@ transition: all 0.1s ease-out;
     justify-content: center;
     text-align: center;
     color: #888;
-    margin: 15px 0;
+    margin: 5px;
 }
 
 .auth-choice-modal .divider hr {
@@ -308,12 +308,12 @@ transition: all 0.1s ease-out;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-.register-modal h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-}
+    .register-modal h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #333;
+    }
 
 .register-submit-button {
     background-color: #ff8559; /*#4caf50 синий*/
@@ -328,9 +328,9 @@ transition: all 0.1s ease-out;
     transition: background-color 0.2s;
 }
 
-.register-submit-button:hover {
-    background-color: #43a047;
-}
+    .register-submit-button:hover {
+        background-color: #43a047;
+    }
 
 /* Ограничение высоты и прокрутка внутри модальных окон */
 .login-modal,
@@ -340,39 +340,40 @@ transition: all 0.1s ease-out;
     overflow-y: auto;
 }
 
-/* Добавим плавность и скрытие скролла (опционально) */
-.login-modal::-webkit-scrollbar,
-.register-modal::-webkit-scrollbar,
-.auth-choice-modal::-webkit-scrollbar {
-    width: 6px;
-}
+    /* Добавим плавность и скрытие скролла (опционально) */
+    .login-modal::-webkit-scrollbar,
+    .register-modal::-webkit-scrollbar,
+    .auth-choice-modal::-webkit-scrollbar {
+        width: 6px;
+    }
 
-.login-modal::-webkit-scrollbar-thumb,
-.register-modal::-webkit-scrollbar-thumb,
-.auth-choice-modal::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
-}
+    .login-modal::-webkit-scrollbar-thumb,
+    .register-modal::-webkit-scrollbar-thumb,
+    .auth-choice-modal::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+    }
 
-.auth-choice-modal .close-modal,
-.register-modal .close-modal,
-.login-modal .close-modal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #666;
-    z-index: 1;
-}
+    .auth-choice-modal .close-modal,
+    .register-modal .close-modal,
+    .login-modal .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+        z-index: 1;
+    }
 
-.auth-choice-modal .close-modal:hover,
-.register-modal .close-modal:hover,
-.login-modal .close-modal:hover {
-    color: #000;
-}
+        .auth-choice-modal .close-modal:hover,
+        .register-modal .close-modal:hover,
+        .login-modal .close-modal:hover {
+            color: #000;
+        }
+
 /*Кнопка смены темы*/
 .theme-toggle.vertical-toggle {
     display: flex;

@@ -3,45 +3,58 @@
 <head>
     <meta charset="utf-8">
     <title>WEB_Tourism</title>
+
     <style>
         /* Стили для сообщений */
         .success {
             color: green;
             font-weight: bold;
         }
+
         .error {
             color: red;
             font-weight: bold;
         }
+
         .warning {
             color: orange;
             font-weight: bold;
         }
+
         .info {
             color: blue;
             font-weight: bold;
         }
     </style>
+
+    <!-- Передаем CSRF и user в глобальные переменные для React -->
+    <script>
+        window.csrfToken = "{{ csrf_token }}";
+        window.user = {
+            isAuthenticated: {{ user.is_authenticated|yesno:"true,false" }},
+            username: "{{ user.username }}"
+        };
+    </script>
 </head>
 <body>
     <nav>
         <a href="{% url 'account:profile' %}">Личный кабинет</a> |
         {% if user.is_authenticated %}
-            {{ user.username }} | <a href="{% url 'account:logout' %}">Выйти</a>
+        {{ user.username }} | <a href="{% url 'account:logout' %}">Выйти</a>
         {% else %}
-            <a href="{% url 'account:login' %}">Войти</a> |
-            <a href="{% url 'account:signup' %}">Регистрация</a>
+        <a href="{% url 'account:login' %}">Войти</a> |
+        <a href="{% url 'account:signup' %}">Регистрация</a>
         {% endif %}
     </nav>
-    <hr/>
+    <hr />
 
     <!-- Блок для сообщений -->
     {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li class="{{ message.tags }}">{{ message }}</li>
-            {% endfor %}
-        </ul>
+    <ul>
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
     {% endif %}
 
     {% block content %}{% endblock %}
