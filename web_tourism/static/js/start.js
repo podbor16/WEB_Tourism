@@ -57,7 +57,6 @@
                                 Мы обучаем базовым и продвинутым навыкам в трёх направлениях:
                             </p>
 
-                            {/* Блок с направлениями */}
                             <div className="directions-container">
                                 <div className="direction-item">
                                     <div className="direction-content">
@@ -117,7 +116,7 @@
                                 <h3>Столбы</h3>
                                 <p>Протяженность по времени: 7 часов</p>
                                 <p>Включено: <br /> Трансфер</p>
-                                <a href="/stolby_route/" className="route-details">Подробнее</a>
+                                <a href="/stolby/" className="route-details">Подробнее</a>
                             </div>
                         </div>
                     </a>
