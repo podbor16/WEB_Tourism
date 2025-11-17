@@ -1,6 +1,6 @@
-{% extends 'base.html' %}
-
-{% block content %}
+<!--{% extends 'base.html' %} -->
+<!--{% block content %} -->
+{% include 'header.html' %}
 <h2>Личный кабинет</h2>
 
 <p>Фамилия: {{ user.last_name }}</p>
@@ -12,6 +12,7 @@
 <p>Телефон: {{ user.profile.phone_number|default:"Не указан" }}</p>
 
 <!-- Новая ссылка -->
+<p><a href="{% url 'account:edit_profile' %}">Редактировать профиль</a></p>
 <p><a href="{% url 'tours_registrations:my_registrations' %}">Мои регистрации</a></p>
 
 <p><a href="{% url 'account:logout' %}">Выйти</a></p>

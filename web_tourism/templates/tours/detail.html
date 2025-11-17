@@ -5,6 +5,7 @@
     <title>{{ tour.name }}</title>
 </head>
 <body>
+    {% include 'header.html' %}
     <a href="{% url 'tours_registrations:my_registrations' %}">Назад к моим регистрациям</a>
 
     <h1>{{ tour.name }}</h1>

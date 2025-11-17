@@ -131,3 +131,16 @@ class LoginForm(AuthenticationForm):
             "autocomplete": "current-password"
         })
     )
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['gender', 'city', 'birth_date']
+        widgets = {
+            'birth_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['first_name', 'last_name']

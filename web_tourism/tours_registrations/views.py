@@ -4,6 +4,8 @@ from django.contrib import messages
 from .models import TourRegistration
 from tours.models import Tour  # 
 from account.models import Profile  # чтобы получить данные профиля
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 @login_required
 def register_for_tour(request, tour_id):
@@ -38,3 +40,34 @@ def register_for_tour(request, tour_id):
 def my_registrations(request):
     registrations = TourRegistration.objects.filter(user=request.user).select_related('tour')
     return render(request, 'tours_registrations/my_registrations.html', {'registrations': registrations})
+
+@login_required
+def cancel_registration(request, reg_id):
+    # Получаем регистрацию, принадлежащую текущему пользователю
+    registration = get_object_or_404(TourRegistration, id=reg_id, user=request.user)
+
+    if request.method == 'POST':
+        registration.status = 'cancelled'
+        registration.save()
+        messages.success(request, f"Регистрация на маршрут «{registration.tour.name}» отменена.")
+        return redirect('tours_registrations:my_registrations')
+
+    # Если GET — показываем подтверждение (опционально, но безопаснее)
+    return render(request, 'tours_registrations/cancel_confirmation.html', {
+        'registration': registration
+    })
+
+@login_required
+def reactivate_registration(request, reg_id):
+    registration = get_object_or_404(TourRegistration, id=reg_id, user=request.user)
+
+    if request.method == 'POST':
+        # Меняем статус с "cancelled" на "pending"
+        if registration.status == 'cancelled':
+            registration.status = 'pending'
+            registration.save()
+            messages.success(request, f"Регистрация на «{registration.tour.name}» восстановлена.")
+        else:
+            messages.warning(request, "Эта регистрация не была отменена.")
+
+    return redirect('tours_registrations:my_registrations')
