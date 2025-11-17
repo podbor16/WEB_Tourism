@@ -1,12 +1,12 @@
-{% extends 'base.html' %}
+<!--{% extends 'base.html' %} -->
+<!--{% block content %} -->
+{% include 'header.html' %}
 
-{% block content %}
 <h2>Вход</h2>
-
 
 <form method="post">
     {% csrf_token %}
-    {{ form.non_field_errors }}
+    <!--{{ form.non_field_errors }}-->
     <p>
       {{ form.username.label_tag }}<br/>
       {{ form.username }}
