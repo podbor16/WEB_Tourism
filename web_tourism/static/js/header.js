@@ -129,7 +129,45 @@
                             </button>
                         </div>
                     )}
+                    {/* Форма входа */}
+                    {isLoginModalOpen && (
+                        <div className="login-modal" onClick={(e) => e.stopPropagation()}>
+                            <h2>Вход</h2>
 
+                            <form method="POST" action="/account/login/">
+                                <input type="hidden" name="csrfmiddlewaretoken" value={window.csrfToken} />
+
+                                <div className="form-group">
+                                    <label htmlFor="id_username">Имя пользователя</label>
+                                    <input
+                                        type="text"
+                                        name="username"
+                                        id="id_username"
+                                        placeholder="Введите имя пользователя"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="id_password">Пароль</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        id="id_password"
+                                        placeholder="Введите свой пароль"
+                                        required
+                                    />
+                                </div>
+
+                                <div className="form-footer">
+                                    <a href="/account/password_reset/" className="forgot-password">Забыли пароль?</a>
+                                    <button type="submit" className="login-button">Войти</button>
+                                </div>
+                            </form>
+
+                            <button className="close-modal" onClick={() => setIsRegistering(false)}>×</button>
+                        </div>
+                    )}
                     {/* Форма регистрации */}
                     {isRegistering && (
                         <div className="register-modal" onClick={(e) => e.stopPropagation()}>
