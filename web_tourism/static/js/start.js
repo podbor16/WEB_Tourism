@@ -63,7 +63,7 @@
                                         <img
                                             src="/static/image/Arrow 1.png"
                                             alt="Стрелка"
-                                            className="direction-arrow"/>
+                                            className="direction-arrow" />
                                         <p className="direction-text">
                                             <strong>Пеший туризм</strong> – походы по равнинам, лесам и холмистым местностям, где вы научитесь правильно планировать маршруты, ориентироваться на местности и комфортно обустраивать лагерь.
                                         </p>
@@ -75,7 +75,7 @@
                                         <img
                                             src="/static/image/Arrow 2.png"
                                             alt="Стрелка"
-                                            className="direction-arrow"/>
+                                            className="direction-arrow" />
                                         <p className="direction-text">
                                             <strong>Водный туризм</strong> – сплавы по рекам и озёрам, включая обучение техникам гребли, навигации и безопасности на воде.
                                         </p>
@@ -87,7 +87,7 @@
                                         <img
                                             src="/static/image/Arrow 3.png"
                                             alt="Стрелка"
-                                            className="direction-arrow"/>
+                                            className="direction-arrow" />
                                         <p className="direction-text">
                                             <strong>Горный туризм</strong> – путешествия по горам, с акцентом на физическую подготовку, преодоление сложных подъёмов и использование специального снаряжения.
                                         </p>
@@ -155,8 +155,43 @@
                     </a>
                 </div>
             </div>
-            <div className="calendar-section">
-                <h2>Календарь с занятиями</h2>
+            <div className="calendar-header-block">
+                <h2 className="calendar-title">Календарь с занятиями</h2>
+                <p className="calendar-subtitle">Для навигации выберите один из фильтров</p>
+
+                <div className="calendar-buttons">
+                    <button className="calendar-btn active">Месяц</button>
+                    <button className="calendar-btn">Год</button>
+                    <button className="calendar-btn">Список</button>
+                </div>
+                <div className="month-view-wrapper">
+                    <div className="month-header">
+                        <h3 className="month-title">Январь 2025</h3>
+
+                        <div className="month-nav">
+                            <button className="nav-btn">‹</button>
+                            <button className="nav-btn">›</button>
+                        </div>
+                    </div>
+
+                    <div className="month-grid">
+                        {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((d) => (
+                            <div key={d} className="day-header">{d}</div>
+                        ))}
+
+                        {[
+                            '', '', '', '', '', '1', '2',
+                            '3', '4', '5', '6', '7', '8', '9',
+                            '10', '11', '12', '13', '14', '15', '16',
+                            '17', '18', '19', '20', '21', '22', '23',
+                            '24', '25', '26', '27', '28', '29', '30'
+                        ].map((day, i) => (
+                            <div key={i} className={`day-cell ${day === '' ? 'empty' : ''}`}>
+                                {day && <div className="day-number">{day}</div>}
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );
