@@ -1,4 +1,77 @@
-﻿function Start() {
+﻿// Если подключаете React через CDN, этот import не нужен
+// import React, { useState } from "react";
+
+function MonthView() {
+    return (
+        <div className="month-view-wrapper">
+            <div className="month-header">
+                <h3 className="month-title">Январь 2025</h3>
+
+                <div className="month-nav">
+                    <button className="nav-btn">‹</button>
+                    <button className="nav-btn">›</button>
+                </div>
+            </div>
+
+            <div className="month-grid">
+                {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((d) => (
+                    <div key={d} className="day-header">{d}</div>
+                ))}
+
+                {[
+                    '', '', '', '', '', '1', '2',
+                    '3', '4', '5', '6', '7', '8', '9',
+                    '10', '11', '12', '13', '14', '15', '16',
+                    '17', '18', '19', '20', '21', '22', '23',
+                    '24', '25', '26', '27', '28', '29', '30'
+                ].map((day, i) => (
+                    <div key={i} className={`day-cell ${day === '' ? 'empty' : ''}`}>
+                        {day && <div className="day-number">{day}</div>}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+const months = [
+    'Январь 2025', 'Февраль 2025', 'Март 2025', 'Апрель 2025',
+    'Май 2025', 'Июнь 2025', 'Июль 2025', 'Август 2025',
+    'Сентябрь 2025', 'Октябрь 2025', 'Ноябрь 2025', 'Декабрь 2025',
+];
+
+function YearView() {
+    return (
+        <div className="year-grid">
+            {months.map((title) => (
+                <div key={title} className="year-month-wrapper">
+                    <div className="year-month-header">
+                        <h3 className="year-month-title">{title}</h3>
+                        <div className="year-month-nav">
+                            <button className="year-nav-btn">‹</button>
+                            <button className="year-nav-btn">›</button>
+                        </div>
+                    </div>
+
+                    <div className="year-month-grid">
+                        {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((d) => (
+                            <div key={d} className="year-day-header">{d}</div>
+                        ))}
+
+                        {Array.from({ length: 42 }).map((_, i) => (
+                            <div key={i} className="year-day-cell" />
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+}
+function Start() {
+    // Если React подключён через CDN:
+    const [viewMode, setViewMode] = React.useState('month');
+    // Если через import: const [viewMode, setViewMode] = useState('month');
+
     return (
         <div>
             <div className="tourism-section">
@@ -160,38 +233,22 @@
                 <p className="calendar-subtitle">Для навигации выберите один из фильтров</p>
 
                 <div className="calendar-buttons">
-                    <button className="calendar-btn active">Месяц</button>
-                    <button className="calendar-btn">Год</button>
+                    <button
+                        className={`calendar-btn ${viewMode === 'month' ? 'active' : ''}`}
+                        onClick={() => setViewMode('month')}
+                    >
+                        Месяц
+                    </button>
+                    <button
+                        className={`calendar-btn ${viewMode === 'year' ? 'active' : ''}`}
+                        onClick={() => setViewMode('year')}
+                    >
+                        Год
+                    </button>
                     <button className="calendar-btn">Список</button>
                 </div>
-                <div className="month-view-wrapper">
-                    <div className="month-header">
-                        <h3 className="month-title">Январь 2025</h3>
 
-                        <div className="month-nav">
-                            <button className="nav-btn">‹</button>
-                            <button className="nav-btn">›</button>
-                        </div>
-                    </div>
-
-                    <div className="month-grid">
-                        {['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].map((d) => (
-                            <div key={d} className="day-header">{d}</div>
-                        ))}
-
-                        {[
-                            '', '', '', '', '', '1', '2',
-                            '3', '4', '5', '6', '7', '8', '9',
-                            '10', '11', '12', '13', '14', '15', '16',
-                            '17', '18', '19', '20', '21', '22', '23',
-                            '24', '25', '26', '27', '28', '29', '30'
-                        ].map((day, i) => (
-                            <div key={i} className={`day-cell ${day === '' ? 'empty' : ''}`}>
-                                {day && <div className="day-number">{day}</div>}
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                {viewMode === 'month' ? <MonthView /> : <YearView />}
             </div>
         </div>
     );

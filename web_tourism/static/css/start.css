@@ -797,3 +797,77 @@ h1 {
     font-weight: 500;
     color: #333;
 }
+/* сетка 4x3 для года */
+.year-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin: 0 auto;
+    max-width: 1200px; 
+}
+
+/* маленькая "карточка" месяца */
+.year-month-wrapper {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* шапка месяца (заголовок + стрелки) */
+.year-month-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.year-month-title {
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* маленькие стрелки справа */
+.year-month-nav {
+    display: flex;
+    gap: 4px;
+}
+
+.year-nav-btn {
+    background: none;
+    border: none;
+    padding: 0 4px;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    color: #555;
+}
+
+/* сетка дней внутри месяца */
+.year-month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 9px;
+}
+
+/* заголовки дней недели */
+.year-day-header {
+    text-align: center;
+    padding: 2px 0;
+    font-weight: 600;
+    color: #777;
+}
+
+/* ячейки дней */
+.year-day-cell {
+    border: 1px solid #f0f0f0;
+    height: 18px; /* сильно меньше, чем в месячном режиме */
+    background: #fafafa;
+}
+
+    /* если позже будешь рисовать числа: небольшой отступ и размер */
+    .year-day-cell .day-number {
+        font-size: 9px;
+        padding-left: 2px;
+    }
