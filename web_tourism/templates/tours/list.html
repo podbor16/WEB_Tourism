@@ -1,0 +1,10 @@
+{% include 'header.html' %}
+
+<h2>Список маршрутов</h2>
+<ul>
+{% for tour in tours %}
+    <li>
+        <a href="{% url 'tours:tour_detail' tour.id %}">{{ tour.name }}</a> — {{ tour.start_date }}
+    </li>
+{% endfor %}
+</ul>

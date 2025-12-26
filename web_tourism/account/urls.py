@@ -8,4 +8,5 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),       # Авторизация
     path('logout/', views.logout_view, name='logout'),    # Выход
     path('profile/', views.profile_view, name='profile'), # Личный кабинет
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
 ]

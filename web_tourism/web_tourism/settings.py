@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tourism',
     'account',
+    'tours',
+    'tours_registrations',
 ]
 
 MIDDLEWARE = [
@@ -130,5 +132,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
-
+LOGIN_URL = 'account:login'  # или '/account/login/'
 
