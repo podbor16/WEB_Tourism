@@ -1,7 +1,4 @@
-﻿// Если подключаете React через CDN, этот import не нужен
-// import React, { useState } from "react";
-
-function MonthView() {
+﻿function MonthView() {
     return (
         <div className="month-view-wrapper">
             <div className="month-header">
@@ -246,7 +243,7 @@ function Start() {
                                 <h3>Столбы</h3>
                                 <p>Протяженность по времени: 7 часов</p>
                                 <p>Включено: <br /> Трансфер</p>
-                                <a href="/stolby/" className="route-details">Подробнее</a>
+                                <a href="/stolby_route/" className="route-details">Подробнее</a>
                             </div>
                         </div>
                     </a>
