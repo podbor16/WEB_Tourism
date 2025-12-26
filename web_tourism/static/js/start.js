@@ -67,11 +67,68 @@ function YearView() {
         </div>
     );
 }
-function Start() {
-    // Если React подключён через CDN:
-    const [viewMode, setViewMode] = React.useState('month');
-    // Если через import: const [viewMode, setViewMode] = useState('month');
+function ListView() {
+    const events = [
+        {
+            id: 1,
+            date: "22 января 2026",
+            title: "Поход на Столбы",
+            linkText: "Подробнее",
+            linkUrl: "#",
+            image: "/static/image/stolb2.jpg"
+        },
+        {
+            id: 2,
+            date: "4-6 апреля 2026",
+            title: "Восхождение на Борус",
+            linkText: "Подробнее",
+            linkUrl: "#",
+            image: "/static/image/borus.png"
+        },
+        {
+            id: 3,
+            date: "1-6 августа 2026",
+            title: "Манский порог",
+            linkText: "Подробнее",
+            linkUrl: "#",
+            image: "/static/image/mana.jpg"
+        }
+    ];
 
+    return (
+        <div className="list-view-wrapper">
+            <div className="list-view-container">
+                {events.map((event) => (
+                    <div key={event.id} className="list-event-card">
+                        <div className="list-event-image">
+                            <img
+                                src={event.image}
+                                alt={event.title}
+                                className="list-event-img"
+                            />
+                        </div>
+
+                        <div className="list-event-content">
+                            <div className="list-event-header">
+                                <h3 className="list-event-title">{event.title}</h3>
+                                <div className="list-event-date-below">{event.date}</div>
+                            </div>
+
+                            <div className="list-event-footer">
+                                <a href={event.linkUrl} className="list-event-link">
+                                    {event.linkText}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+function Start() {
+    const [viewMode, setViewMode] = React.useState('month');
+   
     return (
         <div>
             <div className="tourism-section">
@@ -228,28 +285,27 @@ function Start() {
                     </a>
                 </div>
             </div>
-            <div className="calendar-header-block">
-                <h2 className="calendar-title">Календарь с занятиями</h2>
-                <p className="calendar-subtitle">Для навигации выберите один из фильтров</p>
-
-                <div className="calendar-buttons">
-                    <button
-                        className={`calendar-btn ${viewMode === 'month' ? 'active' : ''}`}
-                        onClick={() => setViewMode('month')}
-                    >
-                        Месяц
-                    </button>
-                    <button
-                        className={`calendar-btn ${viewMode === 'year' ? 'active' : ''}`}
-                        onClick={() => setViewMode('year')}
-                    >
-                        Год
-                    </button>
-                    <button className="calendar-btn">Список</button>
-                </div>
-
-                {viewMode === 'month' ? <MonthView /> : <YearView />}
+            <div className="calendar-buttons">
+                <button
+                    className={`calendar-btn ${viewMode === 'month' ? 'active' : ''}`}
+                    onClick={() => setViewMode('month')}>
+                    Месяц
+                </button>
+                <button
+                    className={`calendar-btn ${viewMode === 'year' ? 'active' : ''}`}
+                    onClick={() => setViewMode('year')}>
+                    Год
+                </button>
+                <button
+                    className={`calendar-btn ${viewMode === 'list' ? 'active' : ''}`}
+                    onClick={() => setViewMode('list')}>
+                    Список
+                </button>
             </div>
+
+            {viewMode === 'month' ? <MonthView /> :
+                viewMode === 'year' ? <YearView /> :
+                    <ListView />}
         </div>
     );
 }

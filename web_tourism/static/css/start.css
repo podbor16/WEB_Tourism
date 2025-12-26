@@ -707,15 +707,15 @@ h1 {
     transition: 0.2s;
 }
 
-.calendar-btn.active {
-    background: #ffffff;
-    font-weight: 600;
-}
+    .calendar-btn.active {
+        background: #ffffff;
+        font-weight: 600;
+    }
 
-/* Небольшой hover */
-.calendar-btn:hover {
-    transform: translateY(-2px);
-}
+    /* Небольшой hover */
+    .calendar-btn:hover {
+        transform: translateY(-2px);
+    }
 /* ОБВЁРТКА МЕСЯЦА — отступы как на картинке */
 .month-view-wrapper {
     background: white;
@@ -784,10 +784,10 @@ h1 {
     font-size: 15px;
 }
 
-.day-cell.empty {
-    background: #f5f5f8;
-    color: #999;
-}
+    .day-cell.empty {
+        background: #f5f5f8;
+        color: #999;
+    }
 
 .day-number {
     position: absolute;
@@ -803,10 +803,9 @@ h1 {
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     margin: 0 auto;
-    max-width: 1200px; 
+    max-width: 1200px;
 }
 
-/* маленькая "карточка" месяца */
 .year-month-wrapper {
     background: #ffffff;
     border-radius: 12px;
@@ -814,7 +813,6 @@ h1 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* шапка месяца (заголовок + стрелки) */
 .year-month-header {
     display: flex;
     justify-content: space-between;
@@ -828,7 +826,6 @@ h1 {
     margin: 0;
 }
 
-/* маленькие стрелки справа */
 .year-month-nav {
     display: flex;
     gap: 4px;
@@ -844,7 +841,6 @@ h1 {
     color: #555;
 }
 
-/* сетка дней внутри месяца */
 .year-month-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -859,15 +855,131 @@ h1 {
     color: #777;
 }
 
-/* ячейки дней */
 .year-day-cell {
     border: 1px solid #f0f0f0;
-    height: 18px; /* сильно меньше, чем в месячном режиме */
+    height: 18px;
     background: #fafafa;
 }
 
-    /* если позже будешь рисовать числа: небольшой отступ и размер */
-    .year-day-cell .day-number {
-        font-size: 9px;
-        padding-left: 2px;
+.year-day-cell .day-number {
+    font-size: 9px;
+    padding-left: 2px;
+}
+
+/* Стили для компонента ListView */
+.list-view-wrapper {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.list-view-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.list-event-card {
+    display: flex;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-event-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.list-event-image {
+    min-width: 200px;
+    max-width: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2c3e50;
+}
+
+.list-event-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.list-event-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.list-event-header {
+    margin-bottom: 15px;
+}
+
+.list-event-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-family: 'Arial', sans-serif;
+}
+
+.list-event-date-below {
+    font-size: 16px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.list-event-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.list-event-link {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+    text-align: center;
+    display: inline-block;
+}
+
+.list-event-link:hover {
+    background-color: #2980b9;
+    text-decoration: none;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .list-event-card {
+        flex-direction: column;
     }
+
+    .list-event-image {
+        min-width: 100%;
+        max-width: 100%;
+        height: 180px;
+    }
+
+    .list-event-title {
+        font-size: 20px;
+    }
+
+    .list-event-date-below {
+        font-size: 15px;
+    }
+}
