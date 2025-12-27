@@ -164,10 +164,10 @@
                                     <button type="submit" className="login-button">Войти</button>
                                 </div>
                             </form>
-
-                            <button className="close-modal" onClick={() => setIsRegistering(false)}>×</button>
+                            <button className="close-modal" onClick={() => setIsLoginModalOpen(false)}>×</button>
                         </div>
                     )}
+
                     {/* Форма регистрации */}
                     {isRegistering && (
                         <div className="register-modal" onClick={(e) => e.stopPropagation()}>
