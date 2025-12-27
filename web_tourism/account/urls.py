@@ -1,12 +1,13 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
-app_name = "account"  
+router = DefaultRouter()
+router.register(r'auth', views.AuthViewSet, basename='auth')
+router.register(r'user', views.UserViewSet, basename='user')
 
+app_name = "account"  
 urlpatterns = [
-    path('signup/', views.register_view, name='signup'),   # Регистрация
-    path('login/', views.login_view, name='login'),       # Авторизация
-    path('logout/', views.logout_view, name='logout'),    # Выход
-    path('profile/', views.profile_view, name='profile'), # Личный кабинет
-    path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('', include(router.urls)),
 ]
+

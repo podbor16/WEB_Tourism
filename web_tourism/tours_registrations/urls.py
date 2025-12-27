@@ -1,11 +1,11 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
-app_name = 'tours_registrations'
+router = DefaultRouter()
+router.register(r'', views.TourRegistrationViewSet, basename='registration')
 
+app_name = 'tours_registrations'
 urlpatterns = [
-    path('register/<int:tour_id>/', views.register_for_tour, name='register_for_tour'),
-    path('my-registrations/', views.my_registrations, name='my_registrations'),
-    path('cancel/<int:reg_id>/', views.cancel_registration, name='cancel_registration'),
-    path('reactivate/<int:reg_id>/', views.reactivate_registration, name='reactivate_registration'),  # ← новая строка
+    path('', include(router.urls)),
 ]

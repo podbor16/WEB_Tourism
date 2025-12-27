@@ -1,0 +1,390 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem 2rem;
+  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+}
+
+/* Сетка контактов */
+.contactsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+}
+
+.infoSection,
+.formSection {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.infoSection h2,
+.formSection h2 {
+  font-size: 1.8rem;
+  color: #667eea;
+  margin: 0 0 2rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #667eea;
+}
+
+/* Элементы контактной информации */
+.contactItem {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.contactItem:last-child {
+  margin-bottom: 0;
+}
+
+.icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  border-radius: 8px;
+}
+
+.contactContent h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.contactContent p {
+  margin: 0;
+  color: #666;
+  line-height: 1.6;
+}
+
+.contactContent a {
+  color: #667eea;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contactContent a:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* Форма */
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.formGroup input,
+.formGroup textarea {
+  padding: 0.8rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  background: #f8f9fa;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.formGroup textarea {
+  resize: vertical;
+}
+
+.submitBtn {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submitBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+/* Социальные сети */
+.socialSection {
+  max-width: 1200px;
+  margin: 4rem auto;
+  text-align: center;
+}
+
+.socialSection h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.socialLink {
+  padding: 0.8rem 2rem;
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.socialLink:hover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* О компании */
+.aboutSection {
+  max-width: 900px;
+  margin: 4rem auto;
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.aboutSection h2 {
+  font-size: 1.8rem;
+  color: #667eea;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #667eea;
+}
+
+.aboutSection p {
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+
+.aboutSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+}
+
+.aboutSection li {
+  padding: 0.8rem 0;
+  padding-left: 2rem;
+  position: relative;
+  color: #555;
+  font-size: 1.05rem;
+}
+
+.aboutSection li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .container {
+    padding: 3rem 1.5rem;
+  }
+
+  .contactsGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .infoSection,
+  .formSection {
+    padding: 2rem;
+  }
+
+  .aboutSection {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .contactsGrid {
+    gap: 1.5rem;
+  }
+
+  .infoSection,
+  .formSection {
+    padding: 1.5rem;
+  }
+
+  .infoSection h2,
+  .formSection h2 {
+    font-size: 1.5rem;
+  }
+
+  .contactItem {
+    gap: 1rem;
+  }
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  .socialLinks {
+    gap: 1rem;
+  }
+
+  .socialLink {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .aboutSection {
+    padding: 1.5rem;
+  }
+
+  .aboutSection h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .infoSection,
+  .formSection {
+    padding: 1rem;
+  }
+
+  .infoSection h2,
+  .formSection h2,
+  .aboutSection h2 {
+    font-size: 1.3rem;
+  }
+
+  .contactItem {
+    gap: 0.8rem;
+  }
+
+  .icon {
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+  }
+
+  .contactContent h3 {
+    font-size: 1rem;
+  }
+
+  .formGroup input,
+  .formGroup textarea {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+  }
+
+  .submitBtn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .socialLinks {
+    gap: 0.8rem;
+    flex-direction: column;
+  }
+
+  .socialLink {
+    width: 100%;
+    padding: 0.6rem 1rem;
+  }
+
+  .aboutSection {
+    padding: 1rem;
+  }
+
+  .aboutSection p,
+  .aboutSection li {
+    font-size: 0.95rem;
+  }
+}

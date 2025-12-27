@@ -1,0 +1,349 @@
+.homeContainer {
+  width: 100%;
+  background-color: #e0e0e0;
+}
+
+/* ГЕРОИЧЕСКИЙ РАЗДЕЛ */
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+}
+
+.backgroundOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.heroTitle {
+  font-size: 80px;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  position: relative;
+  letter-spacing: 2px;
+}
+
+.tourismOptions {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 20px;
+  gap: 20px;
+  z-index: 2;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.tourismItem {
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 150px;
+  max-width: 200px;
+}
+
+.tourismItem:hover {
+  transform: translateY(-10px);
+}
+
+.tourismIcon {
+  font-size: 60px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.tourismItem h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 10px 0;
+  color: white;
+}
+
+.tourismItem a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  border-bottom: 2px solid white;
+  padding-bottom: 4px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.tourismItem a:hover {
+  color: #ff8559;
+  border-bottom-color: #ff8559;
+  transform: translateX(4px);
+}
+
+/* ПОПУЛЯРНЫЕ МАРШРУТЫ */
+.popularRoutes {
+  padding: 60px 40px;
+  background-color: #e0e0e0;
+  text-align: center;
+}
+
+.popularRoutes h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.routeCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  padding: 30px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.routeCardWrapper {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.routeCardWrapper:hover {
+  transform: scale(1.03);
+}
+
+.routeCard {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.routeCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.routeInfo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.routeInfo h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: white;
+}
+
+.routeDetails {
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+
+.price,
+.type {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+/* КАЛЕНДАРЬ */
+.calendarSection {
+  padding: 60px 40px;
+  background-color: white;
+  text-align: center;
+}
+
+.calendarSection h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* ВСЕ ТУРЫ КНОПКА */
+.allToursSection {
+  padding: 60px 40px;
+  background-color: #e0e0e0;
+  text-align: center;
+}
+
+.allToursButton {
+  padding: 18px 50px;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.allToursButton:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.loading {
+  font-size: 18px;
+  color: #667eea;
+  padding: 40px;
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1024px) {
+  .heroTitle {
+    font-size: 60px;
+  }
+
+  .routeCards {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .tourismOptions {
+    gap: 10px;
+  }
+
+  .tourismItem {
+    min-width: 130px;
+    max-width: 160px;
+  }
+
+  .tourismIcon {
+    font-size: 50px;
+  }
+
+  .tourismItem h3 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 48px;
+  }
+
+  .tourismOptions {
+    flex-direction: column;
+    padding: 20px 10px;
+  }
+
+  .tourismItem {
+    min-width: auto;
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .routeCards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .routeCard {
+    height: 240px;
+  }
+
+  .popularRoutes,
+  .calendarSection,
+  .allToursSection {
+    padding: 40px 20px;
+  }
+
+  .popularRoutes h2,
+  .calendarSection h2 {
+    font-size: 28px;
+  }
+
+  .routeInfo h3 {
+    font-size: 18px;
+  }
+
+  .routeDetails {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 36px;
+    padding: 20px;
+  }
+
+  .tourismIcon {
+    font-size: 40px;
+  }
+
+  .tourismItem h3 {
+    font-size: 14px;
+  }
+
+  .tourismItem a {
+    font-size: 12px;
+  }
+
+  .routeCard {
+    height: 200px;
+    border-radius: 12px;
+  }
+
+  .routeInfo {
+    padding: 15px;
+  }
+
+  .routeInfo h3 {
+    font-size: 16px;
+  }
+
+  .price,
+  .type {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .allToursButton {
+    padding: 14px 30px;
+    font-size: 16px;
+  }
+
+  .popularRoutes h2,
+  .calendarSection h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}

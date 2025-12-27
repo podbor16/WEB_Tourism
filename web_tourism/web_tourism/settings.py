@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&gi7pv8e4aj0rg0p-&k92!nm-!vu&ravx$x)lxxi1ho=qqjk)c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']  # В production измените на конкретные домены
 
 
 # Application definition
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tourism',
+    'rest_framework',
+    'corsheaders',
     'account',
     'tours',
     'tours_registrations',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -52,6 +54,33 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CORS Configuration для React фронтенда
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:8000",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:8000",
+]
+CORS_ALLOW_CREDENTIALS = True  # Важно для отправки cookies с запросом
+
+# CSRF Configuration - доверенные origins для CSRF проверки
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+# Django REST Framework Configuration
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+}
 
 ROOT_URLCONF = 'web_tourism.urls'
 
@@ -124,6 +153,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -133,4 +165,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.CustomUser'
 
 LOGIN_URL = 'account:login'  # или '/account/login/'
+
+# Cookie settings для CORS с credentials
+SESSION_COOKIE_SECURE = False  # в production: True (если HTTPS)
+SESSION_COOKIE_HTTPONLY = True  # защита от XSS
+SESSION_COOKIE_SAMESITE = 'Lax'  # для локальной разработки
+CSRF_COOKIE_SECURE = False  # в production: True (если HTTPS)
+CSRF_COOKIE_HTTPONLY = False  # разрешаем JavaScript читать для API
+CSRF_COOKIE_SAMESITE = 'Lax'
 

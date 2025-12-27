@@ -1,0 +1,320 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Героический раздел */
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.heroOverlay h1 {
+  color: white;
+  font-size: 3.5rem;
+  text-align: center;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  margin: 0;
+  font-weight: 700;
+}
+
+/* Раздел описания */
+.descriptionSection {
+  padding: 4rem 2rem;
+  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 3rem;
+  text-align: justify;
+}
+
+.benefits {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 3rem;
+}
+
+.benefits h2 {
+  color: #667eea;
+  font-size: 1.8rem;
+  margin: 0 0 1.5rem 0;
+  text-transform: capitalize;
+}
+
+.benefits ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.benefits li {
+  padding-left: 2rem;
+  position: relative;
+  color: #555;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.benefits li:before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+/* Раздел маршрутов */
+.routesSection {
+  padding: 4rem 2rem;
+  background: #ffffff;
+}
+
+.routesSection h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.loading,
+.noRoutes,
+.error {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  padding: 2rem;
+}
+
+.error {
+  color: #e74c3c;
+}
+
+.routeCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.routeCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.routeCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.cardImage {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.routeCard:hover .cardImage img {
+  transform: scale(1.05);
+}
+
+.cardContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cardContent h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+.duration,
+.price {
+  margin: 0.5rem 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+.price {
+  color: #667eea;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.detailsButton {
+  margin-top: auto;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.detailsButton:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Контейнер для кнопки назад */
+.backButtonContainer {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background: #f8f9fa;
+}
+
+.backButton {
+  padding: 0.8rem 2rem;
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.backButton:hover {
+  background: #667eea;
+  color: white;
+  transform: translateX(-5px);
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .heroOverlay h1 {
+    font-size: 2.5rem;
+  }
+
+  .routeCards {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .descriptionSection,
+  .routesSection {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    height: 350px;
+  }
+
+  .heroOverlay h1 {
+    font-size: 2rem;
+  }
+
+  .descriptionSection,
+  .routesSection {
+    padding: 2rem 1rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .benefits ul {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .routeCards {
+    grid-template-columns: 1fr;
+  }
+
+  .benefits h2,
+  .routesSection h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    height: 250px;
+  }
+
+  .heroOverlay h1 {
+    font-size: 1.5rem;
+  }
+
+  .descriptionSection,
+  .routesSection {
+    padding: 1.5rem 1rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .cardContent {
+    padding: 1rem;
+  }
+
+  .cardImage {
+    height: 180px;
+  }
+}

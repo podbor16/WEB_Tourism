@@ -1,0 +1,147 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { toursAPI } from '../api';
+import Calendar from '../components/Calendar';
+import styles from './Home.module.css';
+
+const Home = ({ user }) => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [tours, setTours] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchTours();
+  }, []);
+
+  const fetchTours = async () => {
+    try {
+      const response = await toursAPI.getTours();
+      const toursData = Array.isArray(response.data.results) ? response.data.results : response.data;
+      setTours(toursData.slice(0, 4));
+    } catch (err) {
+      console.error('Ошибка при загрузке туров:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Типы туризма с иконками
+  const tourismTypes = [
+    {
+      title: 'Пеший туризм',
+      icon: '🥾',
+    },
+    {
+      title: 'Горный туризм',
+      icon: '⛰️',
+    },
+    {
+      title: 'Водный туризм',
+      icon: '🚣',
+    },
+  ];
+
+  const getTourImageUrl = (tour) => {
+    const typeImages = {
+      'Пеший туризм': '/static/image/peshiy.png',
+      'Горный туризм': '/static/image/mountain_main.png',
+      'Водный туризм': '/static/image/vodniy.png',
+    };
+    return typeImages[tour.type] || '/static/image/peshiy.png';
+  };
+
+  const handleTourismClick = (tourType) => {
+    // Маппинг типов на URL параметры
+    const tourTypeMap = {
+      'Пеший туризм': 'walking',
+      'Горный туризм': 'mountain',
+      'Водный туризм': 'water',
+    };
+    const urlType = tourTypeMap[tourType];
+    navigate(`/tourism/${urlType}`);
+  };
+
+  return (
+    <div className={styles.homeContainer}>
+      {/* ГЕРОИЧЕСКИЙ РАЗДЕЛ - с 4 типами туризма */}
+      <section className={styles.heroSection}>
+        <div className={styles.backgroundOverlay}></div>
+        <h1 className={styles.heroTitle}>Выбери свой маршрут</h1>
+        <div className={styles.tourismOptions}>
+          {tourismTypes.map((type, idx) => (
+            <div 
+              key={idx}
+              className={styles.tourismItem}
+            >
+              <div className={styles.tourismIcon}>{type.icon}</div>
+              <h3>{type.title}</h3>
+              <a 
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleTourismClick(type.title);
+                }}
+              >
+                Выбрать →
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ПОПУЛЯРНЫЕ МАРШРУТЫ */}
+      <section className={styles.popularRoutes}>
+        <h2>🔥 Популярные маршруты</h2>
+        {loading ? (
+          <p className={styles.loading}>Загрузка маршрутов...</p>
+        ) : (
+          <div className={styles.routeCards}>
+            {tours.map((tour) => (
+              <div
+                key={tour.id}
+                className={styles.routeCardWrapper}
+                onClick={() => navigate(`/tours/${tour.id}`)}
+              >
+                <div className={styles.routeCard}>
+                  <img
+                    src={getTourImageUrl(tour)}
+                    alt={tour.name}
+                    onError={(e) => {
+                      e.target.src = '/static/image/peshiy.png';
+                    }}
+                  />
+                  <div className={styles.routeInfo}>
+                    <h3>{tour.name}</h3>
+                    <div className={styles.routeDetails}>
+                      {tour.price && <span className={styles.price}>💰 {tour.price} ₽</span>}
+                      {tour.type && <span className={styles.type}>📍 {tour.type}</span>}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* КАЛЕНДАРЬ ТУРОВ */}
+      <section className={styles.calendarSection}>
+        <h2>📅 Календарь туров</h2>
+        <Calendar />
+      </section>
+
+      {/* КНОПКА "ВСЕ ТУРЫ" */}
+      <section className={styles.allToursSection}>
+        <button 
+          className={styles.allToursButton}
+          onClick={() => navigate('/tours')}
+        >
+          Посмотреть все туры →
+        </button>
+      </section>
+    </div>
+  );
+};
+
+export default Home;

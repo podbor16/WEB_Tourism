@@ -1,0 +1,20 @@
+from rest_framework import serializers
+from .models import Tour
+
+
+class TourSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Tour"""
+    
+    class Meta:
+        model = Tour
+        fields = [
+            'id',
+            'name',
+            'description',
+            'start_date',
+            'end_date',
+            'price',
+            'type',
+            'image',
+        ]
+        read_only_fields = ['id']

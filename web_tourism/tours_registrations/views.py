@@ -1,73 +1,58 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
+from rest_framework import viewsets, status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from .models import TourRegistration
-from tours.models import Tour  # 
-from account.models import Profile  # чтобы получить данные профиля
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from .serializers import TourRegistrationSerializer
 
-@login_required
-def register_for_tour(request, tour_id):
-    tour = get_object_or_404(Tour, id=tour_id)
 
-    # Проверяем, не зарегистрирован ли уже пользователь
-    if TourRegistration.objects.filter(user=request.user, tour=tour).exists():
-        messages.warning(request, "Вы уже зарегистрированы на этот маршрут.")
-        return redirect('tours_registrations:my_registrations')
-
-    if request.method == 'POST':
-        TourRegistration.objects.create(user=request.user, tour=tour)
-        messages.success(request, f"Вы успешно зарегистрировались на маршрут: {tour.name}")
-        return redirect('tours_registrations:my_registrations')
-
-    # Получаем данные из профиля
-    profile = getattr(request.user, 'profile', None)
-    user_data = {
-        'first_name': request.user.first_name,
-        'last_name': request.user.last_name,
-        'city': profile.city if profile else '',
-        'phone': profile.phone_number if profile else '',
-    }
-
-    context = {
-        'tour': tour,
-        'user_data': user_data,
-    }
-    return render(request, 'tours_registrations/register.html', context)
-
-@login_required
-def my_registrations(request):
-    registrations = TourRegistration.objects.filter(user=request.user).select_related('tour')
-    return render(request, 'tours_registrations/my_registrations.html', {'registrations': registrations})
-
-@login_required
-def cancel_registration(request, reg_id):
-    # Получаем регистрацию, принадлежащую текущему пользователю
-    registration = get_object_or_404(TourRegistration, id=reg_id, user=request.user)
-
-    if request.method == 'POST':
+class TourRegistrationViewSet(viewsets.ModelViewSet):
+    """API ViewSet для регистраций на туры"""
+    serializer_class = TourRegistrationSerializer
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        """Получить регистрации текущего пользователя"""
+        return TourRegistration.objects.filter(user=self.request.user).select_related('tour')
+    
+    def create(self, request, *args, **kwargs):
+        """Создать новую регистрацию на тур"""
+        tour_id = request.data.get('tour')
+        
+        # Проверяем, не зарегистрирован ли уже
+        if TourRegistration.objects.filter(user=request.user, tour_id=tour_id).exists():
+            return Response(
+                {'detail': 'Вы уже зарегистрированы на этот тур'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        return super().create(request, *args, **kwargs)
+    
+    @action(detail=True, methods=['post'])
+    def cancel(self, request, pk=None):
+        """Отменить регистрацию"""
+        registration = self.get_object()
         registration.status = 'cancelled'
         registration.save()
-        messages.success(request, f"Регистрация на маршрут «{registration.tour.name}» отменена.")
-        return redirect('tours_registrations:my_registrations')
-
-    # Если GET — показываем подтверждение (опционально, но безопаснее)
-    return render(request, 'tours_registrations/cancel_confirmation.html', {
-        'registration': registration
-    })
-
-@login_required
-def reactivate_registration(request, reg_id):
-    registration = get_object_or_404(TourRegistration, id=reg_id, user=request.user)
-
-    if request.method == 'POST':
-        # Меняем статус с "cancelled" на "pending"
-        if registration.status == 'cancelled':
-            registration.status = 'pending'
-            registration.save()
-            messages.success(request, f"Регистрация на «{registration.tour.name}» восстановлена.")
-        else:
-            messages.warning(request, "Эта регистрация не была отменена.")
-
-    return redirect('tours_registrations:my_registrations')
+        serializer = self.get_serializer(registration)
+        return Response(
+            {'detail': 'Регистрация отменена', 'data': serializer.data},
+            status=status.HTTP_200_OK
+        )
+    
+    @action(detail=True, methods=['post'])
+    def reactivate(self, request, pk=None):
+        """Восстановить отменённую регистрацию"""
+        registration = self.get_object()
+        if registration.status != 'cancelled':
+            return Response(
+                {'detail': 'Эта регистрация не была отменена'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        registration.status = 'pending'
+        registration.save()
+        serializer = self.get_serializer(registration)
+        return Response(
+            {'detail': 'Регистрация восстановлена', 'data': serializer.data},
+            status=status.HTTP_200_OK
+        )
