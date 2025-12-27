@@ -24,6 +24,15 @@
   text-decoration: none;
   color: white;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 50px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
 }
 
 .navbar-brand:hover {
@@ -35,6 +44,53 @@
   display: flex;
   gap: 2rem;
   justify-content: center;
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0;
+  transition: opacity 0.3s;
+}
+
+.dropdown-toggle:hover {
+  opacity: 0.8;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 0.5rem;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.8rem 1.5rem;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  background: none;
+}
+
+.dropdown-item:hover {
+  background: #667eea;
+  color: white;
 }
 
 .nav-auth {
@@ -69,6 +125,7 @@
   .nav-center {
     justify-content: flex-start;
     gap: 1rem;
+    flex-direction: column;
   }
 
   .nav-auth {
@@ -80,5 +137,21 @@
   .btn {
     width: 100%;
     text-align: center;
+  }
+
+  .dropdown-menu {
+    position: static;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    border-radius: 0;
+    margin-top: 0;
+  }
+
+  .dropdown-item {
+    color: white;
+  }
+
+  .dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.2);
   }
 }

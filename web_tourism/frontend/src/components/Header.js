@@ -31,7 +31,7 @@ function Header({ user, setUser }) {
     <header className="header">
       <nav className="navbar">
         <Link to="/" className="navbar-brand">
-          <img src="/static/image/logo.jpg" alt="Web Tourism" className="logo-img" />
+          <img src="/static/image/logo.JPG" alt="Web Tourism" className="logo-img" />
         </Link>
         
         <div className="nav-center">
