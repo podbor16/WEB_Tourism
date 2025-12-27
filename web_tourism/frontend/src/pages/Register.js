@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authAPI, userAPI } from '../api';
-import '../styles/Auth.css';
 
 function Register({ setUser }) {
   const navigate = useNavigate();

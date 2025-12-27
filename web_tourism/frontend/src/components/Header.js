@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authAPI, initializeCSRF } from '../api';
-import '../styles/Header.css';
+import './Header.css';
 
 function Header({ user, setUser }) {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ function Header({ user, setUser }) {
     <header className="header">
       <nav className="navbar">
         <Link to="/" className="navbar-brand">
-          <img src="/static/image/logo.JPG" alt="Web Tourism" className="logo-img" />
+          <img src="/static/image/logo.png" alt="Web Tourism" className="logo-img" />
         </Link>
         
         <div className="nav-center">

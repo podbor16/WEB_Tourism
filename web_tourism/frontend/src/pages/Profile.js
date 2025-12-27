@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { userAPI, initializeCSRF } from '../api';
-import '../styles/Profile.css';
+import styles from './Profile.module.css';
 
 function Profile({ user, setUser }) {
   const [formData, setFormData] = useState({
@@ -76,90 +76,80 @@ function Profile({ user, setUser }) {
     }
   };
 
-  if (loading) return <div className="loading">Загрузка профиля...</div>;
-  if (!user) return <div className="error">Пользователь не найден</div>;
+  if (loading) return <div className={styles.loadingMessage}>Загрузка профиля...</div>;
 
   return (
-    <div className="profile-container">
-      <h1>Мой профиль</h1>
-      
-      <div className="profile-card">
-        <div className="user-info">
-          <div className="info-item">
-            <label>Email:</label>
-            <span>{user.email}</span>
-          </div>
-          <div className="info-item">
-            <label>Имя:</label>
-            <span>{user.first_name}</span>
-          </div>
-          <div className="info-item">
-            <label>Фамилия:</label>
-            <span>{user.last_name}</span>
-          </div>
+    <div className={styles.profileContainer}>
+      <div className={styles.profileHeader}>
+        <h1>Мой профиль</h1>
+        <p className={styles.userInfo}>
+          {user.first_name && user.last_name && `${user.first_name} ${user.last_name} • `}
+          {user.email}
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit}>
+        {error && <div className={styles.errorMessage}>{error}</div>}
+        {success && <div className={styles.successMessage}>{success}</div>}
+
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="gender">Пол</label>
+          <select
+            id="gender"
+            name="gender"
+            className={styles.formSelect}
+            value={formData.gender}
+            onChange={handleChange}
+          >
+            <option value="">Не указано</option>
+            <option value="M">Мужской</option>
+            <option value="F">Женский</option>
+          </select>
         </div>
 
-        <form onSubmit={handleSubmit} className="profile-form">
-          <h2>Редактировать профиль</h2>
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="city">Город</label>
+          <input
+            id="city"
+            type="text"
+            name="city"
+            className={styles.formInput}
+            value={formData.city}
+            onChange={handleChange}
+            placeholder="Москва"
+          />
+        </div>
 
-          {error && <div className="error-message">{error}</div>}
-          {success && <div className="success-message">{success}</div>}
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="birth_date">Дата рождения</label>
+          <input
+            id="birth_date"
+            type="date"
+            name="birth_date"
+            className={styles.formInput}
+            value={formData.birth_date}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div className="form-group">
-            <label htmlFor="gender">Пол</label>
-            <select
-              id="gender"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-            >
-              <option value="">Не указано</option>
-              <option value="M">Мужской</option>
-              <option value="F">Женский</option>
-            </select>
-          </div>
+        <div className={styles.formGroup}>
+          <label className={styles.formLabel} htmlFor="phone_number">Телефон</label>
+          <input
+            id="phone_number"
+            type="tel"
+            name="phone_number"
+            className={styles.formInput}
+            value={formData.phone_number}
+            onChange={handleChange}
+            placeholder="9001234567"
+            maxLength="10"
+          />
+        </div>
 
-          <div className="form-group">
-            <label htmlFor="city">Город</label>
-            <input
-              id="city"
-              type="text"
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              placeholder="Москва"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="birth_date">Дата рождения</label>
-            <input
-              id="birth_date"
-              type="date"
-              name="birth_date"
-              value={formData.birth_date}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="phone_number">Телефон</label>
-            <input
-              id="phone_number"
-              type="tel"
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-              placeholder="9001234567"
-              maxLength="10"
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary" disabled={saving}>
-            {saving ? 'Сохранение...' : 'Сохранить'}
-          </button>
-        </form>
-      </div>
+        <button type="submit" className={styles.formButton} disabled={saving}>
+          {saving ? 'Сохранение...' : 'Сохранить'}
+        </button>
+      </form>
     </div>
   );
 }

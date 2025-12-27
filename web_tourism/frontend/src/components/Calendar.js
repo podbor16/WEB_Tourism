@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toursAPI } from '../api';
+import { getTourismColor } from '../constants/tourismColors';
 import styles from './Calendar.module.css';
 
 const Calendar = () => {
@@ -58,9 +59,10 @@ const Calendar = () => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   };
 
-  // Получить первый день недели месяца
+  // Получить первый день недели месяца (Пн=0, Вс=6)
   const getFirstDayOfMonth = (date) => {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    const day = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    return day === 0 ? 6 : day - 1; // Конвертируем из JS формата в Пн-Вс
   };
 
   // Изменить месяц
@@ -89,21 +91,41 @@ const Calendar = () => {
       const toursOnDay = getToursForDate(date);
       const isSelected = selectedDate && 
         selectedDate.toDateString() === date.toDateString();
+      
+      // Получаем цвета туров для этого дня
+      const tourColors = toursOnDay.map(tour => getTourismColor(tour.type).primary);
 
       days.push(
         <div
           key={day}
           className={`${styles.day} ${toursOnDay.length > 0 ? styles.hasEvents : ''} ${isSelected ? styles.selected : ''}`}
           onClick={() => setSelectedDate(date)}
+          style={{
+            borderLeftColor: tourColors.length > 0 ? tourColors[0] : 'transparent',
+            borderLeftWidth: tourColors.length > 0 ? '4px' : '0px',
+          }}
         >
           <div className={styles.dayNumber}>{day}</div>
           {toursOnDay.length > 0 && (
             <>
               <div className={styles.eventCount}>{toursOnDay.length}</div>
               <div className={styles.tourTitles}>
-                {toursOnDay.map((tour) => (
-                  <span key={tour.id} className={styles.tourTag}>{tour.name}</span>
-                ))}
+                {toursOnDay.map((tour) => {
+                  const colors = getTourismColor(tour.type);
+                  return (
+                    <span 
+                      key={tour.id} 
+                      className={styles.tourTag}
+                      style={{
+                        backgroundColor: colors.light,
+                        color: colors.primary,
+                        borderLeftColor: colors.primary,
+                      }}
+                    >
+                      {tour.name}
+                    </span>
+                  );
+                })}
               </div>
             </>
           )}
@@ -174,7 +196,14 @@ const Calendar = () => {
                   day: 'numeric' 
                 })}</h4>
                 {toursOnDay.map((tour, tourIdx) => (
-                  <div key={tourIdx} className={styles.tourItem} onClick={() => navigate(`/tours/${tour.id}`)}>
+                  <div 
+                    key={tourIdx} 
+                    className={styles.tourItem} 
+                    onClick={() => navigate(`/tours/${tour.id}`)}
+                    style={{
+                      borderLeftColor: getTourismColor(tour.type).primary,
+                    }}
+                  >
                     <div className={styles.tourName}>{tour.name}</div>
                     <div className={styles.tourDates}>
                       {new Date(tour.start_date).toLocaleDateString('ru-RU')} 
@@ -238,20 +267,35 @@ const Calendar = () => {
 
     return (
       <div className={styles.toursList}>
-        {toursOnDate.map((tour) => (
-          <div key={tour.id} className={styles.tourCard} onClick={() => navigate(`/tours/${tour.id}`)}>
-            <div className={styles.tourCardHeader}>
-              <h5>{tour.name}</h5>
-              <span className={styles.tourType}>{tour.type}</span>
+        {toursOnDate.map((tour) => {
+          const colors = getTourismColor(tour.type);
+          return (
+            <div 
+              key={tour.id} 
+              className={styles.tourCard} 
+              onClick={() => navigate(`/tours/${tour.id}`)}
+              style={{
+                borderLeftColor: colors.primary,
+              }}
+            >
+              <div className={styles.tourCardHeader}>
+                <h5>{tour.name}</h5>
+                <span className={styles.tourType} style={{
+                  backgroundColor: colors.light,
+                  color: colors.primary,
+                }}>
+                  {tour.type}
+                </span>
+              </div>
+              <div className={styles.tourDates}>
+                {new Date(tour.start_date).toLocaleDateString('ru-RU')}
+                {tour.end_date && ` — ${new Date(tour.end_date).toLocaleDateString('ru-RU')}`}
+              </div>
+              {tour.price && <div className={styles.tourPrice}>{tour.price} ₽</div>}
+              <div className={styles.tourClickHint}>Нажмите для подробностей →</div>
             </div>
-            <div className={styles.tourDates}>
-              {new Date(tour.start_date).toLocaleDateString('ru-RU')}
-              {tour.end_date && ` — ${new Date(tour.end_date).toLocaleDateString('ru-RU')}`}
-            </div>
-            {tour.price && <div className={styles.tourPrice}>{tour.price} ₽</div>}
-            <div className={styles.tourClickHint}>Нажмите для подробностей →</div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     );
   };

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toursAPI } from '../api';
 import Calendar from '../components/Calendar';
 import styles from './Home.module.css';
 
 const Home = ({ user }) => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -65,9 +64,15 @@ const Home = ({ user }) => {
   return (
     <div className={styles.homeContainer}>
       {/* ГЕРОИЧЕСКИЙ РАЗДЕЛ - с 4 типами туризма */}
-      <section className={styles.heroSection}>
-        <div className={styles.backgroundOverlay}></div>
-        <h1 className={styles.heroTitle}>Выбери свой маршрут</h1>
+      <section 
+        className={styles.heroSection}
+        style={{
+          backgroundImage: "linear-gradient(135deg, rgba(0, 0, 0, 0.25) 0%, rgba(100, 100, 100, 0.35) 100%), url('/static/image/glavnaya.png')",
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
+        }}
+      >
         <div className={styles.tourismOptions}>
           {tourismTypes.map((type, idx) => (
             <div 
@@ -76,15 +81,12 @@ const Home = ({ user }) => {
             >
               <div className={styles.tourismIcon}>{type.icon}</div>
               <h3>{type.title}</h3>
-              <a 
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleTourismClick(type.title);
-                }}
+              <button 
+                onClick={() => handleTourismClick(type.title)}
+                className={styles.tourismLink}
               >
                 Выбрать →
-              </a>
+              </button>
             </div>
           ))}
         </div>

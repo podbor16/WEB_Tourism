@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toursAPI } from '../api';
+import { getTourismColor } from '../constants/tourismColors';
 import styles from './TourismTypePage.module.css';
 
 const TourismTypePage = () => {
@@ -21,6 +22,7 @@ const TourismTypePage = () => {
         'Улучшайте физическую форму и настроение.',
       ],
       apiType: 'Пеший туризм',
+      colorType: 'Пеший туризм',
     },
     'mountain': {
       title: 'Горный туризм',
@@ -33,6 +35,7 @@ const TourismTypePage = () => {
         'Развивает силу, выносливость и психологическую устойчивость.',
       ],
       apiType: 'Горный туризм',
+      colorType: 'Горный туризм',
     },
     'water': {
       title: 'Водный туризм',
@@ -45,8 +48,11 @@ const TourismTypePage = () => {
         'Укрепляет командный дух и взаимопомощь.',
       ],
       apiType: 'Водный туризм',
+      colorType: 'Водный туризм',
     },
   };
+
+  const data = tourismData[type];
 
   useEffect(() => {
     const fetchTours = async () => {
@@ -55,9 +61,8 @@ const TourismTypePage = () => {
         const response = await toursAPI.getTours();
         const toursData = Array.isArray(response.data.results) ? response.data.results : response.data;
         
-        const typeData = tourismData[type];
-        if (typeData) {
-          const filteredTours = toursData.filter(tour => tour.type === typeData.apiType);
+        if (data) {
+          const filteredTours = toursData.filter(tour => tour.type === data.apiType);
           setTours(filteredTours);
         }
       } catch (err) {
@@ -68,9 +73,7 @@ const TourismTypePage = () => {
     };
 
     fetchTours();
-  }, [type]);
-
-  const data = tourismData[type];
+  }, [type, data]);
   
   if (!data) {
     return (
@@ -82,6 +85,8 @@ const TourismTypePage = () => {
       </div>
     );
   }
+
+  const colors = getTourismColor(data.colorType);
 
   const getTourImageUrl = (tour) => {
     const typeImages = {
@@ -107,11 +112,18 @@ const TourismTypePage = () => {
         <div className={styles.content}>
           <p className={styles.description}>{data.description}</p>
           
-          <div className={styles.benefits}>
-            <h2>Почему выбрать {data.title.toLowerCase()}?</h2>
+          <div 
+            className={styles.benefits}
+            style={{ borderTopColor: colors.primary }}
+          >
+            <h2 style={{ color: colors.primary }}>
+              Почему выбрать {data.title.toLowerCase()}?
+            </h2>
             <ul>
               {data.benefits.map((benefit, idx) => (
-                <li key={idx}>{benefit}</li>
+                <li key={idx} style={{ color: '#555' }}>
+                  <span style={{ color: colors.primary }}>✓</span> {benefit}
+                </li>
               ))}
             </ul>
           </div>
@@ -150,9 +162,19 @@ const TourismTypePage = () => {
                       <p className={styles.duration}>⏱️ {tour.duration}</p>
                     )}
                     {tour.price && (
-                      <p className={styles.price}>💰 {tour.price} ₽</p>
+                      <p 
+                        className={styles.price}
+                        style={{ color: colors.primary }}
+                      >
+                        💰 {tour.price} ₽
+                      </p>
                     )}
-                    <button className={styles.detailsButton}>
+                    <button 
+                      className={styles.detailsButton}
+                      style={{
+                        background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.dark || colors.primary} 100%)`
+                      }}
+                    >
                       Подробнее →
                     </button>
                   </div>

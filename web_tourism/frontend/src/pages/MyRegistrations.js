@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { registrationsAPI } from '../api';
-import '../styles/MyRegistrations.css';
+import styles from './MyRegistrations.module.css';
 
 function MyRegistrations({ user }) {
   const [registrations, setRegistrations] = useState([]);
@@ -50,69 +50,65 @@ function MyRegistrations({ user }) {
     }
   };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'pending':
-        return 'status-pending';
-      case 'confirmed':
-        return 'status-confirmed';
-      case 'cancelled':
-        return 'status-cancelled';
-      default:
-        return '';
-    }
-  };
+  if (loading) return <div className={styles.loadingMessage}>Загрузка регистраций...</div>;
+  if (error) return <div className={styles.errorMessage}>{error}</div>;
 
-  const getStatusText = (status) => {
-    switch (status) {
-      case 'pending':
-        return 'Ожидание';
-      case 'confirmed':
-        return 'Подтверждено';
-      case 'cancelled':
-        return 'Отменено';
-      default:
-        return status;
-    }
+  const getTourTypeClass = (tourType) => {
+    if (!tourType) return '';
+    if (tourType.includes('Пеший')) return styles.typeWalking;
+    if (tourType.includes('Горный')) return styles.typeMountain;
+    if (tourType.includes('Водный')) return styles.typeWater;
+    return '';
   };
-
-  if (loading) return <div className="loading">Загрузка регистраций...</div>;
-  if (error) return <div className="error">{error}</div>;
 
   return (
-    <div className="registrations-container">
-      <h1>Мои регистрации на туры</h1>
+    <div className={styles.registrationsContainer}>
+      <div className={styles.registrationsHeader}>
+        <h1>Мои регистрации на туры</h1>
+      </div>
 
       {registrations.length > 0 ? (
-        <div className="registrations-list">
+        <div className={styles.registrationsList}>
           {registrations.map(registration => (
-            <div key={registration.id} className="registration-card">
-              <div className="registration-header">
-                <h3>{registration.tour_name}</h3>
-                <span className={`status ${getStatusColor(registration.status)}`}>
-                  {getStatusText(registration.status)}
-                </span>
+            <div key={registration.id} className={styles.registrationCard}>
+              <div className={styles.cardHeader}>
+                <h2 className={styles.tourName}>{registration.tour_name}</h2>
+                {registration.tour_type && (
+                  <span className={`${styles.tourType} ${getTourTypeClass(registration.tour_type)}`}>
+                    {registration.tour_type}
+                  </span>
+                )}
               </div>
 
-              <div className="registration-info">
-                <p>
-                  <strong>Дата регистрации:</strong>{' '}
-                  {new Date(registration.registration_date).toLocaleDateString('ru-RU')}
-                </p>
+              <div className={styles.cardDetails}>
+                <div className={styles.detailItem}>
+                  <div className={styles.detailLabel}>Дата регистрации</div>
+                  <div className={styles.detailValue}>
+                    {new Date(registration.registration_date).toLocaleDateString('ru-RU')}
+                  </div>
+                </div>
+                <div className={styles.detailItem}>
+                  <div className={styles.detailLabel}>Статус</div>
+                  <div className={styles.detailValue}>
+                    {registration.status === 'pending' && 'Ожидание'}
+                    {registration.status === 'confirmed' && 'Подтверждено'}
+                    {registration.status === 'cancelled' && 'Отменено'}
+                  </div>
+                </div>
               </div>
 
-              <div className="registration-actions">
+              <div className={styles.cardActions}>
                 {registration.status !== 'cancelled' ? (
                   <button
                     onClick={() => handleCancel(registration.id)}
-                    className="btn btn-danger"
+                    className={styles.cancelButton}
                   >
-                    Отменить
+                    Отменить регистрацию
                   </button>
                 ) : (
                   <button
                     onClick={() => handleReactivate(registration.id)}
-                    className="btn btn-success"
+                    className={styles.viewButton}
                   >
                     Восстановить
                   </button>
@@ -122,9 +118,13 @@ function MyRegistrations({ user }) {
           ))}
         </div>
       ) : (
-        <p className="no-registrations">
-          У вас нет регистраций. <a href="/tours">Найдите интересующий вас тур</a>
-        </p>
+        <div className={styles.emptyState}>
+          <div className={styles.emptyStateIcon}>📋</div>
+          <p className={styles.emptyStateText}>
+            У вас нет регистраций на туры
+          </p>
+          <a href="/tours" className={styles.emptyStateButton}>Найти тур</a>
+        </div>
       )}
     </div>
   );

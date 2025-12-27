@@ -3,7 +3,7 @@
   max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #57534e 0%, #44403c 100%);
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -34,7 +34,7 @@
 
 .viewModeButtons button.active {
   background: white;
-  color: #667eea;
+  color: #57534e;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -69,7 +69,7 @@
 .monthHeader button {
   padding: 8px 16px;
   border: none;
-  background: #667eea;
+  background: #57534e;
   color: white;
   border-radius: 6px;
   cursor: pointer;
@@ -78,7 +78,7 @@
 }
 
 .monthHeader button:hover {
-  background: #5568d3;
+  background: #44403c;
 }
 
 .weekDays {
@@ -87,7 +87,7 @@
   gap: 10px;
   margin-bottom: 15px;
   font-weight: 600;
-  color: #667eea;
+  color: #57534e;
   text-align: center;
 }
 
@@ -100,7 +100,7 @@
 
 .day {
   aspect-ratio: 1;
-  border: 2px solid #e0e0e0;
+  border: 2px solid #8b7355;
   border-radius: 8px;
   padding: 8px;
   cursor: pointer;
@@ -114,19 +114,19 @@
 }
 
 .day:hover {
-  border-color: #667eea;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  border-color: #57534e;
+  box-shadow: 0 4px 12px rgba(87, 83, 78, 0.15);
 }
 
 .day.hasEvents {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-  border-color: #667eea;
+  background: linear-gradient(135deg, rgba(87, 83, 78, 0.1) 0%, rgba(68, 64, 60, 0.1) 100%);
+  border-color: #57534e;
 }
 
 .day.selected {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #57534e 0%, #44403c 100%);
   color: white;
-  border-color: #667eea;
+  border-color: #57534e;
 }
 
 .day.selected .dayNumber,
@@ -146,7 +146,7 @@
 
 .eventCount {
   font-size: 12px;
-  background: #667eea;
+  background: #57534e;
   color: white;
   border-radius: 50%;
   width: 24px;
@@ -165,7 +165,7 @@
 }
 
 .selectedDateInfo h4 {
-  color: #667eea;
+  color: #57534e;
   font-size: 20px;
   margin-bottom: 15px;
 }
@@ -188,14 +188,14 @@
 }
 
 .dayCard {
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #57534e;
   padding: 15px;
   background: #f9f9f9;
   border-radius: 8px;
 }
 
 .dayCard h4 {
-  color: #667eea;
+  color: #57534e;
   margin: 0 0 15px 0;
   font-size: 18px;
   text-transform: capitalize;
@@ -227,7 +227,7 @@
 
 .tourPrice {
   font-size: 14px;
-  color: #667eea;
+  color: #57534e;
   font-weight: 600;
 }
 
@@ -259,7 +259,7 @@
 
 .tourCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 8px 20px rgba(87, 83, 78, 0.2);
 }
 
 .tourCardHeader {
@@ -289,7 +289,7 @@
 }
 
 .tourType {
-  background: #667eea;
+  background: #57534e;
   color: white;
   padding: 4px 12px;
   border-radius: 20px;
@@ -314,7 +314,7 @@
 .loading {
   text-align: center;
   padding: 40px;
-  color: #667eea;
+  color: #57534e;
   font-size: 18px;
 }
 
@@ -380,7 +380,7 @@
 
 .tourTag {
   font-size: 10px;
-  background: #667eea;
+  background: #57534e;
   color: white;
   padding: 2px 6px;
   border-radius: 4px;
@@ -397,7 +397,7 @@
 /* Подсказка о кликаемости */
 .tourClickHint {
   font-size: 12px;
-  color: #667eea;
+  color: #57534e;
   margin-top: 8px;
   font-weight: 500;
   opacity: 0;
@@ -426,7 +426,7 @@
 }
 
 .tourItem:hover {
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(87, 83, 78, 0.1);
   transform: translateX(4px);
 }
 
