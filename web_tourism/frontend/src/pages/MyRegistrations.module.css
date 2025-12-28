@@ -225,3 +225,109 @@
     text-align: center;
   }
 }
+
+/* МОДАЛЬНОЕ ОКНО */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.modalClose {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s ease;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalClose:hover {
+  color: #333;
+}
+
+.modalContent h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0 0 1.5rem 0;
+  padding-right: 30px;
+}
+
+.modalSection {
+  margin-bottom: 2rem;
+}
+
+.modalSection h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #55514d;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.modalField {
+  margin-bottom: 1rem;
+}
+
+.modalField label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.modalField p {
+  color: #333;
+  margin: 0;
+  padding: 0.5rem 0;
+  word-break: break-word;
+}
+
+.modalCloseButton {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #55514d 0%, #3a3632 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.modalCloseButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(85, 81, 77, 0.3);
+}

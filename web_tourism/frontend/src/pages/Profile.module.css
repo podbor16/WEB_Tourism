@@ -58,6 +58,23 @@
   margin: 0;
 }
 
+.editButton {
+  padding: 0.6rem 1.2rem;
+  background-color: #55514D;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.editButton:hover {
+  background-color: #3a3632;
+  transform: translateY(-2px);
+}
+
 .verifiedStatus {
   display: inline-block;
   background: #d4edda;
@@ -255,6 +272,32 @@
   padding: 2rem;
   color: #666;
   font-size: 1.1rem;
+}
+
+.staticInfo {
+  background: #f9fafb;
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.infoRow:last-child {
+  border-bottom: none;
+}
+
+.infoLabel {
+  font-weight: 600;
+  color: #555;
+}
+
+.infoValue {
+  color: #333;
 }
 
 @media (max-width: 768px) {

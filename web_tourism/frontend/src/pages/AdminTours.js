@@ -7,6 +7,7 @@ const AdminTours = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [tours, setTours] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingTour, setEditingTour] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,20 @@ const AdminTours = () => {
   const [success, setSuccess] = useState('');
 
   const tourTypes = ['Пеший туризм', 'Горный туризм', 'Водный туризм'];
+
+  const getTourTypeColor = (type) => {
+    const colors = {
+      'Пеший туризм': '#22c55e',
+      'Горный туризм': '#8b7355',
+      'Водный туризм': '#3b82f6',
+    };
+    return colors[type] || '#555';
+  };
+
+  const getFilteredTours = () => {
+    if (!selectedFilter) return tours;
+    return tours.filter(tour => tour.type === selectedFilter);
+  };
 
   useEffect(() => {
     // Проверяем статус пользователя
@@ -262,14 +277,29 @@ const AdminTours = () => {
         </div>
       )}
 
+      {/* ФИЛЬТР ПО ТИПАМ */}
+      <div className={styles.filterSection}>
+        <label>Фильтр по типу:</label>
+        <select
+          value={selectedFilter}
+          onChange={(e) => setSelectedFilter(e.target.value)}
+          className={styles.filterSelect}
+        >
+          <option value="">Все маршруты</option>
+          {tourTypes.map(type => (
+            <option key={type} value={type}>{type}</option>
+          ))}
+        </select>
+      </div>
+
       <div className={styles.toursGrid}>
-        {tours.length === 0 ? (
+        {getFilteredTours().length === 0 ? (
           <p className={styles.noTours}>Туры не добавлены</p>
         ) : (
-          tours.map(tour => (
+          getFilteredTours().map(tour => (
             <div key={tour.id} className={styles.tourCard}>
               <div className={styles.tourHeader}>
-                <h3>{tour.name}</h3>
+                <h3 style={{ color: getTourTypeColor(tour.type) }}>{tour.name}</h3>
                 <span className={styles.tourType}>{tour.type}</span>
               </div>
 

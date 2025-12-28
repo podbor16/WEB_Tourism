@@ -123,15 +123,54 @@ class AuthViewSet(viewsets.ViewSet):
 class UserViewSet(viewsets.ViewSet):
     """ViewSet для работы с профилем пользователя"""
     
-    @action(detail=False, methods=['get'], permission_classes=[AllowAny])
+    @action(detail=False, methods=['get', 'patch'], permission_classes=[AllowAny])
     def me(self, request):
-        """Получить информацию о текущем пользователе"""
-        # Если пользователь не авторизован, вернуть пусто
-        if not request.user.is_authenticated:
-            return Response(None, status=status.HTTP_200_OK)
-        
-        serializer = UserSerializer(request.user)
-        return Response(serializer.data)
+        """Получить или обновить информацию о текущем пользователе"""
+        if request.method == 'GET':
+            # Если пользователь не авторизован, вернуть пусто
+            if not request.user.is_authenticated:
+                return Response(None, status=status.HTTP_200_OK)
+
+            serializer = UserSerializer(request.user)
+            return Response(serializer.data)
+
+        elif request.method == 'PATCH':
+            # Требует аутентификации
+            if not request.user.is_authenticated:
+                return Response(
+                    {'detail': 'Аутентификация требуется'},
+                    status=status.HTTP_401_UNAUTHORIZED
+                )
+
+            try:
+                user = request.user
+
+                # Проверка на уникальность email если он изменяется
+                if 'email' in request.data and request.data['email'] != user.email:
+                    if User.objects.filter(email=request.data['email']).exists():
+                        return Response(
+                            {'detail': 'Пользователь с таким email уже существует'},
+                            status=status.HTTP_400_BAD_REQUEST
+                        )
+
+                # Обновляем поля
+                if 'email' in request.data:
+                    user.email = request.data['email']
+                if 'first_name' in request.data:
+                    user.first_name = request.data['first_name']
+                if 'last_name' in request.data:
+                    user.last_name = request.data['last_name']
+
+                user.save()
+
+                serializer = UserSerializer(user)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except Exception as e:
+                print(f"Ошибка при обновлении пользователя: {str(e)}")
+                return Response(
+                    {'detail': f'Ошибка при обновлении: {str(e)}'},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
 
     @action(detail=False, methods=['put', 'patch'], permission_classes=[IsAuthenticated])
     @method_decorator(csrf_exempt)

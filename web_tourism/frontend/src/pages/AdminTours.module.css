@@ -50,15 +50,16 @@
   color: white;
   border: none;
   border-radius: 8px;
+  cursor: pointer;
   font-size: 16px;
   font-weight: 600;
-  cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .addButton:hover {
+  background: #44403c;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(87, 83, 78, 0.3);
+  box-shadow: 0 4px 12px rgba(87, 83, 78, 0.3);
 }
 
 .formContainer {
@@ -272,6 +273,39 @@
   padding: 40px;
   color: #22c55e;
   font-size: 18px;
+}
+
+/* ФИЛЬТР */
+.filterSection {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filterSection label {
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.filterSelect {
+  padding: 0.7rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #55514d;
+  box-shadow: 0 0 0 3px rgba(85, 81, 77, 0.1);
 }
 
 @media (max-width: 768px) {

@@ -160,6 +160,12 @@ export const userAPI = {
   
   // Обновить профиль
   updateProfile: (data) => api.patch('/account/user/profile/', data),
+
+  // Обновить основные данные пользователя (email, имя, фамилия)
+  updateUserData: (data) => api.patch('/account/user/me/', data),
+
+  // Проверить доступность email
+  checkEmailAvailability: (email) => api.post('/account/auth/check_email/', { email }),
 };
 
 export default api;

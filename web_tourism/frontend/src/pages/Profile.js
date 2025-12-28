@@ -10,10 +10,16 @@ function Profile({ user, setUser }) {
     country_code: '+7',
     phone_number: '',
   });
+  const [userDataForm, setUserDataForm] = useState({
+    email: '',
+    first_name: '',
+    last_name: '',
+  });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [editingUserData, setEditingUserData] = useState(false);
 
 
   useEffect(() => {
@@ -25,6 +31,11 @@ function Profile({ user, setUser }) {
         country_code: user.profile.country_code || '+7',
         phone_number: user.profile.phone_number || '',
       });
+      setUserDataForm({
+        email: user.email || '',
+        first_name: user.first_name || '',
+        last_name: user.last_name || '',
+      });
     }
     setLoading(false);
   }, [user]);
@@ -35,6 +46,61 @@ function Profile({ user, setUser }) {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleUserDataChange = (e) => {
+    const { name, value } = e.target;
+    setUserDataForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSaveUserData = async (e) => {
+    e.preventDefault();
+    try {
+      setSaving(true);
+      setError('');
+      setSuccess('');
+
+      // Проверка на уникальность email если он изменился
+      if (userDataForm.email !== user.email) {
+        try {
+          const response = await userAPI.checkEmailAvailability(userDataForm.email);
+          if (!response.data.available) {
+            setError('Пользователь с таким email уже существует');
+            setSaving(false);
+            return;
+          }
+        } catch (err) {
+          console.error('Ошибка при проверке email:', err);
+        }
+      }
+
+      await initializeCSRF();
+
+      // Отправляем обновления
+      const updateData = {
+        first_name: userDataForm.first_name,
+        last_name: userDataForm.last_name,
+        email: userDataForm.email,
+      };
+
+      // Для email нужен отдельный запрос или включение в updateProfile
+      const response = await userAPI.updateUserData(updateData);
+      setSuccess('Основная информация успешно обновлена');
+
+      setUser({
+        ...user,
+        ...response.data
+      });
+      setEditingUserData(false);
+    } catch (err) {
+      console.error('Ошибка при сохранении:', err);
+      setError(err.response?.data?.detail || 'Ошибка при сохранении');
+    } finally {
+      setSaving(false);
+    }
   };
 
 
@@ -92,7 +158,100 @@ function Profile({ user, setUser }) {
         </p>
       </div>
 
-      {/* Profile Form */}
+      {/* Основные данные пользователя */}
+      <div className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h3>Основная информация</h3>
+          {!editingUserData && (
+            <button
+              type="button"
+              onClick={() => setEditingUserData(true)}
+              className={styles.editButton}
+            >
+              Редактировать
+            </button>
+          )}
+        </div>
+
+        {editingUserData ? (
+          <form onSubmit={handleSaveUserData}>
+            {error && <div className={styles.errorMessage}>{error}</div>}
+            {success && <div className={styles.successMessage}>{success}</div>}
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel} htmlFor="first_name">Имя</label>
+              <input
+                id="first_name"
+                type="text"
+                name="first_name"
+                className={styles.formInput}
+                value={userDataForm.first_name}
+                onChange={handleUserDataChange}
+                placeholder="Иван"
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel} htmlFor="last_name">Фамилия</label>
+              <input
+                id="last_name"
+                type="text"
+                name="last_name"
+                className={styles.formInput}
+                value={userDataForm.last_name}
+                onChange={handleUserDataChange}
+                placeholder="Иванов"
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel} htmlFor="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                className={styles.formInput}
+                value={userDataForm.email}
+                onChange={handleUserDataChange}
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+
+            <div className={styles.buttonGroup}>
+              <button type="submit" className={styles.formButton} disabled={saving}>
+                {saving ? 'Сохранение...' : 'Сохранить'}
+              </button>
+              <button
+                type="button"
+                className={styles.cancelButton}
+                onClick={() => setEditingUserData(false)}
+              >
+                Отмена
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div className={styles.staticInfo}>
+            <div className={styles.infoRow}>
+              <span className={styles.infoLabel}>Имя:</span>
+              <span className={styles.infoValue}>{user.first_name}</span>
+            </div>
+            <div className={styles.infoRow}>
+              <span className={styles.infoLabel}>Фамилия:</span>
+              <span className={styles.infoValue}>{user.last_name}</span>
+            </div>
+            <div className={styles.infoRow}>
+              <span className={styles.infoLabel}>Email:</span>
+              <span className={styles.infoValue}>{user.email}</span>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Личная информация */}
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h3>Личная информация</h3>
@@ -142,7 +301,7 @@ function Profile({ user, setUser }) {
           </div>
 
           <div className={styles.formGroup}>
-            <label className={styles.formLabel}>Телефон</label>
+            <label className={styles.formLabel} htmlFor="phone_number">Телефон</label>
             <div className={styles.phoneInputGroup}>
               <select
                 name="country_code"

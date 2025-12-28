@@ -6,6 +6,8 @@ function MyRegistrations({ user }) {
   const [registrations, setRegistrations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedReg, setSelectedReg] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchRegistrations();
@@ -48,6 +50,16 @@ function MyRegistrations({ user }) {
       alert('Ошибка при восстановлении регистрации');
       console.error(err);
     }
+  };
+
+  const openDetails = (registration) => {
+    setSelectedReg(registration);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedReg(null);
   };
 
   if (loading) return <div className={styles.loadingMessage}>Загрузка регистраций...</div>;
@@ -98,6 +110,12 @@ function MyRegistrations({ user }) {
               </div>
 
               <div className={styles.cardActions}>
+                <button
+                  onClick={() => openDetails(registration)}
+                  className={styles.viewButton}
+                >
+                  Подробнее
+                </button>
                 {registration.status !== 'cancelled' ? (
                   <button
                     onClick={() => handleCancel(registration.id)}
@@ -124,6 +142,73 @@ function MyRegistrations({ user }) {
             У вас нет регистраций на туры
           </p>
           <a href="/tours" className={styles.emptyStateButton}>Найти тур</a>
+        </div>
+      )}
+
+      {/* МОДАЛЬНОЕ ОКНО С ДЕТАЛЯМИ */}
+      {showModal && selectedReg && (
+        <div className={styles.modalOverlay} onClick={closeModal}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.modalClose} onClick={closeModal}>✕</button>
+
+            <h2>Детали регистрации</h2>
+
+            <div className={styles.modalSection}>
+              <h3>Информация о маршруте</h3>
+              <div className={styles.modalField}>
+                <label>Название маршрута:</label>
+                <p>{selectedReg.tour_name}</p>
+              </div>
+              <div className={styles.modalField}>
+                <label>Тип маршрута:</label>
+                <p>{selectedReg.tour_type}</p>
+              </div>
+              <div className={styles.modalField}>
+                <label>Дата регистрации:</label>
+                <p>{new Date(selectedReg.registration_date).toLocaleDateString('ru-RU')}</p>
+              </div>
+              <div className={styles.modalField}>
+                <label>Статус:</label>
+                <p>
+                  {selectedReg.status === 'pending' && 'Ожидание'}
+                  {selectedReg.status === 'confirmed' && 'Подтверждено'}
+                  {selectedReg.status === 'cancelled' && 'Отменено'}
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.modalSection}>
+              <h3>Данные участника</h3>
+              <div className={styles.modalField}>
+                <label>Фамилия:</label>
+                <p>{selectedReg.participant_last_name}</p>
+              </div>
+              <div className={styles.modalField}>
+                <label>Имя:</label>
+                <p>{selectedReg.participant_first_name}</p>
+              </div>
+              <div className={styles.modalField}>
+                <label>Дата рождения:</label>
+                <p>{new Date(selectedReg.participant_birth_date).toLocaleDateString('ru-RU')}</p>
+              </div>
+              <div className={styles.modalField}>
+                <label>Телефон:</label>
+                <p>{selectedReg.participant_phone}</p>
+              </div>
+              <div className={styles.modalField}>
+                <label>Email:</label>
+                <p>{selectedReg.participant_email}</p>
+              </div>
+              <div className={styles.modalField}>
+                <label>Населённый пункт:</label>
+                <p>{selectedReg.participant_city}</p>
+              </div>
+            </div>
+
+            <button className={styles.modalCloseButton} onClick={closeModal}>
+              Закрыть
+            </button>
+          </div>
         </div>
       )}
     </div>
