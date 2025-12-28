@@ -107,7 +107,7 @@ const Home = ({ user }) => {
 
       {/* ПОПУЛЯРНЫЕ МАРШРУТЫ */}
       <section className={styles.popularRoutes}>
-        <h2>🔥 Популярные маршруты (топ {tours.length})</h2>
+        <h2>Популярные маршруты</h2>
         {loading ? (
           <p className={styles.loading}>Загрузка маршрутов...</p>
         ) : tours.length === 0 ? (
@@ -144,7 +144,7 @@ const Home = ({ user }) => {
 
       {/* КАЛЕНДАРЬ ТУРОВ */}
       <section className={styles.calendarSection}>
-        <h2>📅 Календарь туров</h2>
+        <h2>Календарь событий</h2>
         <Calendar />
       </section>
 

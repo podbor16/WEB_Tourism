@@ -140,7 +140,7 @@ const TourismTypePage = () => {
       {/* Маршруты */}
       <section className={styles.routesSection}>
         <div className={styles.content}>
-          <h2>Доступные маршруты</h2>
+          <h2>{data.title}: маршруты</h2>
           
           {loading ? (
             <p className={styles.loading}>Загрузка маршрутов...</p>
