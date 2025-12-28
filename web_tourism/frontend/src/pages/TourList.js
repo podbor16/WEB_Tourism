@@ -120,7 +120,7 @@ function TourList() {
           <option value="">Все маршруты</option>
           {types && types.map(type => (
             <option key={type} value={type}>
-              {typeIcons[type] || '??'} {type}
+              {typeIcons[type] || '🥾'} {type}
             </option>
           ))}
         </select>
@@ -141,7 +141,7 @@ function TourList() {
                     }}
                   />
                   <div className={styles.tourTypeBadge}>
-                    {typeIcons[tour.type] || '??'} {tour.type}
+                    {typeIcons[tour.type] || '🥾'} {tour.type}
                   </div>
                 </div>
                 <div className={styles.tourContent}>

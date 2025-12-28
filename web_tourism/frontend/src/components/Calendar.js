@@ -76,6 +76,74 @@ const Calendar = () => {
     setCurrentDate(newDate);
   };
 
+  // Перейти к конкретному месяцу
+  const goToSpecificMonth = (year, month) => {
+    setCurrentDate(new Date(year, month, 1));
+  };
+
+  // Массив названий месяцев на русском
+  const months = [
+    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+  ];
+
+  // Массив коротких названий месяцев для быстрой навигации
+  const shortMonths = [
+    'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн',
+    'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'
+  ];
+
+  // Генерация списка годов (от текущего - 5 до текущего + 5)
+  const generateYears = () => {
+    const currentYear = new Date().getFullYear();
+    const years = [];
+    for (let i = currentYear - 5; i <= currentYear + 5; i++) {
+      years.push(i);
+    }
+    return years;
+  };
+
+  // Получить следующие N месяцев, начиная с текущего
+  const getNextMonths = (count = 12) => {
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+    const nextMonths = [];
+
+    for (let i = 0; i < count; i++) {
+      const monthIndex = (currentMonth + i) % 12;
+      const year = currentYear + Math.floor((currentMonth + i) / 12);
+      nextMonths.push({
+        month: monthIndex,
+        year: year,
+        name: shortMonths[monthIndex],
+        isCurrent: monthIndex === currentDate.getMonth() && year === currentDate.getFullYear(),
+        isTodayMonth: monthIndex === today.getMonth() && year === today.getFullYear()
+      });
+    }
+
+    return nextMonths;
+  };
+
+  // Обработчик изменения месяца через селектор
+  const handleMonthChange = (e) => {
+    const newMonth = parseInt(e.target.value, 10);
+    const newDate = new Date(currentDate.getFullYear(), newMonth, 1);
+    setCurrentDate(newDate);
+  };
+
+  // Обработчик изменения года через селектор
+  const handleYearChange = (e) => {
+    const newYear = parseInt(e.target.value, 10);
+    const newDate = new Date(newYear, currentDate.getMonth(), 1);
+    setCurrentDate(newDate);
+  };
+
+  // Быстрая навигация по месяцам
+  const quickMonthNavigate = (year, month) => {
+    goToSpecificMonth(year, month);
+  };
+
   // Рассчитать календарь
   const calendarData = useMemo(() => {
     const year = currentDate.getFullYear();
@@ -302,32 +370,91 @@ const Calendar = () => {
       year: 'numeric'
     });
 
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth();
+    const years = generateYears();
+    const nextMonths = getNextMonths(12);
+
     return (
       <div className={styles.calendarWrapper}>
         <div className={styles.calendarHeader}>
-          <div className={styles.calendarTitle}>
-            <button
-              className={styles.monthNav}
-              onClick={() => changeMonth(-1)}
-            >
-              ←
-            </button>
-            <h2>{monthName}</h2>
-            <button
-              className={styles.monthNav}
-              onClick={() => changeMonth(1)}
-            >
-              →
-            </button>
-          </div>
+          <div className={styles.calendarControls}>
+            {/* Селекторы для выбора месяца и года */}
+            <div className={styles.monthYearSelectors}>
+              <select
+                  className={styles.monthSelector}
+                  value={currentMonth}
+                  onChange={handleMonthChange}
+                  title="Выберите месяц"
+              >
+                {months.map((month, index) => (
+                    <option key={index} value={index}>
+                      {month}
+                    </option>
+                ))}
+              </select>
 
-          <div className={styles.monthQuickNav}>
-            <button
-              className={styles.todayButton}
-              onClick={goToToday}
-            >
-              Сегодня
-            </button>
+              <select
+                  className={styles.yearSelector}
+                  value={currentYear}
+                  onChange={handleYearChange}
+                  title="Выберите год"
+              >
+                {years.map(year => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Быстрая навигация по месяцам - начиная с текущего */}
+            <div className={styles.quickMonthNav}>
+              {nextMonths.map((monthData, index) => (
+                  <button
+                      key={`${monthData.year}-${monthData.month}`}
+                      className={`${styles.quickMonthButton} ${
+                          monthData.isCurrent ? styles.quickMonthButtonActive : ''
+                      } ${
+                          monthData.isTodayMonth ? styles.quickMonthButtonToday : ''
+                      }`}
+                      onClick={() => quickMonthNavigate(monthData.year, monthData.month)}
+                      title={`${months[monthData.month]} ${monthData.year}`}
+                  >
+                    {monthData.name}
+                    {index === 0 && (
+                        <span className={styles.currentMonthIndicator}>●</span>
+                    )}
+                  </button>
+              ))}
+            </div>
+
+            <div className={styles.calendarTitle}>
+              {/*<button*/}
+              {/*  className={styles.monthNav}*/}
+              {/*  onClick={() => changeMonth(-1)}*/}
+              {/*  title="Предыдущий месяц"*/}
+              {/*>*/}
+              {/*  ←*/}
+              {/*</button>*/}
+              <h2>{monthName}</h2>
+              {/*<button*/}
+              {/*  className={styles.monthNav}*/}
+              {/*  onClick={() => changeMonth(1)}*/}
+              {/*  title="Следующий месяц"*/}
+              {/*>*/}
+              {/*  →*/}
+              {/*</button>*/}
+            </div>
+
+            <div className={styles.monthQuickNav}>
+              <button
+                  className={styles.todayButton}
+                  onClick={goToToday}
+              >
+                Сегодня
+              </button>
+            </div>
           </div>
         </div>
 
@@ -348,7 +475,7 @@ const Calendar = () => {
             const weekSegments = calculateEventLayouts.segmentsByWeek[weekIndex] || [];
 
             return (
-              <div key={weekIndex} className={styles.weekRow}>
+                <div key={weekIndex} className={styles.weekRow}>
                 {/* Контейнер для событий */}
                 <div className={styles.weekEventsContainer}>
                   {weekSegments.map((segment, segmentIndex) => {

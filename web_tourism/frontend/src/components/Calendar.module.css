@@ -1,8 +1,8 @@
 .calendarContainer {
   width: 100%;
   max-width: 1200px;
-  margin: 40px auto;
-  padding: 20px;
+  margin: 15px auto;
+  padding: 15px;
 }
 
 /* Шапка календаря */
@@ -10,42 +10,42 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  padding-bottom: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
   border-bottom: 2px solid #f0f0f0;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
 }
 
 .calendarTitle {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .calendarTitle h2 {
-  font-size: 28px;
+  font-size: 24px;
   color: #333;
   margin: 0;
-  min-width: 250px;
+  min-width: 220px;
   text-align: center;
 }
 
 /* Быстрая навигация по месяцам */
 .monthQuickNav {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   flex-wrap: wrap;
 }
 
 .quickNavButton {
-  padding: 8px 16px;
+  padding: 6px 14px;
   background: #e0e0e0;
   color: #333;
   border: none;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -60,13 +60,13 @@
 .monthNav {
   background: none;
   border: 2px solid #e0e0e0;
-  border-radius: 8px;
-  width: 40px;
-  height: 40px;
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 18px;
   color: #57534e;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -78,12 +78,12 @@
 }
 
 .todayButton {
-  padding: 10px 20px;
+  padding: 8px 16px;
   background: #57534e;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -98,9 +98,9 @@
 /* Сетка календаря */
 .calendarGrid {
   background: #f8f9fa;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Дни недели */
@@ -112,11 +112,11 @@
 }
 
 .weekDays div {
-  padding: 12px;
+  padding: 8px 4px;
   text-align: center;
   font-weight: 600;
   color: #5f6368;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 /* Неделя */
@@ -124,8 +124,8 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   border-bottom: 1px solid #e0e0e0;
-  position: relative; /* Важно для позиционирования событий */
-  min-height: 120px;
+  position: relative;
+  min-height: 60px;
 }
 
 .weekRow:last-child {
@@ -135,24 +135,24 @@
 /* Контейнер для событий недели */
 .weekEventsContainer {
   position: absolute;
-  top: 35px; /* Начинаем ниже номера дня */
+  top: 28px;
   left: 0;
   right: 0;
   bottom: 0;
-  pointer-events: none; /* Пропускаем события через контейнер к ячейкам */
+  pointer-events: none;
   z-index: 2;
 }
 
 /* Ячейка дня */
 .dayCell {
   border-right: 1px solid #e0e0e0;
-  padding: 10px 6px 6px 6px;
+  padding: 6px 4px 4px 4px;
   background: white;
   cursor: pointer;
   transition: background-color 0.2s ease;
   display: flex;
   flex-direction: column;
-  min-height: 120px;
+  min-height: 90px;
   position: relative;
   z-index: 1;
 }
@@ -185,17 +185,17 @@
 
 /* Номер дня */
 .dayNumber {
-  font-size: 14px;
+  font-size: 13px;
   color: #5f6368;
   font-weight: 500;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   align-self: flex-end;
   z-index: 4;
   position: relative;
   background: rgba(255, 255, 255, 0.95);
-  padding: 2px 6px;
+  padding: 2px 5px;
   border-radius: 3px;
-  min-width: 26px;
+  min-width: 22px;
   text-align: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
@@ -203,8 +203,8 @@
 .dayCell.today .dayNumber {
   background: #1a73e8;
   color: white;
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -216,9 +216,9 @@
 /* Событие в календаре */
 .calendarEvent {
   position: absolute;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 11px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -227,10 +227,10 @@
   text-overflow: ellipsis;
   display: flex;
   align-items: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   pointer-events: auto;
   box-sizing: border-box;
-  height: 22px;
+  height: 20px;
   z-index: 3;
 }
 
@@ -248,14 +248,15 @@
   text-align: left;
   padding-left: 4px;
   width: 100%;
+  font-size: 11px;
 }
 
 /* Индикатор для событий, продолжающихся в следующем месяце */
 .calendarEvent.continuing::after {
   content: '→';
   position: absolute;
-  right: 4px;
-  font-size: 10px;
+  right: 3px;
+  font-size: 9px;
   opacity: 0.7;
 }
 
@@ -263,68 +264,68 @@
 .calendarEvent.continued::before {
   content: '←';
   position: absolute;
-  left: 4px;
-  font-size: 10px;
+  left: 3px;
+  font-size: 9px;
   opacity: 0.7;
 }
 
 /* События выбранной даты */
 .selectedEvents {
-  margin-top: 40px;
-  padding: 30px;
+  margin-top: 30px;
+  padding: 20px;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .selectedEvents h3 {
-  font-size: 24px;
+  font-size: 20px;
   color: #333;
-  margin: 0 0 25px 0;
-  padding-bottom: 15px;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
   border-bottom: 2px solid #f0f0f0;
 }
 
 .eventsList {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 /* Карточка события */
 .eventCard {
   background: white;
   border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 20px;
+  border-radius: 8px;
+  padding: 16px;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .eventCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(87, 83, 78, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(87, 83, 78, 0.15);
 }
 
 .eventHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 15px;
-  gap: 15px;
+  margin-bottom: 12px;
+  gap: 12px;
 }
 
 .eventHeader h4 {
-  font-size: 18px;
+  font-size: 16px;
   color: #333;
   margin: 0;
   flex: 1;
 }
 
 .eventType {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 16px;
+  font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
@@ -333,43 +334,43 @@
 .eventDetails {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .eventDate,
 .eventPrice {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  gap: 6px;
+  font-size: 13px;
   color: #666;
 }
 
 .detailIcon {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .eventDescription {
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
   line-height: 1.5;
-  margin: 10px 0 0 0;
+  margin: 8px 0 0 0;
 }
 
 .eventActions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .moreButton {
-  padding: 8px 16px;
+  padding: 6px 14px;
   background: #57534e;
   color: white;
   border: none;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -383,23 +384,201 @@
 
 .noEvents {
   text-align: center;
-  padding: 40px;
+  padding: 30px;
   color: #999;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .loading {
   text-align: center;
-  padding: 40px;
+  padding: 30px;
   color: #57534e;
-  font-size: 18px;
+  font-size: 16px;
 }
 
-/* Адаптивный дизайн */
+/* Улучшенные стили для контролов календаря */
+.calendarControls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.monthYearSelectors {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.monthSelector,
+.yearSelector {
+  padding: 6px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: white;
+  color: #333;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 110px;
+}
+
+.monthSelector:hover,
+.yearSelector:hover {
+  border-color: #57534e;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.monthSelector:focus,
+.yearSelector:focus {
+  outline: none;
+  border-color: #57534e;
+  box-shadow: 0 0 0 2px rgba(87, 83, 78, 0.2);
+}
+
+/* Быстрая навигация по месяцам - начиная с текущего */
+.quickMonthNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 8px 0;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.quickMonthButton {
+  padding: 6px 8px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  color: #5f6368;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  min-width: 50px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.quickMonthButton:hover {
+  background: #57534E;
+  border-color: #57534e;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quickMonthButtonActive {
+  background: #57534E;
+  border-color: #ffffff;
+  color: white;
+  font-weight: 600;
+}
+
+.quickMonthButtonActive:hover {
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(87, 83, 78, 0.4);
+}
+
+/* Стиль для текущего месяца (сегодняшнего) */
+.quickMonthButtonToday {
+  border: 2px solid #1a73e8;
+  color: #1a73e8;
+  font-weight: 600;
+  background: white;
+}
+
+.quickMonthButtonToday:hover {
+  background: #e8f0fe;
+  border-color: #0d62d9;
+  color: #0d62d9;
+}
+
+/* Если месяц одновременно сегодняшний и активный */
+.quickMonthButtonToday.quickMonthButtonActive {
+  background: #57534e;
+  border-color: #57534e;
+  color: white;
+}
+
+.quickMonthButtonToday.quickMonthButtonActive:hover {
+  background: #44403c;
+}
+
+/* Индикатор текущего месяца (самого левого) */
+.currentMonthIndicator {
+  color: #1a73e8;
+  font-size: 8px;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  animation: pulse 2s infinite;
+}
+
+.quickMonthButtonActive .currentMonthIndicator {
+  color: white;
+}
+
+.quickMonthButtonToday .currentMonthIndicator {
+  color: #1a73e8;
+}
+
+.quickMonthButtonToday.quickMonthButtonActive .currentMonthIndicator {
+  color: white;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* Подсказка над быстрой навигацией */
+.quickMonthNav::before {
+  position: absolute;
+  top: -6px;
+  left: 12px;
+  background: #57534e;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  z-index: 1;
+}
+
+/* Адаптивные стили */
+@media (max-width: 1024px) {
+  .quickMonthButton {
+    min-width: 45px;
+    padding: 5px 6px;
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 768px) {
   .calendarContainer {
-    padding: 15px;
-    margin: 20px auto;
+    padding: 12px;
+    margin: 15px auto;
   }
 
   .calendarHeader {
@@ -412,7 +591,7 @@
   }
 
   .calendarTitle h2 {
-    font-size: 22px;
+    font-size: 20px;
     min-width: auto;
   }
 
@@ -421,63 +600,25 @@
   }
 
   .quickNavButton {
-    padding: 6px 12px;
+    padding: 5px 10px;
     font-size: 12px;
   }
 
   .weekRow {
-    min-height: 100px;
-  }
-
-  .dayCell {
-    padding: 6px;
-    min-height: 100px;
-  }
-
-  .dayNumber {
-    font-size: 13px;
-  }
-
-  .weekEventsContainer {
-    top: 30px;
-  }
-
-  .calendarEvent {
-    font-size: 11px;
-    padding: 3px 6px;
-    height: 20px;
-  }
-
-  .selectedEvents {
-    padding: 20px;
-  }
-
-  .selectedEvents h3 {
-    font-size: 20px;
-  }
-
-  .eventCard {
-    padding: 15px;
-  }
-
-  .eventHeader h4 {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .weekRow {
-    min-height: 90px;
-  }
-
-  .weekDays div {
-    padding: 8px 4px;
-    font-size: 12px;
+    min-height: 80px;
   }
 
   .dayCell {
     padding: 4px;
-    min-height: 90px;
+    min-height: 80px;
+  }
+
+  .dayNumber {
+    font-size: 12px;
+  }
+
+  .weekEventsContainer {
+    top: 25px;
   }
 
   .calendarEvent {
@@ -486,12 +627,85 @@
     height: 18px;
   }
 
+  .selectedEvents {
+    padding: 16px;
+  }
+
+  .selectedEvents h3 {
+    font-size: 18px;
+  }
+
+  .eventCard {
+    padding: 14px;
+  }
+
+  .eventHeader h4 {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weekRow {
+    min-height: 70px;
+  }
+
+  .weekDays div {
+    padding: 6px 2px;
+    font-size: 11px;
+  }
+
+  .dayCell {
+    padding: 3px;
+    min-height: 70px;
+  }
+
+  .dayNumber {
+    font-size: 11px;
+    padding: 1px 4px;
+    min-width: 20px;
+  }
+
+  .dayCell.today .dayNumber {
+    width: 20px;
+    height: 20px;
+  }
+
+  .calendarEvent {
+    font-size: 9px;
+    padding: 2px 3px;
+    height: 16px;
+  }
+
   .eventHeader {
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   .eventType {
     align-self: flex-start;
+  }
+
+  .quickMonthNav {
+    justify-content: center;
+  }
+
+  .quickMonthButton {
+    flex: 0 0 calc(25% - 6px);
+    min-width: auto;
+    margin-bottom: 3px;
+    font-size: 10px;
+    padding: 4px 2px;
+  }
+
+  .quickMonthNav::before {
+    font-size: 9px;
+    left: 8px;
+    padding: 2px 6px;
+  }
+
+  .currentMonthIndicator {
+    font-size: 7px;
+    top: 2px;
+    right: 2px;
   }
 }
