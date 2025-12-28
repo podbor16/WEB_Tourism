@@ -26,9 +26,9 @@ const AdminTours = () => {
 
   const getTourTypeColor = (type) => {
     const colors = {
-      'Пеший туризм': '#22c55e',
-      'Горный туризм': '#8b7355',
-      'Водный туризм': '#3b82f6',
+      'Пеший туризм': '#22C55E',
+      'Горный туризм': '#57534E',
+      'Водный туризм': '#3B82F6',
     };
     return colors[type] || '#555';
   };
@@ -44,20 +44,20 @@ const AdminTours = () => {
       try {
         const response = await userAPI.getMe();
         setUser(response.data);
-        
+
         // Если пользователь не staff, редиректим на главную
         if (!response.data.is_staff) {
           navigate('/');
           return;
         }
-        
+
         fetchTours();
       } catch (err) {
         console.error('Ошибка при проверке прав:', err);
         navigate('/');
       }
     };
-    
+
     checkPermissions();
   }, [navigate]);
 
@@ -172,7 +172,7 @@ const AdminTours = () => {
       {error && <div className={styles.alert + ' ' + styles.error}>{error}</div>}
       {success && <div className={styles.alert + ' ' + styles.success}>{success}</div>}
 
-      <button 
+      <button
         className={styles.addButton}
         onClick={() => {
           resetForm();
@@ -262,8 +262,8 @@ const AdminTours = () => {
               <button type="submit" className={styles.submitButton}>
                 {editingTour ? 'Обновить тур' : 'Добавить тур'}
               </button>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className={styles.cancelButton}
                 onClick={() => {
                   resetForm();
@@ -298,9 +298,20 @@ const AdminTours = () => {
         ) : (
           getFilteredTours().map(tour => (
             <div key={tour.id} className={styles.tourCard}>
-              <div className={styles.tourHeader}>
-                <h3 style={{ color: getTourTypeColor(tour.type) }}>{tour.name}</h3>
-                <span className={styles.tourType}>{tour.type}</span>
+              <div
+                  className={styles.tourHeader}
+                  style={{ backgroundColor: getTourTypeColor(tour.type) }}
+              >
+                <h3>{tour.name}</h3>
+                <
+                  span className={styles.tourType}
+                  style={{
+                    backgroundColor: getTourTypeColor(tour.type),
+                    filter: 'brightness(0.9)',
+                    color: 'white'
+                  }}
+                >
+                  {tour.type}</span>
               </div>
 
               <div className={styles.tourBody}>
@@ -334,13 +345,13 @@ const AdminTours = () => {
               </div>
 
               <div className={styles.tourActions}>
-                <button 
+                <button
                   className={styles.editButton}
                   onClick={() => handleEdit(tour)}
                 >
                   ✏️ Редактировать
                 </button>
-                <button 
+                <button
                   className={styles.deleteButton}
                   onClick={() => handleDelete(tour.id)}
                 >

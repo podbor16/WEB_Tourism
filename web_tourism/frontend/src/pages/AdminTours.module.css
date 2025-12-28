@@ -173,7 +173,6 @@
 }
 
 .tourHeader {
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
   color: white;
   padding: 15px;
   display: flex;
@@ -189,7 +188,6 @@
 }
 
 .tourType {
-  background: rgba(255, 255, 255, 0.3);
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 12px;
@@ -219,7 +217,7 @@
 }
 
 .tourDetails strong {
-  color: #22c55e;
+  color:  #555;
 }
 
 .tourActions {
