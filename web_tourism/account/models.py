@@ -60,22 +60,52 @@ class Profile(models.Model):
         ('F', 'Женский'),
     ]
 
+    COUNTRY_CHOICES = [
+        ('+7', 'Россия (+7)'),
+        ('+1', 'USA/Canada (+1)'),
+        ('+44', 'UK (+44)'),
+        ('+49', 'Germany (+49)'),
+        ('+33', 'France (+33)'),
+        ('+39', 'Italy (+39)'),
+        ('+34', 'Spain (+34)'),
+        ('+31', 'Netherlands (+31)'),
+        ('+43', 'Austria (+43)'),
+        ('+41', 'Switzerland (+41)'),
+        ('+32', 'Belgium (+32)'),
+        ('+46', 'Sweden (+46)'),
+        ('+47', 'Norway (+47)'),
+        ('+45', 'Denmark (+45)'),
+        ('+358', 'Finland (+358)'),
+        ('+48', 'Poland (+48)'),
+        ('+420', 'Czech Republic (+420)'),
+        ('+36', 'Hungary (+36)'),
+        ('+40', 'Romania (+40)'),
+        ('+30', 'Greece (+30)'),
+        ('+90', 'Turkey (+90)'),
+    ]
+
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="profile")
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, null=True, verbose_name="Пол")
     city = models.CharField(max_length=100, blank=True, null=True, verbose_name="Город")
     birth_date = models.DateField(blank=True, null=True, verbose_name="Дата рождения")
 
+    country_code = models.CharField(
+        max_length=4,
+        choices=COUNTRY_CHOICES,
+        default='+7',
+        verbose_name="Код страны"
+    )
     phone_number = models.CharField(
-        max_length=10,
+        max_length=15,
         validators=[
             RegexValidator(
-                regex=r'^\d{10}$',
-                message="Введите номер в формате: 9001234567 (10 цифр без пробелов и символов)"
+                regex=r'^\d{10,15}$',
+                message="Введите номер телефона (10-15 цифр без пробелов)"
             )
         ],
         blank=True,
         null=True,
-        verbose_name="Телефон"
+        verbose_name="Номер телефона"
     )
 
     def __str__(self):

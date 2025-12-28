@@ -174,3 +174,14 @@ CSRF_COOKIE_SECURE = False  # в production: True (если HTTPS)
 CSRF_COOKIE_HTTPONLY = False  # разрешаем JavaScript читать для API
 CSRF_COOKIE_SAMESITE = 'Lax'
 
+# Email settings для отправки кодов подтверждения
+DEFAULT_FROM_EMAIL = 'noreply@webtourism.ru'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Для разработки
+# Для production используйте:
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your-email@gmail.com'
+# EMAIL_HOST_PASSWORD = 'your-app-password'
+

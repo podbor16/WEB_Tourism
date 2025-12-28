@@ -2,8 +2,10 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from datetime import date
 from .models import TourRegistration
 from .serializers import TourRegistrationSerializer
+from tours.models import Tour
 
 
 class TourRegistrationViewSet(viewsets.ModelViewSet):
@@ -17,17 +19,63 @@ class TourRegistrationViewSet(viewsets.ModelViewSet):
     
     def create(self, request, *args, **kwargs):
         """Создать новую регистрацию на тур"""
-        tour_id = request.data.get('tour')
-        
-        # Проверяем, не зарегистрирован ли уже
-        if TourRegistration.objects.filter(user=request.user, tour_id=tour_id).exists():
+        try:
+            tour_id = request.data.get('tour')
+            participant_email = request.data.get('participant_email')
+            participant_birth_date = request.data.get('participant_birth_date')
+
+            # Проверяем наличие обязательных полей
+            if not tour_id:
+                return Response(
+                    {'detail': 'ID тура обязателен'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            # Получаем тур
+            try:
+                tour = Tour.objects.get(id=tour_id)
+            except Tour.DoesNotExist:
+                return Response(
+                    {'detail': 'Маршрут не найден'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+
+            # Проверяем возраст участника
+            if tour.min_age > 0 and participant_birth_date:
+                from datetime import datetime
+                birth_date = datetime.strptime(str(participant_birth_date), '%Y-%m-%d').date()
+                today = date.today()
+                age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+
+                if age < tour.min_age:
+                    return Response(
+                        {
+                            'detail': f'Минимальный возраст для этого маршрута: {tour.min_age} лет. Возраст участника: {age} лет'
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+
+            # Проверяем, не зарегистрирован ли уже этот email на этот тур
+            if participant_email and TourRegistration.objects.filter(
+                tour_id=tour_id,
+                participant_email=participant_email,
+                status__in=['pending', 'confirmed']
+            ).exists():
+                return Response(
+                    {'detail': f'Пользователь с email "{participant_email}" уже зарегистрирован на этот маршрут'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            return super().create(request, *args, **kwargs)
+        except Exception as e:
+            print(f"Ошибка при регистрации на тур: {str(e)}")
+            import traceback
+            traceback.print_exc()
             return Response(
-                {'detail': 'Вы уже зарегистрированы на этот тур'},
-                status=status.HTTP_400_BAD_REQUEST
+                {'detail': f'Ошибка при регистрации: {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-        
-        return super().create(request, *args, **kwargs)
-    
+
     @action(detail=True, methods=['post'])
     def cancel(self, request, pk=None):
         """Отменить регистрацию"""

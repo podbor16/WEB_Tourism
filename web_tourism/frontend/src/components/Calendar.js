@@ -11,6 +11,7 @@ const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [listFilter, setListFilter] = useState('upcoming'); // upcoming, past, all
 
   useEffect(() => {
     fetchTours();
@@ -43,9 +44,17 @@ const Calendar = () => {
     const year = date.getFullYear();
     const month = date.getMonth();
     
+    // Первый и последний день месяца
+    const monthStart = new Date(year, month, 1);
+    const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
+
     return tours.filter(tour => {
       const tourStart = new Date(tour.start_date);
-      return tourStart.getFullYear() === year && tourStart.getMonth() === month;
+      const tourEnd = new Date(tour.end_date || tour.start_date);
+
+      // Тур пересекается с месяцем если:
+      // его конец >= начало месяца И его начало <= конец месяца
+      return tourEnd >= monthStart && tourStart <= monthEnd;
     });
   };
 
@@ -62,7 +71,9 @@ const Calendar = () => {
   // Получить первый день недели месяца (Пн=0, Вс=6)
   const getFirstDayOfMonth = (date) => {
     const day = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-    return day === 0 ? 6 : day - 1; // Конвертируем из JS формата в Пн-Вс
+    // День недели: 0=Вс, 1=Пн, 2=Вт... 6=Сб
+    // Нам нужно: 0=Пн, 1=Вт, 2=Ср, 3=Чт, 4=Пт, 5=Сб, 6=Вс
+    return day === 0 ? 6 : day - 1;
   };
 
   // Изменить месяц
@@ -223,35 +234,80 @@ const Calendar = () => {
 
   // Рендер списка всех туров
   const renderListView = () => {
-    const sortedTours = [...tours].sort((a, b) => 
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let filteredTours = [...tours].sort((a, b) =>
       new Date(a.start_date) - new Date(b.start_date)
     );
 
+    // Применяем фильтр по датам
+    if (listFilter === 'upcoming') {
+      filteredTours = filteredTours.filter(tour =>
+        new Date(tour.start_date) >= today
+      );
+    } else if (listFilter === 'past') {
+      filteredTours = filteredTours.filter(tour => {
+        const endDate = new Date(tour.end_date || tour.start_date);
+        return endDate < today;
+      });
+    }
+
     return (
       <div className={styles.listView}>
-        <h3>Все туры</h3>
+        <div className={styles.listHeader}>
+          <h3>Туры</h3>
+          <div className={styles.filterButtons}>
+            <button
+              className={`${styles.filterBtn} ${listFilter === 'upcoming' ? styles.active : ''}`}
+              onClick={() => setListFilter('upcoming')}
+            >
+              📅 Предстоящие
+            </button>
+            <button
+              className={`${styles.filterBtn} ${listFilter === 'past' ? styles.active : ''}`}
+              onClick={() => setListFilter('past')}
+            >
+              ✓ Прошедшие
+            </button>
+            <button
+              className={`${styles.filterBtn} ${listFilter === 'all' ? styles.active : ''}`}
+              onClick={() => setListFilter('all')}
+            >
+              📋 Все
+            </button>
+          </div>
+        </div>
         <div className={styles.toursList}>
-          {sortedTours.map((tour) => (
-            <div key={tour.id} className={styles.tourCard} onClick={() => navigate(`/tours/${tour.id}`)}>
-              <div className={styles.tourCardHeader}>
-                <h4>{tour.name}</h4>
-                <span className={styles.tourType}>{tour.type}</span>
-              </div>
-              <div className={styles.tourCardBody}>
-                <div className={styles.tourDates}>
-                  📅 {new Date(tour.start_date).toLocaleDateString('ru-RU')}
-                  {tour.end_date && ` — ${new Date(tour.end_date).toLocaleDateString('ru-RU')}`}
+          {filteredTours.length === 0 ? (
+            <p className={styles.noTours}>
+              {listFilter === 'upcoming' && 'Нет предстоящих туров'}
+              {listFilter === 'past' && 'Нет прошедших туров'}
+              {listFilter === 'all' && 'Нет туров'}
+            </p>
+          ) : (
+            filteredTours.map((tour) => (
+              <div key={tour.id} className={styles.tourCard} onClick={() => navigate(`/tours/${tour.id}`)}>
+                <div className={styles.tourCardHeader}>
+                  <h4>{tour.name}</h4>
+                  <span className={styles.tourType}>{tour.type}</span>
                 </div>
-                {tour.price && (
-                  <div className={styles.tourPrice}>💰 {tour.price} ₽</div>
-                )}
-                {tour.description && (
-                  <p className={styles.tourDescription}>{tour.description.substring(0, 150)}...</p>
-                )}
+                <div className={styles.tourCardBody}>
+                  <div className={styles.tourDates}>
+                    📅 {new Date(tour.start_date).toLocaleDateString('ru-RU')}
+                    {tour.end_date && ` — ${new Date(tour.end_date).toLocaleDateString('ru-RU')}`}
+                  </div>
+                  {tour.price && (
+                    <div className={styles.tourPrice}>💰 {tour.price} ₽</div>
+                  )}
+                  {tour.description && (
+                    <p className={styles.tourDescription}>{tour.description.substring(0, 150)}...</p>
+                  )}
+                </div>
+                <div className={styles.tourClickHint}>Подробнее →</div>
               </div>
-              <div className={styles.tourClickHint}>Подробнее →</div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     );

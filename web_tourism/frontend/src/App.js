@@ -10,6 +10,7 @@ import TourList from './pages/TourList';
 import TourDetail from './pages/TourDetail';
 import RouteDetail from './pages/RouteDetail';
 import TourismTypePage from './pages/TourismTypePage';
+import TourRegistrationForm from './pages/TourRegistrationForm';
 import Media from './pages/Media';
 import Contacts from './pages/Contacts';
 import Profile from './pages/Profile';
@@ -64,7 +65,11 @@ function App() {
             <Route path="/register" element={user ? <Navigate to="/profile" /> : <Register setUser={setUser} />} />
             
             {/* Защищенные маршруты */}
-            <Route 
+            <Route
+              path="/tours/:id/register"
+              element={<PrivateRoute user={user}><TourRegistrationForm user={user} /></PrivateRoute>}
+            />
+            <Route
               path="/profile" 
               element={<PrivateRoute user={user}><Profile user={user} setUser={setUser} /></PrivateRoute>} 
             />

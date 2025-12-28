@@ -7,7 +7,8 @@ class Tour(models.Model):
     end_date = models.DateField("Дата окончания похода", blank=True, null=True)
     price = models.DecimalField("Стоимость", max_digits=10, decimal_places=2, blank=True, null=True)
     type = models.CharField("Тип похода", max_length=255)
-    image = models.ImageField(upload_to='tours/', blank=True, null=True)  # если будут изображения
+    image = models.ImageField(upload_to='tours/', blank=True, null=True)
+    min_age = models.IntegerField("Минимальный возраст", default=0, help_text="0 = нет ограничений")
 
     def __str__(self):
         return f"{self.name} ({self.start_date} — {self.end_date})"

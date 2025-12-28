@@ -22,6 +22,73 @@
 .userInfo {
   color: #666;
   font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.verifiedBadge {
+  display: inline-block;
+  background: #d4edda;
+  color: #155724;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  border-left: 4px solid #4E4A46;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeader h3 {
+  color: #333;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.verifiedStatus {
+  display: inline-block;
+  background: #d4edda;
+  color: #155724;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.unverifiedStatus {
+  display: inline-block;
+  background: #fff3cd;
+  color: #856404;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.sectionContent {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.sectionContent > p {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
 }
 
 .formGroup {
@@ -47,11 +114,55 @@
   font-family: inherit;
 }
 
+.phoneInputGroup {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 10px;
+}
+
+.countrySelect {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background-color: white;
+  cursor: pointer;
+}
+
+.phoneInput {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.countrySelect:focus,
+.phoneInput:focus {
+  outline: none;
+  border-color: #4E4A46;
+  box-shadow: 0 0 0 3px rgba(78, 74, 70, 0.1);
+}
+
+.hint {
+  display: block;
+  margin-top: 0.5rem;
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
 .formInput:focus,
 .formSelect:focus {
   outline: none;
-  border-color: #22c55e;
-  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+  border-color: #4E4A46;
+  box-shadow: 0 0 0 3px rgba(78, 74, 70, 0.1);
 }
 
 .formButton {
@@ -77,6 +188,48 @@
   background-color: #ccc;
   cursor: not-allowed;
   transform: none;
+}
+
+.actionButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #4E4A46;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.actionButton:hover {
+  background-color: #3a3632;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(78, 74, 70, 0.3);
+}
+
+.actionButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cancelButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #4E4A46;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancelButton:hover {
+  background-color: #3a3632;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
 }
 
 .errorMessage {

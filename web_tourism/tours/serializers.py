@@ -16,5 +16,6 @@ class TourSerializer(serializers.ModelSerializer):
             'price',
             'type',
             'image',
+            'min_age',
         ]
         read_only_fields = ['id']

@@ -102,12 +102,11 @@ api.interceptors.response.use(
 export const toursAPI = {
   // Получить все туры
   getTours: (params = {}) => api.get('/tours/', { params }),
-  getAll: (params = {}) => api.get('/tours/', { params }),
-  
+
   // Получить конкретный тур
+  getTourDetail: (id) => api.get(`/tours/${id}/`),
   getById: (id) => api.get(`/tours/${id}/`),
-  getTour: (id) => api.get(`/tours/${id}/`),
-  
+
   // Получить типы туров
   getTypes: () => api.get('/tours/types/'),
   
@@ -124,18 +123,18 @@ export const toursAPI = {
   delete: (id) => api.delete(`/tours/${id}/`),
 };
 
-// ==================== Регистрации на туры ====================
-export const registrationsAPI = {
-  // Получить мои регистрации
-  getMy: () => api.get('/registrations/'),
-  
+// ==================== Регистрация на туры ====================
+export const toursRegistrationsAPI = {
   // Зарегистрироваться на тур
-  register: (tourId) => api.post('/registrations/', { tour: tourId }),
-  
+  register: (data) => api.post('/registrations/', data),
+
+  // Получить мои регистрации
+  getMyRegistrations: () => api.get('/registrations/'),
+
   // Отменить регистрацию
-  cancel: (id) => api.post(`/registrations/${id}/cancel/`),
-  
-  // Восстановить регистрацию
+  cancel: (id) => api.delete(`/registrations/${id}/`),
+
+  // Восстановить отменённую регистрацию
   reactivate: (id) => api.post(`/registrations/${id}/reactivate/`),
 };
 

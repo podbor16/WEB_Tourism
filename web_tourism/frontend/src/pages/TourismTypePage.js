@@ -61,20 +61,22 @@ const TourismTypePage = () => {
         const response = await toursAPI.getTours();
         const toursData = Array.isArray(response.data.results) ? response.data.results : response.data;
         
-        if (data) {
-          const filteredTours = toursData.filter(tour => tour.type === data.apiType);
+        const currentData = tourismData[type];
+        if (currentData) {
+          const filteredTours = toursData.filter(tour => tour.type === currentData.apiType);
           setTours(filteredTours);
         }
       } catch (err) {
-        console.error('Ошибка при загрузке туров:', err);
+        console.error('Ошибка при загрузке маршрутов:', err);
+        setTours([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchTours();
-  }, [type, data]);
-  
+  }, [type]);
+
   if (!data) {
     return (
       <div className={styles.container}>

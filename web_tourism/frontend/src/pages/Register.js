@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authAPI, userAPI } from '../api';
+import styles from './Auth.module.css';
 
 function Register({ setUser }) {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ function Register({ setUser }) {
       const response = await authAPI.register(formData);
       console.log('Регистрация успешна:', response.data);
       
-      // После регистрации получить данные пользователя из сессии
+      // После регистрации получить данные пользователя
       const userResponse = await userAPI.getMe();
       console.log('Данные пользователя:', userResponse.data);
       setUser(userResponse.data);
@@ -53,46 +54,22 @@ function Register({ setUser }) {
     } catch (err) {
       console.error('Ошибка регистрации:', err);
       
-      // Обработка различных типов ошибок
+      // Обработка ошибок
       if (err.response?.data) {
         const errors = err.response.data;
         
-        // Если это словарь ошибок валидации
         if (errors.email) {
-          if (Array.isArray(errors.email)) {
-            setError(errors.email[0]);
-          } else {
-            setError(errors.email);
-          }
+          const emailError = Array.isArray(errors.email) ? errors.email[0] : errors.email;
+          setError(emailError);
         } else if (errors.password2) {
-          if (Array.isArray(errors.password2)) {
-            setError(errors.password2[0]);
-          } else {
-            setError(errors.password2);
-          }
-        } else if (errors.password) {
-          if (Array.isArray(errors.password)) {
-            setError(errors.password[0]);
-          } else {
-            setError(errors.password);
-          }
+          const pwdError = Array.isArray(errors.password2) ? errors.password2[0] : errors.password2;
+          setError(pwdError);
         } else if (errors.detail) {
           setError(errors.detail);
-        } else if (errors.non_field_errors) {
-          setError(errors.non_field_errors[0] || 'Ошибка при регистрации');
         } else {
-          // Общая ошибка
           const firstError = Object.values(errors)[0];
-          if (Array.isArray(firstError)) {
-            setError(firstError[0]);
-          } else if (typeof firstError === 'string') {
-            setError(firstError);
-          } else {
-            setError('Ошибка при регистрации. Проверьте введённые данные');
-          }
+          setError(Array.isArray(firstError) ? firstError[0] : firstError || 'Ошибка при регистрации');
         }
-      } else if (err.message === 'Network Error') {
-        setError('Ошибка сети. Убедитесь, что сервер Django запущен на http://localhost:8000');
       } else {
         setError('Ошибка при регистрации');
       }
@@ -102,14 +79,14 @@ function Register({ setUser }) {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
+    <div className={styles.authContainer}>
+      <div className={styles.authCard}>
         <h2>Регистрация</h2>
-        
-        {error && <div className="error-message">{error}</div>}
-        
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
+
+        {error && <div className={styles.errorMessage}>{error}</div>}
+
+        <form onSubmit={handleSubmit} className={styles.authForm}>
+          <div className={styles.formGroup}>
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -122,7 +99,7 @@ function Register({ setUser }) {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="first_name">Имя</label>
             <input
               id="first_name"
@@ -135,7 +112,7 @@ function Register({ setUser }) {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="last_name">Фамилия</label>
             <input
               id="last_name"
@@ -148,7 +125,7 @@ function Register({ setUser }) {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="password">Пароль</label>
             <input
               id="password"
@@ -162,7 +139,7 @@ function Register({ setUser }) {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="password2">Подтверждение пароля</label>
             <input
               id="password2"
@@ -181,7 +158,7 @@ function Register({ setUser }) {
           </button>
         </form>
 
-        <p className="auth-link">
+        <p className={styles.authLink}>
           Уже есть аккаунт? <a href="/login">Войти</a>
         </p>
       </div>

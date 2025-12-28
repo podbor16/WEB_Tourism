@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authAPI, userAPI, initializeCSRF } from '../api';
+import styles from './Auth.module.css';
 
 function Login({ setUser }) {
   const navigate = useNavigate();
@@ -52,14 +53,14 @@ function Login({ setUser }) {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
+    <div className={styles.authContainer}>
+      <div className={styles.authCard}>
         <h2>Вход</h2>
         
-        {error && <div className="error-message">{error}</div>}
-        
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
+        {error && <div className={styles.errorMessage}>{error}</div>}
+
+        <form onSubmit={handleSubmit} className={styles.authForm}>
+          <div className={styles.formGroup}>
             <label htmlFor="email">Email</label>
             <input
               id="email"
@@ -71,7 +72,7 @@ function Login({ setUser }) {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="password">Пароль</label>
             <input
               id="password"
@@ -88,7 +89,7 @@ function Login({ setUser }) {
           </button>
         </form>
 
-        <p className="auth-link">
+        <p className={styles.authLink}>
           Нет аккаунта? <a href="/register">Зарегистрируйтесь</a>
         </p>
       </div>

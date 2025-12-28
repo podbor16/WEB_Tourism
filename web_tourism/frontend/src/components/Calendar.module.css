@@ -236,6 +236,49 @@
   width: 100%;
 }
 
+.listHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.listHeader h3 {
+  color: #333;
+  margin: 0;
+  font-size: 24px;
+}
+
+.filterButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.filterBtn {
+  padding: 8px 16px;
+  border: 2px solid #57534e;
+  background: white;
+  color: #57534e;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.filterBtn:hover {
+  background: #f5f5f5;
+  transform: translateY(-2px);
+}
+
+.filterBtn.active {
+  background: #57534e;
+  color: white;
+  box-shadow: 0 4px 12px rgba(87, 83, 78, 0.3);
+}
+
 .listView h3 {
   color: #333;
   margin-bottom: 25px;

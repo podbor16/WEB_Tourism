@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { registrationsAPI } from '../api';
+import { toursRegistrationsAPI } from '../api';
 import styles from './MyRegistrations.module.css';
 
 function MyRegistrations({ user }) {
@@ -14,7 +14,7 @@ function MyRegistrations({ user }) {
   const fetchRegistrations = async () => {
     try {
       setLoading(true);
-      const response = await registrationsAPI.getMy();
+      const response = await toursRegistrationsAPI.getMyRegistrations();
       setRegistrations(response.data.results || response.data);
     } catch (err) {
       setError('Ошибка при загрузке регистраций');
@@ -27,7 +27,7 @@ function MyRegistrations({ user }) {
   const handleCancel = async (id) => {
     if (window.confirm('Вы уверены, что хотите отменить регистрацию?')) {
       try {
-        await registrationsAPI.cancel(id);
+        await toursRegistrationsAPI.cancel(id);
         setRegistrations(registrations.map(reg =>
           reg.id === id ? { ...reg, status: 'cancelled' } : reg
         ));
@@ -40,7 +40,7 @@ function MyRegistrations({ user }) {
 
   const handleReactivate = async (id) => {
     try {
-      await registrationsAPI.reactivate(id);
+      await toursRegistrationsAPI.reactivate(id);
       setRegistrations(registrations.map(reg =>
         reg.id === id ? { ...reg, status: 'pending' } : reg
       ));

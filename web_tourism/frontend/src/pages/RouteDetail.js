@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { toursAPI, registrationsAPI } from '../api';
+import { toursAPI, toursRegistrationsAPI } from '../api';
 import styles from './RouteDetail.module.css';
 
 const RouteDetail = ({ user }) => {
@@ -138,7 +138,7 @@ const RouteDetail = ({ user }) => {
   const checkRegistration = async () => {
     if (!user) return;
     try {
-      const response = await registrationsAPI.getMy();
+      const response = await toursRegistrationsAPI.getMyRegistrations();
       const isRegistered = response.data.some(reg => reg.tour === parseInt(id));
       setRegistered(isRegistered);
     } catch (err) {
@@ -146,23 +146,14 @@ const RouteDetail = ({ user }) => {
     }
   };
 
-  const handleRegister = async () => {
+  const handleRegister = () => {
     if (!user) {
       navigate('/login');
       return;
     }
 
-    setRegistering(true);
-    try {
-      await registrationsAPI.register(id);
-      setRegistered(true);
-      alert('Вы успешно зарегистрированы на этот тур!');
-    } catch (err) {
-      console.error('Ошибка при регистрации:', err);
-      setError(err.response?.data?.detail || 'Ошибка при регистрации');
-    } finally {
-      setRegistering(false);
-    }
+    // Переходим на страницу заполнения формы регистрации
+    navigate(`/tours/${id}/register`);
   };
 
   if (loading) {
@@ -262,11 +253,11 @@ const RouteDetail = ({ user }) => {
       {/* Registration Button */}
       <section className={styles.registrationSection}>
         <button
-          className={`${styles.registerButton} ${registered ? styles.registered : ''}`}
+          className={styles.registerButton}
           onClick={handleRegister}
-          disabled={registering || registered}
+          disabled={registering}
         >
-          {registered ? '✓ Вы зарегистрированы' : 'Зарегистрироваться на тур'}
+          {registering ? 'Загрузка...' : 'Зарегистрироваться на тур'}
         </button>
         {!user && (
           <p className={styles.loginPrompt}>

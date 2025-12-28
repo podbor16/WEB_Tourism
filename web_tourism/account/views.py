@@ -103,6 +103,22 @@ class AuthViewSet(viewsets.ViewSet):
             status=status.HTTP_200_OK
         )
 
+    @action(detail=False, methods=['post'])
+    def check_email(self, request):
+        """Проверить доступность email"""
+        email = request.data.get('email', '').lower().strip()
+        if not email:
+            return Response(
+                {'detail': 'Email не указан'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        exists = User.objects.filter(email=email).exists()
+        return Response({
+            'available': not exists,
+            'email': email
+        })
+
 
 class UserViewSet(viewsets.ViewSet):
     """ViewSet для работы с профилем пользователя"""
@@ -116,7 +132,7 @@ class UserViewSet(viewsets.ViewSet):
         
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
-    
+
     @action(detail=False, methods=['put', 'patch'], permission_classes=[IsAuthenticated])
     @method_decorator(csrf_exempt)
     def profile(self, request):
