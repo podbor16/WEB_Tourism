@@ -17,9 +17,9 @@ function TourList() {
     'Пешеходный туризм': '🥾',
     'Горный туризм': '⛰️',
     'Водный туризм': '🚣',
-    'Пешем': '🥾',
-    'Горном': '⛰️',
-    'Водном': '🚣',
+    // 'Пешем': '🥾',
+    // 'Горном': '⛰️',
+    // 'Водном': '🚣',
   };
 
   // Изображения по умолчанию для каждого типа
@@ -27,9 +27,9 @@ function TourList() {
     'Пешеходный туризм': '/static/image/peshiy.png',
     'Горный туризм': '/static/image/mountain_main.png',
     'Водный туризм': '/static/image/vodniy.png',
-    'Пешем': '/static/image/peshiy.png',
-    'Горном': '/static/image/mountain_main.png',
-    'Водном': '/static/image/vodniy.png',
+    // 'Пешем': '/static/image/peshiy.png',
+    // 'Горном': '/static/image/mountain_main.png',
+    // 'Водном': '/static/image/vodniy.png',
   };
 
   const fetchTours = useCallback(async () => {
@@ -86,13 +86,13 @@ function TourList() {
       </section>
       
       <div className={styles.filtersSection}>
-        <input
-          type="text"
-          placeholder="Поиск по названию маршрута..."
-          className={styles.searchInput}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        {/*<input*/}
+        {/*  type="text"*/}
+        {/*  placeholder="Поиск по названию маршрута..."*/}
+        {/*  className={styles.searchInput}*/}
+        {/*  value={searchQuery}*/}
+        {/*  onChange={(e) => setSearchQuery(e.target.value)}*/}
+        {/*/>*/}
         <label htmlFor="type-filter">Фильтр по типу:</label>
         <select 
           id="type-filter"
@@ -110,7 +110,7 @@ function TourList() {
           <option value="">Все маршруты</option>
           {types && types.map(type => (
             <option key={type} value={type}>
-              {typeIcons[type] || '📍'} {type}
+              {typeIcons[type] || '??'} {type}
             </option>
           ))}
         </select>
@@ -125,11 +125,13 @@ function TourList() {
                   <img 
                     src={tour.image || typeImages[tour.type] || '/static/image/mountain_main.png'} 
                     alt={tour.name} 
-                    className={styles.tourImage} 
-                    onError={(e) => e.target.src = typeImages[tour.type] || '/static/image/mountain_main.png'}
+                    className={styles.tourImage}
+                    onError={(e) => {
+                      e.target.src = typeImages[tour.type] || '/static/image/mountain_main.png';
+                    }}
                   />
                   <div className={styles.tourTypeBadge}>
-                    {typeIcons[tour.type] || '📍'} {tour.type}
+                    {typeIcons[tour.type] || '??'} {tour.type}
                   </div>
                 </div>
                 <div className={styles.tourContent}>

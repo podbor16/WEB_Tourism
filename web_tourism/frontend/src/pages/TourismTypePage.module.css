@@ -95,15 +95,6 @@
   line-height: 1.6;
 }
 
-.benefits li:before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: #22c55e;
-  font-weight: bold;
-  font-size: 1.3rem;
-}
-
 /* Раздел маршрутов */
 .routesSection {
   padding: 4rem 2rem;

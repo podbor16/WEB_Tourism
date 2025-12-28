@@ -5,9 +5,12 @@ from . import views
 router = DefaultRouter()
 router.register(r'auth', views.AuthViewSet, basename='auth')
 router.register(r'user', views.UserViewSet, basename='user')
+router.register(r'accounts', views.UsersListViewSet, basename='accounts')
 
 app_name = "account"  
 urlpatterns = [
     path('', include(router.urls)),
 ]
+
+
 

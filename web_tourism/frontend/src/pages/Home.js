@@ -10,16 +10,27 @@ const Home = ({ user }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchTours();
+    fetchPopularTours();
+    // Обновляем популярные туры каждые 30 секунд
+    const interval = setInterval(fetchPopularTours, 30000);
+    return () => clearInterval(interval);
   }, []);
 
-  const fetchTours = async () => {
+  const fetchPopularTours = async () => {
     try {
-      const response = await toursAPI.getTours();
-      const toursData = Array.isArray(response.data.results) ? response.data.results : response.data;
-      setTours(toursData.slice(0, 4));
+      const response = await toursAPI.getPopular();
+      const toursData = response.data.results || response.data;
+      setTours(Array.isArray(toursData) ? toursData : []);
     } catch (err) {
-      console.error('Ошибка при загрузке туров:', err);
+      console.error('Ошибка при загрузке популярных туров:', err);
+      // Fallback на обычные туры если популярные не доступны
+      try {
+        const response = await toursAPI.getTours();
+        const toursData = Array.isArray(response.data.results) ? response.data.results : response.data;
+        setTours(toursData.slice(0, 3));
+      } catch (e) {
+        setTours([]);
+      }
     } finally {
       setLoading(false);
     }
@@ -29,19 +40,21 @@ const Home = ({ user }) => {
   const tourismTypes = [
     {
       title: 'Пеший туризм',
-      icon: '🥾',
     },
     {
       title: 'Горный туризм',
-      icon: '⛰️',
     },
     {
       title: 'Водный туризм',
-      icon: '🚣',
     },
   ];
 
   const getTourImageUrl = (tour) => {
+    // Если у тура есть своё изображение, используем его
+    if (tour.image) {
+      return tour.image;
+    }
+    // Иначе используем дефолтное по типу
     const typeImages = {
       'Пеший туризм': '/static/image/peshiy.png',
       'Горный туризм': '/static/image/mountain_main.png',
@@ -94,9 +107,11 @@ const Home = ({ user }) => {
 
       {/* ПОПУЛЯРНЫЕ МАРШРУТЫ */}
       <section className={styles.popularRoutes}>
-        <h2>🔥 Популярные маршруты</h2>
+        <h2>🔥 Популярные маршруты (топ {tours.length})</h2>
         {loading ? (
           <p className={styles.loading}>Загрузка маршрутов...</p>
+        ) : tours.length === 0 ? (
+          <p className={styles.loading}>Маршруты пока не добавлены</p>
         ) : (
           <div className={styles.routeCards}>
             {tours.map((tour) => (
@@ -117,7 +132,7 @@ const Home = ({ user }) => {
                     <h3>{tour.name}</h3>
                     <div className={styles.routeDetails}>
                       {tour.price && <span className={styles.price}>💰 {tour.price} ₽</span>}
-                      {tour.type && <span className={styles.type}>📍 {tour.type}</span>}
+                      {tour.type && <span className={styles.type}> {tour.type}</span>}
                     </div>
                   </div>
                 </div>

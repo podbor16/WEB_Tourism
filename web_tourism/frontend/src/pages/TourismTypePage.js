@@ -91,6 +91,11 @@ const TourismTypePage = () => {
   const colors = getTourismColor(data.colorType);
 
   const getTourImageUrl = (tour) => {
+    // Если у тура есть своё изображение, используем его
+    if (tour.image) {
+      return tour.image;
+    }
+    // Иначе используем дефолтное по типу
     const typeImages = {
       'Пеший туризм': '/static/image/peshiy.png',
       'Горный туризм': '/static/image/mountain_main.png',

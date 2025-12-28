@@ -110,6 +110,9 @@ export const toursAPI = {
   // Получить типы туров
   getTypes: () => api.get('/tours/types/'),
   
+  // Получить топ-3 популярных туров по количеству регистраций
+  getPopular: () => api.get('/tours/popular/'),
+
   // Создать новый тур (только для авторизованных пользователей)
   createTour: (data) => api.post('/tours/', data),
   create: (data) => api.post('/tours/', data),
