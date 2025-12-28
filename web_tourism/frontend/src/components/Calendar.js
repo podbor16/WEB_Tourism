@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toursAPI } from '../api';
 import { getTourismColor } from '../constants/tourismColors';
@@ -7,11 +7,10 @@ import styles from './Calendar.module.css';
 const Calendar = () => {
   const navigate = useNavigate();
   const [tours, setTours] = useState([]);
-  const [viewMode, setViewMode] = useState('month'); // month, day, list
+  const [viewMode, setViewMode] = useState('month');
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [listFilter, setListFilter] = useState('upcoming'); // upcoming, past, all
 
   useEffect(() => {
     fetchTours();
@@ -28,73 +27,6 @@ const Calendar = () => {
     }
   };
 
-  // Получить туры на конкретную дату
-  const getToursForDate = (date) => {
-    return tours.filter(tour => {
-      const tourStart = new Date(tour.start_date);
-      const tourEnd = new Date(tour.end_date || tour.start_date);
-      const checkDate = new Date(date);
-      checkDate.setHours(0, 0, 0, 0);
-      tourStart.setHours(0, 0, 0, 0);
-      tourEnd.setHours(0, 0, 0, 0);
-
-      return checkDate >= tourStart && checkDate <= tourEnd;
-    });
-  };
-
-  // Получить события для дня с информацией об их протяженности
-  const getEventBlocksForDay = (date) => {
-    const dayTours = getToursForDate(date);
-    const eventBlocks = [];
-
-    dayTours.forEach(tour => {
-      const tourStart = new Date(tour.start_date);
-      const tourEnd = new Date(tour.end_date || tour.start_date);
-      const checkDate = new Date(date);
-      checkDate.setHours(0, 0, 0, 0);
-      tourStart.setHours(0, 0, 0, 0);
-      tourEnd.setHours(0, 0, 0, 0);
-
-      // Определяем позицию дня в диапазоне тура
-      const isFirst = checkDate.getTime() === tourStart.getTime();
-      const isLast = checkDate.getTime() === tourEnd.getTime();
-      const isSingleDay = isFirst && isLast;
-
-      eventBlocks.push({
-        ...tour,
-        isFirst,
-        isLast,
-        isSingleDay,
-      });
-    });
-
-    return eventBlocks;
-  };
-
-  // Получить туры на месяц
-  const getToursForMonth = (date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    
-    // Первый и последний день месяца
-    const monthStart = new Date(year, month, 1);
-    const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
-
-    return tours.filter(tour => {
-      const tourStart = new Date(tour.start_date);
-      const tourEnd = new Date(tour.end_date || tour.start_date);
-
-      // Тур пересекается с месяцем если:
-      // его конец >= начало месяца И его начало <= конец месяца
-      return tourEnd >= monthStart && tourStart <= monthEnd;
-    });
-  };
-
-  // Проверить, есть ли туры на дату
-  const hasToursOnDate = (date) => {
-    return getToursForDate(date).length > 0;
-  };
-
   // Получить дни месяца
   const getDaysInMonth = (date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -103,8 +35,6 @@ const Calendar = () => {
   // Получить первый день недели месяца (Пн=0, Вс=6)
   const getFirstDayOfMonth = (date) => {
     const day = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-    // День недели: 0=Вс, 1=Пн, 2=Вт... 6=Сб
-    // Нам нужно: 0=Пн, 1=Вт, 2=Ср, 3=Чт, 4=Пт, 5=Сб, 6=Вс
     return day === 0 ? 6 : day - 1;
   };
 
@@ -122,62 +52,289 @@ const Calendar = () => {
     setSelectedDate(null);
   };
 
-  // Рендер месячного календаря
-  const renderMonthView = () => {
+  // Функция для расчета позиций событий (алгоритм размещения без наложений)
+  const calculateEventLayouts = useMemo(() => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
     const daysInMonth = getDaysInMonth(currentDate);
     const firstDay = getFirstDayOfMonth(currentDate);
-    const days = [];
-    const monthName = currentDate.toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' });
 
-    // Пустые ячейки для дней до начала месяца
+    // Создаем массив дней месяца
+    const days = Array.from({ length: daysInMonth }, (_, i) => {
+      const date = new Date(year, month, i + 1);
+      const dayOfWeek = (date.getDay() + 6) % 7; // Пн=0, Вс=6
+      return {
+        date,
+        dayOfWeek,
+        events: [],
+      };
+    });
+
+    // Фильтруем туры, которые попадают в текущий месяц
+    const monthTours = tours.filter(tour => {
+      const tourStart = new Date(tour.start_date);
+      const tourEnd = new Date(tour.end_date || tour.start_date);
+      const monthStart = new Date(year, month, 1);
+      const monthEnd = new Date(year, month + 1, 0);
+
+      return tourEnd >= monthStart && tourStart <= monthEnd;
+    });
+
+    // Распределяем события по дням
+    monthTours.forEach((tour) => {
+      const startDate = new Date(tour.start_date);
+      const endDate = new Date(tour.end_date || tour.start_date);
+
+      // Нормализуем даты к началу дня
+      startDate.setHours(0, 0, 0, 0);
+      endDate.setHours(0, 0, 0, 0);
+
+      // Определяем дни, когда событие активно
+      const eventStartDay = Math.max(
+        startDate.getDate(),
+        startDate.getMonth() === month ? startDate.getDate() : 1
+      );
+
+      const eventEndDay = Math.min(
+        endDate.getDate(),
+        endDate.getMonth() === month ? endDate.getDate() : daysInMonth
+      );
+
+      // Добавляем событие в каждый день его активности
+      for (let day = eventStartDay; day <= eventEndDay; day++) {
+        if (day >= 1 && day <= daysInMonth) {
+          days[day - 1].events.push({
+            ...tour,
+            isFirstDay: day === eventStartDay,
+            isLastDay: day === eventEndDay,
+            duration: eventEndDay - eventStartDay + 1,
+            currentDay: day - eventStartDay,
+            startDayInMonth: eventStartDay - 1,
+          });
+        }
+      }
+    });
+
+    // Рассчитываем позиции событий (раскладка как в Google Calendar)
+    const eventRows = [];
+    const maxRowsPerDay = Array(daysInMonth).fill(0);
+
+    // Группируем события по их начальному дню
+    const eventsByStartDay = {};
+
+    monthTours.forEach(tour => {
+      const startDate = new Date(tour.start_date);
+      const eventStartDay = Math.max(
+        startDate.getDate(),
+        startDate.getMonth() === month ? startDate.getDate() : 1
+      ) - 1;
+
+      if (!eventsByStartDay[eventStartDay]) {
+        eventsByStartDay[eventStartDay] = [];
+      }
+      eventsByStartDay[eventStartDay].push(tour);
+    });
+
+    // Матрица занятости: daysInMonth x maxRows
+    const maxRows = 10; // Максимальное количество строк для событий
+    const occupancyMatrix = Array.from({ length: daysInMonth }, () =>
+      Array.from({ length: maxRows }, () => false)
+    );
+
+    // Функция для поиска доступной строки для события
+    const findAvailableRow = (startDay, duration) => {
+      for (let row = 0; row < maxRows; row++) {
+        let available = true;
+        for (let d = 0; d < duration; d++) {
+          const day = startDay + d;
+          if (day >= daysInMonth || occupancyMatrix[day][row]) {
+            available = false;
+            break;
+          }
+        }
+        if (available) {
+          // Занимаем строку
+          for (let d = 0; d < duration; d++) {
+            const day = startDay + d;
+            if (day < daysInMonth) {
+              occupancyMatrix[day][row] = true;
+              maxRowsPerDay[day] = Math.max(maxRowsPerDay[day], row + 1);
+            }
+          }
+          return row;
+        }
+      }
+      // Если не нашли строку, используем следующую
+      const newRow = maxRows;
+      for (let d = 0; d < duration; d++) {
+        const day = startDay + d;
+        if (day < daysInMonth) {
+          maxRowsPerDay[day] = Math.max(maxRowsPerDay[day], newRow + 1);
+        }
+      }
+      return newRow;
+    };
+
+    // Обрабатываем каждое событие
+    monthTours.forEach(tour => {
+      const startDate = new Date(tour.start_date);
+      const endDate = new Date(tour.end_date || tour.start_date);
+
+      const eventStartDay = Math.max(
+        startDate.getDate(),
+        startDate.getMonth() === month ? startDate.getDate() : 1
+      ) - 1;
+
+      const eventEndDay = Math.min(
+        endDate.getDate(),
+        endDate.getMonth() === month ? endDate.getDate() : daysInMonth
+      ) - 1;
+
+      const duration = eventEndDay - eventStartDay + 1;
+
+      // Находим строку для события
+      const row = findAvailableRow(eventStartDay, duration);
+
+      // Разбиваем событие на недельные сегменты
+      let currentDay = eventStartDay;
+      let segmentNumber = 0;
+
+      while (currentDay <= eventEndDay) {
+        const weekStart = Math.floor((currentDay + firstDay) / 7) * 7 - firstDay;
+        const weekEnd = weekStart + 6 - firstDay;
+
+        const segmentStart = Math.max(currentDay, weekStart);
+        const segmentEnd = Math.min(eventEndDay, weekEnd);
+
+        if (segmentStart <= segmentEnd) {
+          const segmentDuration = segmentEnd - segmentStart + 1;
+
+          eventRows.push({
+            tour,
+            row,
+            segmentNumber,
+            startDay: segmentStart,
+            endDay: segmentEnd,
+            duration: segmentDuration,
+            isFirstSegment: segmentStart === eventStartDay,
+            isLastSegment: segmentEnd === eventEndDay,
+            weekNumber: Math.floor((segmentStart + firstDay) / 7),
+          });
+
+          currentDay = segmentEnd + 1;
+          segmentNumber++;
+        }
+      }
+    });
+
+    return { days, eventRows, maxRows: Math.max(...maxRowsPerDay, 1), firstDay };
+  }, [tours, currentDate]);
+
+  // Рендер месячного календаря
+  const renderMonthView = () => {
+    const { days, eventRows, maxRows, firstDay } = calculateEventLayouts;
+    const monthName = currentDate.toLocaleDateString('ru-RU', {
+      month: 'long',
+      year: 'numeric'
+    });
+
+    const totalCells = Math.ceil((days.length + firstDay) / 7) * 7;
+
+    // Создаем массив всех ячеек календаря
+    const calendarCells = [];
+
+    // Пустые ячейки до начала месяца
     for (let i = 0; i < firstDay; i++) {
-      days.push(<div key={`empty-${i}`} className={styles.emptyDay}></div>);
+      calendarCells.push(<div key={`empty-${i}`} className={styles.emptyDay}></div>);
     }
 
-    // Дни месяца
-    for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-      const eventBlocks = getEventBlocksForDay(date);
+    // Ячейки дней месяца
+    days.forEach((day, dayIndex) => {
+      const date = new Date(day.date);
       const isSelected = selectedDate &&
         selectedDate.toDateString() === date.toDateString();
+      const hasEvents = day.events.length > 0;
 
-      days.push(
+      // Находим все сегменты событий, которые начинаются в этот день
+      const dayEventSegments = eventRows.filter(event => event.startDay === dayIndex);
+
+      calendarCells.push(
         <div
-          key={day}
-          className={`${styles.day} ${eventBlocks.length > 0 ? styles.hasEvents : ''} ${isSelected ? styles.selected : ''}`}
+          key={`day-${dayIndex}`}
+          className={`${styles.dayCell} ${hasEvents ? styles.hasEvents : ''} ${isSelected ? styles.selected : ''}`}
           onClick={() => setSelectedDate(date)}
         >
-          <div className={styles.dayNumber}>{day}</div>
-          {eventBlocks.length > 0 && (
-            <div className={styles.eventBlocks}>
-              {eventBlocks.map((event, idx) => {
-                const colors = getTourismColor(event.type);
-                const borderRadius = {
-                  borderRadius: `${event.isFirst ? '6px' : '0'} ${event.isLast ? '6px' : '0'} ${event.isLast ? '6px' : '0'} ${event.isFirst ? '6px' : '0'}`,
-                };
+          <div className={styles.dayNumber}>{dayIndex + 1}</div>
 
-                return (
-                  <div
-                    key={`${event.id}-${idx}`}
-                    className={styles.eventBlock}
-                    style={{
-                      backgroundColor: colors.light,
-                      borderLeft: `3px solid ${colors.primary}`,
-                      ...borderRadius,
-                    }}
-                    title={event.name}
-                  >
-                    {event.isFirst && (
-                      <span className={styles.eventName}>{event.name.substring(0, 15)}</span>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          )}
+          {/* Контейнер для событий */}
+          <div className={styles.eventsContainer}>
+            {dayEventSegments.map(event => {
+              const colors = getTourismColor(event.tour.type);
+
+              // Определяем, сколько дней до конца недели
+              const daysInWeek = 7;
+              const dayOfWeek = (date.getDay() + 6) % 7; // Пн=0, Вс=6
+              const daysToWeekEnd = daysInWeek - dayOfWeek - 1;
+
+              // Вычисляем длину сегмента
+              const segmentLength = Math.min(event.duration, daysToWeekEnd + 1);
+
+              // Ширина в процентах
+              const widthPercent = segmentLength * 100;
+
+              return (
+                <div
+                  key={`event-${event.tour.id}-${event.segmentNumber}`}
+                  className={styles.calendarEvent}
+                  style={{
+                    backgroundColor: colors.light,
+                    borderLeft: `3px solid ${colors.primary}`,
+                    width: `calc(${widthPercent}% - ${(segmentLength - 1) * 2}px)`,
+                    top: `${event.row * 24}px`,
+                    height: '20px',
+                    // Скругления углов
+                    borderTopLeftRadius: event.isFirstSegment ? '4px' : '0',
+                    borderBottomLeftRadius: event.isFirstSegment ? '4px' : '0',
+                    borderTopRightRadius: event.isLastSegment ? '4px' : '0',
+                    borderBottomRightRadius: event.isLastSegment ? '4px' : '0',
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/tours/${event.tour.id}`);
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.filter = 'brightness(0.9)';
+                    e.currentTarget.style.zIndex = '10';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.filter = 'brightness(1)';
+                    e.currentTarget.style.zIndex = 'auto';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <span className={styles.eventTitle}>
+                    {event.tour.name}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       );
+    });
+
+    // Пустые ячейки после конца месяца
+    const remainingCells = totalCells - (firstDay + days.length);
+    for (let i = 0; i < remainingCells; i++) {
+      calendarCells.push(<div key={`empty-end-${i}`} className={styles.emptyDay}></div>);
     }
+
+    // Рассчитываем количество строк (недель)
+    const weekCount = Math.ceil(totalCells / 7);
+
+    // Устанавливаем высоту контейнера дней в зависимости от количества строк событий
+    const eventsContainerHeight = maxRows * 24 + 10;
 
     return (
       <div className={styles.monthView}>
@@ -198,160 +355,45 @@ const Calendar = () => {
           <div>Вс</div>
         </div>
 
-        <div className={styles.daysGrid}>{days}</div>
+        <div
+          className={styles.daysGrid}
+          style={{
+            gridTemplateRows: `repeat(${weekCount}, minmax(${eventsContainerHeight}px, auto))`,
+          }}
+        >
+          {calendarCells}
+        </div>
 
         {selectedDate && (
           <div className={styles.selectedDateInfo}>
-            <h4>{selectedDate.toLocaleDateString('ru-RU', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
+            <h4>{selectedDate.toLocaleDateString('ru-RU', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
             })}</h4>
-            {renderToursForSelectedDate()}
+            {renderToursForSelectedDate(selectedDate)}
           </div>
         )}
       </div>
     );
   };
 
-  // Рендер дневного календаря
-  const renderDayView = () => {
-    const today = new Date();
-    const nextDays = [];
-
-    for (let i = 0; i < 30; i++) {
-      const date = new Date(today);
-      date.setDate(date.getDate() + i);
-      nextDays.push(date);
-    }
-
-    return (
-      <div className={styles.dayView}>
-        <h3>Ближайшие туры</h3>
-        <div className={styles.daysList}>
-          {nextDays.map((date, idx) => {
-            const toursOnDay = getToursForDate(date);
-            if (toursOnDay.length === 0) return null;
-
-            return (
-              <div key={idx} className={styles.dayCard}>
-                <h4>{date.toLocaleDateString('ru-RU', { 
-                  weekday: 'short', 
-                  year: 'numeric', 
-                  month: 'short', 
-                  day: 'numeric' 
-                })}</h4>
-                {toursOnDay.map((tour, tourIdx) => (
-                  <div 
-                    key={tourIdx} 
-                    className={styles.tourItem} 
-                    onClick={() => navigate(`/tours/${tour.id}`)}
-                    style={{
-                      borderLeftColor: getTourismColor(tour.type).primary,
-                    }}
-                  >
-                    <div className={styles.tourName}>{tour.name}</div>
-                    <div className={styles.tourDates}>
-                      {new Date(tour.start_date).toLocaleDateString('ru-RU')} 
-                      {tour.end_date && ` — ${new Date(tour.end_date).toLocaleDateString('ru-RU')}`}
-                    </div>
-                    {tour.price && <div className={styles.tourPrice}>{tour.price} ₽</div>}
-                    <div className={styles.tourClickHint}>Подробнее →</div>
-                  </div>
-                ))}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
-
-  // Рендер списка всех туров
-  const renderListView = () => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    let filteredTours = [...tours].sort((a, b) =>
-      new Date(a.start_date) - new Date(b.start_date)
-    );
-
-    // Применяем фильтр по датам
-    if (listFilter === 'upcoming') {
-      filteredTours = filteredTours.filter(tour =>
-        new Date(tour.start_date) >= today
-      );
-    } else if (listFilter === 'past') {
-      filteredTours = filteredTours.filter(tour => {
-        const endDate = new Date(tour.end_date || tour.start_date);
-        return endDate < today;
-      });
-    }
-
-    return (
-      <div className={styles.listView}>
-        <div className={styles.listHeader}>
-          <h3>Туры</h3>
-          <div className={styles.filterButtons}>
-            <button
-              className={`${styles.filterBtn} ${listFilter === 'upcoming' ? styles.active : ''}`}
-              onClick={() => setListFilter('upcoming')}
-            >
-              📅 Предстоящие
-            </button>
-            <button
-              className={`${styles.filterBtn} ${listFilter === 'past' ? styles.active : ''}`}
-              onClick={() => setListFilter('past')}
-            >
-              ✓ Прошедшие
-            </button>
-            <button
-              className={`${styles.filterBtn} ${listFilter === 'all' ? styles.active : ''}`}
-              onClick={() => setListFilter('all')}
-            >
-              📋 Все
-            </button>
-          </div>
-        </div>
-        <div className={styles.toursList}>
-          {filteredTours.length === 0 ? (
-            <p className={styles.noTours}>
-              {listFilter === 'upcoming' && 'Нет предстоящих туров'}
-              {listFilter === 'past' && 'Нет прошедших туров'}
-              {listFilter === 'all' && 'Нет туров'}
-            </p>
-          ) : (
-            filteredTours.map((tour) => (
-              <div key={tour.id} className={styles.tourCard} onClick={() => navigate(`/tours/${tour.id}`)}>
-                <div className={styles.tourCardHeader}>
-                  <h4>{tour.name}</h4>
-                  <span className={styles.tourType}>{tour.type}</span>
-                </div>
-                <div className={styles.tourCardBody}>
-                  <div className={styles.tourDates}>
-                    📅 {new Date(tour.start_date).toLocaleDateString('ru-RU')}
-                    {tour.end_date && ` — ${new Date(tour.end_date).toLocaleDateString('ru-RU')}`}
-                  </div>
-                  {tour.price && (
-                    <div className={styles.tourPrice}>💰 {tour.price} ₽</div>
-                  )}
-                  {tour.description && (
-                    <p className={styles.tourDescription}>{tour.description.substring(0, 150)}...</p>
-                  )}
-                </div>
-                <div className={styles.tourClickHint}>Подробнее →</div>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-    );
-  };
-
   // Рендер туров для выбранной даты
-  const renderToursForSelectedDate = () => {
-    const toursOnDate = getToursForDate(selectedDate);
+  const renderToursForSelectedDate = (date) => {
+    if (!date) return null;
+
+    const selectedDay = new Date(date);
+    selectedDay.setHours(0, 0, 0, 0);
+
+    const toursOnDate = tours.filter(tour => {
+      const tourStart = new Date(tour.start_date);
+      const tourEnd = new Date(tour.end_date || tour.start_date);
+      tourStart.setHours(0, 0, 0, 0);
+      tourEnd.setHours(0, 0, 0, 0);
+
+      return selectedDay >= tourStart && selectedDay <= tourEnd;
+    });
 
     if (toursOnDate.length === 0) {
       return <p className={styles.noTours}>Нет туров на эту дату</p>;
@@ -362,9 +404,9 @@ const Calendar = () => {
         {toursOnDate.map((tour) => {
           const colors = getTourismColor(tour.type);
           return (
-            <div 
-              key={tour.id} 
-              className={styles.tourCard} 
+            <div
+              key={tour.id}
+              className={styles.tourCard}
               onClick={() => navigate(`/tours/${tour.id}`)}
               style={{
                 borderLeftColor: colors.primary,
@@ -399,30 +441,16 @@ const Calendar = () => {
   return (
     <div className={styles.calendarContainer}>
       <div className={styles.viewModeButtons}>
-        <button 
-          className={viewMode === 'month' ? styles.active : ''} 
+        <button
+          className={viewMode === 'month' ? styles.active : ''}
           onClick={() => setViewMode('month')}
         >
           📅 Месяц
-        </button>
-        <button 
-          className={viewMode === 'day' ? styles.active : ''} 
-          onClick={() => setViewMode('day')}
-        >
-          📆 Ближайшие
-        </button>
-        <button 
-          className={viewMode === 'list' ? styles.active : ''} 
-          onClick={() => setViewMode('list')}
-        >
-          📋 Список
         </button>
       </div>
 
       <div className={styles.viewContent}>
         {viewMode === 'month' && renderMonthView()}
-        {viewMode === 'day' && renderDayView()}
-        {viewMode === 'list' && renderListView()}
       </div>
     </div>
   );

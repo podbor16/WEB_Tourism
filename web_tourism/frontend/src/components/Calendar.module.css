@@ -66,448 +66,6 @@
   text-transform: capitalize;
 }
 
-.monthHeader button {
-  padding: 8px 16px;
-  border: none;
-  background: #57534e;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background 0.3s ease;
-}
-
-.monthHeader button:hover {
-  background: #44403c;
-}
-
-.weekDays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-  margin-bottom: 15px;
-  font-weight: 600;
-  color: #57534e;
-  text-align: center;
-}
-
-.daysGrid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
-  margin-bottom: 30px;
-}
-
-.day {
-  aspect-ratio: 1;
-  border: 2px solid #8b7355;
-  border-radius: 8px;
-  padding: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: white;
-}
-
-.day:hover {
-  border-color: #57534e;
-  box-shadow: 0 4px 12px rgba(87, 83, 78, 0.15);
-}
-
-.day.hasEvents {
-  background: linear-gradient(135deg, rgba(87, 83, 78, 0.1) 0%, rgba(68, 64, 60, 0.1) 100%);
-  border-color: #57534e;
-}
-
-.day.selected {
-  background: linear-gradient(135deg, #57534e 0%, #44403c 100%);
-  color: white;
-  border-color: #57534e;
-}
-
-.day.selected .dayNumber,
-.day.selected .eventCount {
-  color: white;
-}
-
-.emptyDay {
-  aspect-ratio: 1;
-}
-
-.dayNumber {
-  font-weight: 600;
-  font-size: 18px;
-  color: #333;
-}
-
-.eventCount {
-  font-size: 12px;
-  background: #57534e;
-  color: white;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 4px;
-  font-weight: 600;
-}
-
-.selectedDateInfo {
-  margin-top: 30px;
-  padding-top: 30px;
-  border-top: 2px solid #f0f0f0;
-}
-
-.selectedDateInfo h4 {
-  color: #57534e;
-  font-size: 20px;
-  margin-bottom: 15px;
-}
-
-/* ДНЕВНОЙ КАЛЕНДАРЬ */
-.dayView {
-  width: 100%;
-}
-
-.dayView h3 {
-  color: #333;
-  margin-bottom: 20px;
-  font-size: 24px;
-}
-
-.daysList {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.dayCard {
-  border-left: 4px solid #57534e;
-  padding: 15px;
-  background: #f9f9f9;
-  border-radius: 8px;
-}
-
-.dayCard h4 {
-  color: #57534e;
-  margin: 0 0 15px 0;
-  font-size: 18px;
-  text-transform: capitalize;
-}
-
-.tourItem {
-  padding: 12px;
-  background: white;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  border: 1px solid #e0e0e0;
-}
-
-.tourItem:last-child {
-  margin-bottom: 0;
-}
-
-.tourName {
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.tourDates {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 5px;
-}
-
-.tourPrice {
-  font-size: 14px;
-  color: #57534e;
-  font-weight: 600;
-}
-
-/* СПИСОК ТУРОВ */
-.listView {
-  width: 100%;
-}
-
-.listHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.listHeader h3 {
-  color: #333;
-  margin: 0;
-  font-size: 24px;
-}
-
-.filterButtons {
-  display: flex;
-  gap: 10px;
-}
-
-.filterBtn {
-  padding: 8px 16px;
-  border: 2px solid #57534e;
-  background: white;
-  color: #57534e;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
-
-.filterBtn:hover {
-  background: #f5f5f5;
-  transform: translateY(-2px);
-}
-
-.filterBtn.active {
-  background: #57534e;
-  color: white;
-  box-shadow: 0 4px 12px rgba(87, 83, 78, 0.3);
-}
-
-.listView h3 {
-  color: #333;
-  margin-bottom: 25px;
-  font-size: 24px;
-}
-
-.toursList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-}
-
-.tourCard {
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 20px;
-  background: white;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.tourCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(87, 83, 78, 0.2);
-}
-
-.tourCardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 15px;
-}
-
-.tourCardHeader h4,
-.tourCardHeader h5 {
-  margin: 0;
-  color: #333;
-  flex: 1;
-}
-
-.tourCardHeader h4 {
-  font-size: 18px;
-}
-
-.tourCardHeader h5 {
-  font-size: 16px;
-}
-
-.tourCardBody {
-  font-size: 14px;
-}
-
-.tourType {
-  background: #57534e;
-  color: white;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.noTours {
-  text-align: center;
-  color: #999;
-  padding: 20px;
-  font-style: italic;
-}
-
-.tourDescription {
-  color: #666;
-  margin: 10px 0 0 0;
-  line-height: 1.4;
-}
-
-.loading {
-  text-align: center;
-  padding: 40px;
-  color: #57534e;
-  font-size: 18px;
-}
-
-/* Адаптивный дизайн */
-@media (max-width: 768px) {
-  .calendarContainer {
-    padding: 15px;
-    margin: 20px auto;
-  }
-
-  .viewModeButtons {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .viewModeButtons button {
-    flex: 1;
-    min-width: 100px;
-    padding: 10px 16px;
-    font-size: 14px;
-  }
-
-  .viewContent {
-    padding: 20px;
-  }
-
-  .daysGrid {
-    gap: 8px;
-  }
-
-  .day {
-    padding: 6px;
-  }
-
-  .dayNumber {
-    font-size: 14px;
-  }
-
-  .eventCount {
-    width: 20px;
-    height: 20px;
-    font-size: 10px;
-  }
-
-  .monthHeader h3 {
-    font-size: 22px;
-  }
-
-  .toursList {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Теги туров в календаре */
-.tourTitles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 4px;
-  width: 100%;
-  justify-content: center;
-}
-
-.tourTag {
-  font-size: 10px;
-  background: #57534e;
-  color: white;
-  padding: 2px 6px;
-  border-radius: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-
-.day.selected .tourTag {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Подсказка о кликаемости */
-.tourClickHint {
-  font-size: 12px;
-  color: #57534e;
-  margin-top: 8px;
-  font-weight: 500;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.tourCard:hover .tourClickHint {
-  opacity: 1;
-}
-
-.tourCard {
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.tourCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
-}
-
-.tourItem {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 8px;
-  border-radius: 6px;
-}
-
-.tourItem:hover {
-  background: rgba(87, 83, 78, 0.1);
-  transform: translateX(4px);
-}
-
-/* БЛОКИ СОБЫТИЙ (Google Calendar стиль) */
-.eventBlocks {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  width: 100%;
-  margin-top: 4px;
-  max-height: 60px;
-  overflow: hidden;
-}
-
-.eventBlock {
-  padding: 2px 4px;
-  font-size: 11px;
-  font-weight: 500;
-  color: #333;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border-left-width: 3px;
-  border-left-style: solid;
-}
-
-.eventBlock:hover {
-  opacity: 0.8;
-  transform: translateX(2px);
-}
-
-.eventName {
-  display: block;
-  padding: 1px 3px;
-}
-
 .navButton {
   padding: 8px 16px;
   border: none;
@@ -538,4 +96,309 @@
 .todayButton:hover {
   background: #16a34a;
   transform: translateY(-2px);
+}
+
+.weekDays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  margin-bottom: 2px;
+  font-weight: 600;
+  color: #57534e;
+  text-align: center;
+  background: #f0f0f0;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 0;
+}
+
+.weekDays div {
+  padding: 5px;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: var(--grid-rows, repeat(5, minmax(100px, auto)));
+  gap: 1px;
+  background: #f0f0f0;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  border: 1px solid #f0f0f0;
+}
+
+.dayCell {
+  min-height: 100px;
+  background: white;
+  padding: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #f0f0f0;
+  margin: -1px 0 0 -1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dayCell:hover {
+  background: #f9f9f9;
+}
+
+.dayCell.selected {
+  background: #fff8e1;
+  border: 2px solid #ffd54f;
+  z-index: 2;
+}
+
+.dayCell.hasEvents {
+  background: #f5f5f5;
+}
+
+.dayNumber {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 4px;
+  align-self: flex-end;
+}
+
+.emptyDay {
+  min-height: 100px;
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  margin: -1px 0 0 -1px;
+}
+
+/* Контейнер для событий */
+.eventsContainer {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  min-height: var(--events-height, 80px);
+}
+
+/* Событие в календаре */
+.calendarEvent {
+  position: absolute;
+  left: 0;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.calendarEvent:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10 !important;
+}
+
+.eventTitle {
+  color: #333;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: block;
+}
+
+/* Для событий, которые продолжаются в следующую строку */
+.calendarEvent.continues {
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.calendarEvent.continued {
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: -1px;
+}
+
+.selectedDateInfo {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.selectedDateInfo h4 {
+  color: #57534e;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+/* Карточки туров */
+.toursList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tourCard {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  background: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  border-left-width: 4px;
+  border-left-style: solid;
+}
+
+.tourCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(87, 83, 78, 0.2);
+}
+
+.tourCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.tourCardHeader h5 {
+  margin: 0;
+  color: #333;
+  flex: 1;
+  font-size: 16px;
+}
+
+.tourType {
+  background: #57534e;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tourDates {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.tourPrice {
+  font-size: 14px;
+  color: #57534e;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.noTours {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+  font-style: italic;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: #57534e;
+  font-size: 18px;
+}
+
+.tourClickHint {
+  font-size: 12px;
+  color: #57534e;
+  margin-top: 8px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tourCard:hover .tourClickHint {
+  opacity: 1;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+  .calendarContainer {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  .viewModeButtons {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .viewModeButtons button {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .viewContent {
+    padding: 15px;
+  }
+
+  .monthHeader {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .monthHeader h3 {
+    font-size: 22px;
+    order: 2;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navButton, .todayButton {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+
+  .daysGrid {
+    grid-template-rows: repeat(6, minmax(80px, auto));
+  }
+
+  .dayCell {
+    min-height: 80px;
+    padding: 4px;
+  }
+
+  .dayNumber {
+    font-size: 14px;
+  }
+
+  .calendarEvent {
+    font-size: 9px;
+    padding: 1px 3px;
+    height: 18px;
+  }
+
+  .eventTitle {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .weekDays div {
+    font-size: 12px;
+    padding: 3px;
+  }
+
+  .dayCell {
+    min-height: 70px;
+  }
+
+  .calendarEvent {
+    height: 16px;
+  }
 }
