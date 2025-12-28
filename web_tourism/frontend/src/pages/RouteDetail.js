@@ -174,9 +174,30 @@ const RouteDetail = ({ user }) => {
   let mainImage = tour.image || routeData.images?.[0] || '/static/image/mountain_main.png';
   const galleryImages = routeData.images?.slice(1) || [];
 
+  // Функция для форматирования описания (сохранение переносов)
+  const formatDescription = (text) => {
+    if (!text) return null;
+    return text.split('\n').map((line, idx) => (
+      <React.Fragment key={idx}>
+        {line}
+        {idx < text.split('\n').length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
+  // Функция для получения названия сложности
+  const getDifficultyName = (difficulty) => {
+    const names = {
+      'easy': 'Легкий',
+      'medium': 'Средний',
+      'hard': 'Сложный'
+    };
+    return names[difficulty] || 'Средний';
+  };
+
   return (
     <div className={styles.routeContainer}>
-      {/* Hero Section */}
+      {/* Hero Section с информационными плашками */}
       <section className={styles.heroSection}>
         <img
           src={mainImage}
@@ -187,15 +208,47 @@ const RouteDetail = ({ user }) => {
           }}
         />
         <div className={styles.heroOverlay}>
-          <h1>{routeData.title || tour.name}</h1>
+          <div className={styles.heroContent}>
+            <h1>{routeData.title || tour.name}</h1>
+
+            {/* Информационные плашки */}
+            <div className={styles.infoPlates}>
+              {/* Даты */}
+              <div className={styles.infoPlate}>
+                <div className={styles.plateName}>📅 Даты</div>
+                <div className={styles.plateValue}>
+                  {new Date(tour.start_date).toLocaleDateString('ru-RU')}
+                  {tour.end_date && ` — ${new Date(tour.end_date).toLocaleDateString('ru-RU')}`}
+                </div>
+              </div>
+
+              {/* Сложность */}
+              {tour.difficulty && (
+                <div className={styles.infoPlate}>
+                  <div className={styles.plateName}>⚡ Сложность</div>
+                  <div className={styles.plateValue}>{getDifficultyName(tour.difficulty)}</div>
+                </div>
+              )}
+
+              {/* Минимальный возраст */}
+              {tour.min_age > 0 && (
+                <div className={styles.infoPlate}>
+                  <div className={styles.plateName}>👤 Возраст</div>
+                  <div className={styles.plateValue}>с {tour.min_age} лет</div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Description */}
       <section className={styles.descriptionSection}>
         <div className={styles.content}>
-          <p className={styles.mainDescription}>{routeData.description || tour.description}</p>
-          <p className={styles.fullDescription}>{routeData.fullDescription}</p>
+          <div className={styles.mainDescription}>{formatDescription(routeData.description || tour.description)}</div>
+          {routeData.fullDescription && (
+            <div className={styles.fullDescription}>{formatDescription(routeData.fullDescription)}</div>
+          )}
         </div>
       </section>
 

@@ -4,7 +4,8 @@ from .models import Tour
 
 class TourSerializer(serializers.ModelSerializer):
     """Сериализатор для модели Tour"""
-    
+    difficulty_display = serializers.CharField(source='get_difficulty_display', read_only=True)
+
     class Meta:
         model = Tour
         fields = [
@@ -17,5 +18,7 @@ class TourSerializer(serializers.ModelSerializer):
             'type',
             'image',
             'min_age',
+            'difficulty',
+            'difficulty_display',
         ]
-        read_only_fields = ['id']
+        read_only_fields = ['id', 'difficulty_display']
