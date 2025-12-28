@@ -35,6 +35,9 @@ function Header({ user, setUser }) {
         </Link>
         
         <div className="nav-center">
+
+          <Link to="/" className="nav-link">Главная</Link>
+
           <div className="dropdown-container">
             <button 
               className="nav-link dropdown-toggle"
