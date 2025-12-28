@@ -34,9 +34,41 @@ const Calendar = () => {
       const tourStart = new Date(tour.start_date);
       const tourEnd = new Date(tour.end_date || tour.start_date);
       const checkDate = new Date(date);
-      
+      checkDate.setHours(0, 0, 0, 0);
+      tourStart.setHours(0, 0, 0, 0);
+      tourEnd.setHours(0, 0, 0, 0);
+
       return checkDate >= tourStart && checkDate <= tourEnd;
     });
+  };
+
+  // Получить события для дня с информацией об их протяженности
+  const getEventBlocksForDay = (date) => {
+    const dayTours = getToursForDate(date);
+    const eventBlocks = [];
+
+    dayTours.forEach(tour => {
+      const tourStart = new Date(tour.start_date);
+      const tourEnd = new Date(tour.end_date || tour.start_date);
+      const checkDate = new Date(date);
+      checkDate.setHours(0, 0, 0, 0);
+      tourStart.setHours(0, 0, 0, 0);
+      tourEnd.setHours(0, 0, 0, 0);
+
+      // Определяем позицию дня в диапазоне тура
+      const isFirst = checkDate.getTime() === tourStart.getTime();
+      const isLast = checkDate.getTime() === tourEnd.getTime();
+      const isSingleDay = isFirst && isLast;
+
+      eventBlocks.push({
+        ...tour,
+        isFirst,
+        isLast,
+        isSingleDay,
+      });
+    });
+
+    return eventBlocks;
   };
 
   // Получить туры на месяц
@@ -76,6 +108,12 @@ const Calendar = () => {
     return day === 0 ? 6 : day - 1;
   };
 
+  // Перейти к сегодня
+  const goToToday = () => {
+    setCurrentDate(new Date());
+    setSelectedDate(new Date());
+  };
+
   // Изменить месяц
   const changeMonth = (offset) => {
     const newDate = new Date(currentDate);
@@ -99,46 +137,43 @@ const Calendar = () => {
     // Дни месяца
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-      const toursOnDay = getToursForDate(date);
-      const isSelected = selectedDate && 
+      const eventBlocks = getEventBlocksForDay(date);
+      const isSelected = selectedDate &&
         selectedDate.toDateString() === date.toDateString();
-      
-      // Получаем цвета туров для этого дня
-      const tourColors = toursOnDay.map(tour => getTourismColor(tour.type).primary);
 
       days.push(
         <div
           key={day}
-          className={`${styles.day} ${toursOnDay.length > 0 ? styles.hasEvents : ''} ${isSelected ? styles.selected : ''}`}
+          className={`${styles.day} ${eventBlocks.length > 0 ? styles.hasEvents : ''} ${isSelected ? styles.selected : ''}`}
           onClick={() => setSelectedDate(date)}
-          style={{
-            borderLeftColor: tourColors.length > 0 ? tourColors[0] : 'transparent',
-            borderLeftWidth: tourColors.length > 0 ? '4px' : '0px',
-          }}
         >
           <div className={styles.dayNumber}>{day}</div>
-          {toursOnDay.length > 0 && (
-            <>
-              <div className={styles.eventCount}>{toursOnDay.length}</div>
-              <div className={styles.tourTitles}>
-                {toursOnDay.map((tour) => {
-                  const colors = getTourismColor(tour.type);
-                  return (
-                    <span 
-                      key={tour.id} 
-                      className={styles.tourTag}
-                      style={{
-                        backgroundColor: colors.light,
-                        color: colors.primary,
-                        borderLeftColor: colors.primary,
-                      }}
-                    >
-                      {tour.name}
-                    </span>
-                  );
-                })}
-              </div>
-            </>
+          {eventBlocks.length > 0 && (
+            <div className={styles.eventBlocks}>
+              {eventBlocks.map((event, idx) => {
+                const colors = getTourismColor(event.type);
+                const borderRadius = {
+                  borderRadius: `${event.isFirst ? '6px' : '0'} ${event.isLast ? '6px' : '0'} ${event.isLast ? '6px' : '0'} ${event.isFirst ? '6px' : '0'}`,
+                };
+
+                return (
+                  <div
+                    key={`${event.id}-${idx}`}
+                    className={styles.eventBlock}
+                    style={{
+                      backgroundColor: colors.light,
+                      borderLeft: `3px solid ${colors.primary}`,
+                      ...borderRadius,
+                    }}
+                    title={event.name}
+                  >
+                    {event.isFirst && (
+                      <span className={styles.eventName}>{event.name.substring(0, 15)}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           )}
         </div>
       );
@@ -147,9 +182,10 @@ const Calendar = () => {
     return (
       <div className={styles.monthView}>
         <div className={styles.monthHeader}>
-          <button onClick={() => changeMonth(-1)}>←</button>
+          <button className={styles.navButton} onClick={() => changeMonth(-1)}>←</button>
           <h3>{monthName}</h3>
-          <button onClick={() => changeMonth(1)}>→</button>
+          <button className={styles.navButton} onClick={() => changeMonth(1)}>→</button>
+          <button className={styles.todayButton} onClick={goToToday}>Сегодня</button>
         </div>
 
         <div className={styles.weekDays}>

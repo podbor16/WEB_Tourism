@@ -473,31 +473,69 @@
   transform: translateX(4px);
 }
 
-@media (max-width: 480px) {
-  .weekDays {
-    font-size: 12px;
-  }
+/* БЛОКИ СОБЫТИЙ (Google Calendar стиль) */
+.eventBlocks {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  margin-top: 4px;
+  max-height: 60px;
+  overflow: hidden;
+}
 
-  .daysGrid {
-    gap: 6px;
-  }
+.eventBlock {
+  padding: 2px 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left-width: 3px;
+  border-left-style: solid;
+}
 
-  .day {
-    padding: 4px;
-    font-size: 12px;
-  }
+.eventBlock:hover {
+  opacity: 0.8;
+  transform: translateX(2px);
+}
 
-  .dayNumber {
-    font-size: 12px;
-  }
+.eventName {
+  display: block;
+  padding: 1px 3px;
+}
 
-  .viewModeButtons button {
-    padding: 8px 12px;
-    font-size: 12px;
-  }
+.navButton {
+  padding: 8px 16px;
+  border: none;
+  background: #57534e;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.3s ease;
+}
 
-  .tourTag {
-    font-size: 9px;
-    padding: 1px 4px;
-  }
+.navButton:hover {
+  background: #44403c;
+}
+
+.todayButton {
+  padding: 8px 16px;
+  border: none;
+  background: #22c55e;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.todayButton:hover {
+  background: #16a34a;
+  transform: translateY(-2px);
 }

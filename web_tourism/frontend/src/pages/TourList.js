@@ -32,6 +32,17 @@ function TourList() {
     // 'Водном': '/static/image/vodniy.png',
   };
 
+  // Функция для получения цвета по типу туризма
+  const getTourTypeColor = (type) => {
+    const colors = {
+      'Пешеходный туризм': '#22c55e',
+      'Пеший туризм': '#22c55e',
+      'Горный туризм': '#8b7355',
+      'Водный туризм': '#3b82f6',
+    };
+    return colors[type] || '#57534e';
+  };
+
   const fetchTours = useCallback(async () => {
     try {
       setLoading(true);
