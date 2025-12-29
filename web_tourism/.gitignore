@@ -155,12 +155,45 @@ dmypy.json
 cython_debug/
 
 # PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+# Добавьте эти строки для JetBrains IDE
+.idea/
+.idea/*
+!.idea/inspectionProfiles/
+!.idea/runConfigurations/
+*.iml
+*.ipr
+*.iws
 
 # Node.js
 node_modules/
 
+# ========== ДОБАВЬТЕ ЭТИ СТРОКИ ДЛЯ ВАШЕГО ПРОЕКТА ==========
+
+# Django медиа файлы
+web_tourism/media/
+media/
+
+# Django статические файлы (сгенерированные)
+web_tourism/staticfiles/
+staticfiles/
+
+# Операционные системы
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Временные файлы
+*.tmp
+*.bak
+*~
+*.swp
+*.swo
+
+# Логи приложений
+*.log
+
+# React/Vue/Angular (если фронтенд в той же папке)
+build/
+dist/
+.next/
+out/
